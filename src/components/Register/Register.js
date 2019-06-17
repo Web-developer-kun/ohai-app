@@ -19,6 +19,8 @@ class Register extends React.Component {
             <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required="" autofocus=""/>
           <label for="inputPassword" className="sr-only">Password</label>
           <input type="password" id="inputPassword" className="form-control" placeholder="Password" required=""/>
+          <label for="inputPassword" className="sr-only">Password</label>
+          <input type="password" id="confirmPassword" className="form-control" placeholder="Confirm Password" required=""/>
           <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
             <span className="fa fa-google"></span> Sign Up with Google 
