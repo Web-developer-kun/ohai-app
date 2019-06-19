@@ -8,7 +8,7 @@ import Placeholder from './components/Placeholder/Placeholder';
 
 const initialState = {
   input: '',
-  route: 'register',
+  route: 'signin',
   isSignedIn: false,
   user: {
     id: '',
@@ -19,8 +19,8 @@ const initialState = {
 }
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = initialState;
   }
 
