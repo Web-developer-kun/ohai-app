@@ -19,14 +19,15 @@ class Signin extends React.Component {
   }
 
   onSignIn = () => {
+    const { signInEmail, signInPassword } = this.state;
      fetch('http://localhost:3000/register', {
            method: 'POST',
            headers: {
              'Content-Type': 'application/json',
            },
            body: JSON.stringify({
-             email: this.state.email,
-             password: this.state.password
+             email: signInEmail,
+             password: signInPassword
            })
          })
       .then(response => response.json())
