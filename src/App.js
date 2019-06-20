@@ -8,7 +8,7 @@ import Placeholder from './components/Placeholder/Placeholder';
 
 const initialState = {
   input: '',
-  route: 'register',
+  route: 'signin',
   isSignedIn: false,
   user: {
     id: '',
