@@ -2,41 +2,21 @@ import React from 'react';
 import './register.css';
 
 class Register extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: '',
-      setPass1: '',
-      setPass2: '',
-      passErr: '',
-      password: null
-    }
-  }
-
-  onEmailChange = (event) => {
-    this.setState({email: event.target.value})
-  }
-
-  onSetPass1 = (event) => {
-    this.setState({setPass1: event.target.value})
-  }
-
-  onSetPass2 = (event) => {
-    this.setState({setPass2: event.target.value})
-  }
-
   checkPassword = () => {
-    if(this.state.setPass1 === this.state.setPass2){
-      this.setState({passErr: "Passwords Match"});
-      this.setState({password: this.state.setPass2});
-    } else if(this.state.setPass1 !== this.state.setPass2){
-      this.setState({passErr: "Passwords Don't Match"});
-      this.setState({password: ''});
+    const { setPassErr, setPassword, setPass1, setPass2 } = this.props;
+    if(setPass1 === setPass2){
+      setPassErr("Passwords Match");
+      console.log(setPass2, "Why isn't the pass being set?");
+      setPassword(setPass2);
+    } else if(setPass1 !== setPass2){
+      setPassErr("Passwords Don't  Match");
+      setPassword("");
     }
   }
 
    onSubmitRegister = () => {
-     const { email, password } = this.state;
+     this.checkPassword();
+     const { email, password } = this.props;
      if(email.length && password.length){
        fetch('http://localhost:3000/register', {
              method: 'POST',
@@ -56,6 +36,8 @@ class Register extends React.Component {
   }
 
   render(){
+    const { onEmailChange, onSetPass1, onSetPass2, passErr } = this.props;
+
     return(
       <div>
       <div className="text-center">
@@ -68,7 +50,7 @@ class Register extends React.Component {
               placeholder="Email address"
               required=""
               autoFocus=""
-              onChange={this.onEmailChange}
+              onChange={onEmailChange}
             />
           <label htmlFor="inputPassword">Password</label>
           <input
@@ -77,18 +59,18 @@ class Register extends React.Component {
             className="form-control"
             placeholder="Password"
             required=""
-            onChange={this.onSetPass1}
+            onChange={onSetPass1}
             onBlur={this.checkPassword}
             />
 
-          <label htmlFor="inputPassword">{this.state.passErr.length ? this.state.passErr : "Confirm Password" }</label>
+          <label htmlFor="inputPassword">{ passErr.length ? passErr : "Confirm Password" }</label>
           <input
             type="password"
             id="confirmPassword"
             className="form-control"
             placeholder="Confirm Password"
             required=""
-            onChange={this.onSetPass2}
+            onChange={onSetPass2}
             onBlur={this.checkPassword}
           />
           <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
