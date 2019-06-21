@@ -35,16 +35,8 @@ const mapDispatchToProps = (dispatch) => {
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      route: 'signin'
-    }
-  }
-
-
   render(){
-    const { route } = this.state;
+    const { route } = this.props;
     return (
       <div style={{'width': '100%', 'height': '100%'}}>
         { route === "signin" ? <Signin {...this.props}/> : '' }

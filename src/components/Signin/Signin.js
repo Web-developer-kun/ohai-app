@@ -3,7 +3,7 @@ import './sign-in.css';
 
 class Signin extends React.Component {
   onSignIn = () => {
-    const { signInEmail, signInPassword } = this.state;
+    const { signInEmail, signInPassword } = this.props;
      fetch('http://localhost:3000/signin', {
            method: 'POST',
            headers: {
