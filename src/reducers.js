@@ -14,7 +14,7 @@ const initialRegisterState = {
   setPass1: '',
   setPass2: '',
   passErr: '',
-  password: null
+  password: ''
 }
 
 export const fillRegisterForm = (state=initialRegisterState, action={}) => {

@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
     setPass1: state.setPass1,
     setPass2: state.setPass2,
     passErr: state.passErr,
-    password: state.passWord,
+    password: state.password,
   }
 }
 
@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     onEmailChange: (event) => dispatch(setRegisterEmail(event.target.value)),
     onSetPass1: (event) => dispatch(setPassField1(event.target.value)),
     onSetPass2: (event) => dispatch(setPassField2(event.target.value)),
-    setPassErr: (event) => dispatch(setPassErr(event.target.value)),
-    setPassword: (event) => dispatch(setPassword(event.target.value))
+    setPassErr: (text) => dispatch(setPassErr(text)),
+    setPassword: (text) => dispatch(setPassword(text))
   }
 }
 
