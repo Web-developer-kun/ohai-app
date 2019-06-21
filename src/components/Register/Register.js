@@ -11,6 +11,7 @@ class Register extends React.Component {
       passErr: '',
       password: null
     }
+    console.log(this.props, "These are the props");
   }
 
   onEmailChange = (event) => {

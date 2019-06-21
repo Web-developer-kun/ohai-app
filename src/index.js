@@ -9,9 +9,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { fillRegisterForm } from './reducers';
 
-const logger = createLogger();
-const rootReducers = fillRegisterForm;
-const store = createStore(rootReducers, applyMiddleware(thunkMiddleware, logger));
+const store = createStore(fillRegisterForm)
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
 
