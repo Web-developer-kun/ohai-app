@@ -33,3 +33,32 @@ export const fillRegisterForm = (state=initialRegisterState, action={}) => {
       return state
   }
 }
+
+const initialSigninState = {
+  signInEmail: '',
+  signInPassword: ''
+}
+
+export const fillSigninForm = (state=initialSigninState, action={}) => {
+  switch (action.type) {
+    case SET_LOGIN_EMAIL:
+      return Object.assign({}, state, {signInEmail: action.payload});
+    case SET_LOGIN_PASSWORD:
+      return Object.assign({}, state, {signInPassword: action.payload});
+    default:
+      return state;
+  }
+}
+
+const initialRouteState = {
+  route: ''
+}
+
+export const changeRoute = (state=initialRouteState, action={}) => {
+  switch (action.type){
+    case CHANGE_ROUTE:
+      return Object.assign({}, state, {route: action.payload})
+    default:
+      return state;
+  }
+}

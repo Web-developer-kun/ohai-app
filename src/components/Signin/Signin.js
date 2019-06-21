@@ -2,22 +2,6 @@ import React from 'react';
 import './sign-in.css';
 
 class Signin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      signInEmail: '',
-      signInPassword: ''
-    }
-  }
-
-  onEmailChange = (event) => {
-    this.setState({signInEmail: event.target.value})
-  }
-
-  onPasswordChange = (event) => {
-    this.setState({signInPassword: event.target.value})
-  }
-
   onSignIn = () => {
     const { signInEmail, signInPassword } = this.state;
      fetch('http://localhost:3000/signin', {
@@ -35,6 +19,7 @@ class Signin extends React.Component {
   }
 
   render(){
+    const { onSignInEmailChange, onSignInPasswordChange } = this.props;
     return(
       <div>
       <div className="text-center">
@@ -47,7 +32,7 @@ class Signin extends React.Component {
               placeholder="Email address"
               required=""
               autoFocus=""
-              onChange={this.onEmailChange}
+              onChange={onSignInEmailChange}
             />
           <label htmlFor="inputPassword" className="sr-only">Password</label>
           <input
@@ -56,7 +41,7 @@ class Signin extends React.Component {
             className="form-control"
             placeholder="Password"
             required=""
-            onChange={this.onPasswordChange}
+            onChange={onSignInPasswordChange}
           />
           <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
             <span className="fa fa-google"></span> Sign Up with Google
