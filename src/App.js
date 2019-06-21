@@ -5,23 +5,12 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import Placeholder from './components/Placeholder/Placeholder';
 
-
-const initialState = {
-  input: '',
-  route: 'register',
-  isSignedIn: false,
-  user: {
-    id: '',
-    name: '',
-    email: '',
-    joined: ''
-  }
-}
-
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = initialState;
+    this.state = {
+      route: 'register'
+    }
   }
 
 
