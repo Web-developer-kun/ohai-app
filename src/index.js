@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
+import { logger } from 'redux-logger';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { fillRegisterForm } from './reducers';
+import { fillRegisterForm, fillSigninForm, changeRoute } from './reducers';
 
-const store = createStore(fillRegisterForm)
+const rootReducer = combineReducers({fillRegisterForm, fillSigninForm, changeRoute});
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));
 

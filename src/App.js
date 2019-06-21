@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setRegisterEmail, setPassField1, setPassField2, setPassErr, setPassword } from './actions';
+import { setRegisterEmail, setPassField1, setPassField2, setPassErr, setPassword, setLoginEmail, setLoginPassword, changeRoute } from './actions';
 import './App.css';
 import './bootstrap-social.css';
 import Signin from './components/Signin/Signin';
@@ -9,11 +9,14 @@ import Placeholder from './components/Placeholder/Placeholder';
 
 const mapStateToProps = (state) => {
   return {
-    email: state.email,
-    setPass1: state.setPass1,
-    setPass2: state.setPass2,
-    passErr: state.passErr,
-    password: state.password,
+    email: state.fillRegisterForm.email,
+    setPass1: state.fillRegisterForm.setPass1,
+    setPass2: state.fillRegisterForm.setPass2,
+    passErr: state.fillRegisterForm.passErr,
+    password: state.fillRegisterForm.password,
+    signInEmail: state.fillSigninForm.signInEmail,
+    signInPassword: state.fillSigninForm.signInPassword,
+    route: state.changeRoute.route
   }
 }
 
@@ -23,25 +26,20 @@ const mapDispatchToProps = (dispatch) => {
     onSetPass1: (event) => dispatch(setPassField1(event.target.value)),
     onSetPass2: (event) => dispatch(setPassField2(event.target.value)),
     setPassErr: (text) => dispatch(setPassErr(text)),
-    setPassword: (text) => dispatch(setPassword(text))
+    setPassword: (text) => dispatch(setPassword(text)),
+    onSignInEmailChange: (event) => dispatch(setLoginEmail(event.target.value)),
+    onSignInPasswordChange: (event) => dispatch(setLoginPassword(event.target.value)),
+    changeRoute: (text) => dispatch(changeRoute(text))
   }
 }
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      route: 'register'
-    }
-  }
-
-
   render(){
-    const { route } = this.state;
+    const { route } = this.props;
     return (
       <div style={{'width': '100%', 'height': '100%'}}>
-        { route === "signin" ? <Signin/> : '' }
+        { route === "signin" ? <Signin {...this.props}/> : '' }
         { route === "register" ? <Register {...this.props}/> : ''}
         { route === "placeholder" ? <Placeholder/> : ''}
       </div>
