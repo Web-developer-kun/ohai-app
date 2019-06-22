@@ -6,7 +6,6 @@ class Register extends React.Component {
     const { setPassErr, setPassword, setPass1, setPass2 } = this.props;
     if(setPass1 === setPass2){
       setPassErr("Passwords Match");
-      console.log(setPass2, "Why isn't the pass being set?");
       setPassword(setPass2);
     } else if(setPass1 !== setPass2){
       setPassErr("Passwords Don't  Match");
@@ -16,7 +15,7 @@ class Register extends React.Component {
 
    onSubmitRegister = () => {
      this.checkPassword();
-     const { email, password } = this.props;
+     const { email, password, setPassErr, changeRoute } = this.props;
      if(email.length && password.length){
        fetch('http://localhost:3000/register', {
              method: 'POST',
@@ -29,9 +28,10 @@ class Register extends React.Component {
              })
            })
            .then(response => response.json())
+           .then(changeRoute("signin"))
            .catch(err => console.log(err))
      } else {
-        this.setState({passErr: "Complete the form"});
+        setPassErr("Complete the form");
      }
   }
 

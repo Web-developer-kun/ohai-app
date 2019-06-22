@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { setRegisterEmail, setPassField1, setPassField2, setPassErr, setPassword, setLoginEmail, setLoginPassword, changeRoute } from './actions';
 import './App.css';
 import './bootstrap-social.css';
-import Signin from './components/Signin/Signin';
-import Register from './components/Register/Register';
-import Placeholder from './components/Placeholder/Placeholder';
+const Signin = React.lazy(() => import('./components/Signin/Signin'))
+const Register = React.lazy(() => import('./components/Register/Register'))
+const Placeholder = React.lazy(() => import('./components/Placeholder/Placeholder'))
 
 const mapStateToProps = (state) => {
   return {
@@ -37,14 +37,33 @@ const mapDispatchToProps = (dispatch) => {
 class App extends React.Component {
   render(){
     const { route } = this.props;
-    return (
-      <div style={{'width': '100%', 'height': '100%'}}>
-        { route === "signin" ? <Signin {...this.props}/> : '' }
-        { route === "register" ? <Register {...this.props}/> : ''}
-        { route === "placeholder" ? <Placeholder/> : ''}
-      </div>
-    );
+    if(route === 'signin'){
+      return(
+        <div style={{'width': '100%', 'height': '100%'}}>
+          <Suspense fallback={<h1>Signin</h1>}>
+            <Signin {...this.props}/>
+          </Suspense>
+        </div>
+      )
+    } else if(route === 'register'){
+      return(
+        <div style={{'width': '100%', 'height': '100%'}}>
+          <Suspense fallback={<h1>Register</h1>}>
+            <Register {...this.props}/>
+          </Suspense>
+        </div>
+      )
+    } else if(route === 'placeholder'){
+      return(
+        <div style={{'width': '100%', 'height': '100%'}}>
+          <Suspense fallback={<h1>Register</h1>}>
+            <Placeholder {...this.props}/>
+          </Suspense>
+        </div>
+      )
+    }
   }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
