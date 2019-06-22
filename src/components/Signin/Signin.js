@@ -10,8 +10,8 @@ class Signin extends React.Component {
              'Content-Type': 'application/json',
            },
            body: JSON.stringify({
-             signInEmail: signInEmail,
-             signInPassword: signInPassword
+             username: signInEmail,
+             password: signInPassword
            })
          })
       .then(response => response.json())
