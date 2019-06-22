@@ -23,7 +23,7 @@ class Register extends React.Component {
                'Content-Type': 'application/json',
              },
              body: JSON.stringify({
-               email: email,
+               username: email,
                password: password
              })
            })
