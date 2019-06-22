@@ -3,7 +3,7 @@ import './sign-in.css';
 
 class Signin extends React.Component {
   onSignIn = () => {
-    const { signInEmail, signInPassword } = this.props;
+    const { signInEmail, signInPassword, changeRoute } = this.props;
      fetch('http://localhost:3000/signin', {
            method: 'POST',
            headers: {
@@ -15,6 +15,7 @@ class Signin extends React.Component {
            })
          })
       .then(response => response.json())
+      .then(changeRoute('placeholder'))
       .catch(err => console.log(err))
   }
 
