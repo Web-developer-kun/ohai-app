@@ -2,6 +2,10 @@ import React from 'react';
 import './sign-in.css';
 
 class Signin extends React.Component {
+  saveAuthTokenID = (token) => {
+    window.sessionStorage.setItem('token', token);
+  }
+
   onSignIn = () => {
     const { signInEmail, signInPassword, changeRoute } = this.props;
      fetch('http://localhost:3000/signin', {
@@ -14,10 +18,20 @@ class Signin extends React.Component {
              password: signInPassword
            })
          })
-      .then(response => response.json())
-      .then(changeRoute('placeholder'))
-      .catch(err => console.log(err))
-  }
+         .then(response => response.json())
+         .then(data => {
+           if (data.userId) {
+             this.saveAuthTokenID(data.token);
+             fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+               method: 'get',
+               headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': data.token
+               }
+             }).then(response => response.json())
+            .then(data =>{ if(data); changeRoute('placeholder')})
+          }}).catch(err => console.log(err))
+        }
 
   render(){
     const { onSignInEmailChange, onSignInPasswordChange } = this.props;
