@@ -35,19 +35,14 @@ class Register extends React.Component {
            .then(data => {
              if(data.userId){
                this.saveAuthTokenID(data.token);
-               fetch(`http://localhost:3000/profile/${data.userId}`, {
+               fetch(`http://localhost:3000/placeholder/${data.userId}`, {
                  method: 'get',
                  headers: {
                    'Content-Type': 'application/json',
                    'Authorization': data.token
                  }
-               })
-             }
-           })
-           .then(response => response.json())
-           .then(data => {
-             if(data){
-               changeRoute('placeholder')
+               }).then(response => response.json())
+              .then(data => { console.log(data); changeRoute('placeholder')})
              }
            })
            .catch(err => console.log(err))
