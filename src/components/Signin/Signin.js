@@ -10,7 +10,7 @@ class Signin extends React.Component {
              'Content-Type': 'application/json',
            },
            body: JSON.stringify({
-             username: signInEmail,
+             email: signInEmail,
              password: signInPassword
            })
          })
@@ -44,12 +44,6 @@ class Signin extends React.Component {
             required=""
             onChange={onSignInPasswordChange}
           />
-          <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
-            <span className="fa fa-google"></span> Sign Up with Google
-          </div>
-          <div className="btn btn-block btn-social btn-facebook" style={{'color': '#fff'}}>
-            <span className="fa fa-facebook"></span> Sign Up with Facebook
-          </div>
       </div>
       <button
         onClick={this.onSignIn}

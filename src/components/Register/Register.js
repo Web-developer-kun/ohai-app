@@ -13,6 +13,10 @@ class Register extends React.Component {
     }
   }
 
+  saveAuthTokenID = (token) => {
+    window.sessionStorage.setItem('token', token);
+  }
+
    onSubmitRegister = () => {
      this.checkPassword();
      const { email, password, setPassErr, changeRoute } = this.props;
@@ -20,15 +24,32 @@ class Register extends React.Component {
        fetch('http://localhost:3000/register', {
              method: 'POST',
              headers: {
-               'Content-Type': 'application/json',
+               'Content-Type': 'application/json'
              },
              body: JSON.stringify({
-               username: email,
+               email: email,
                password: password
              })
            })
            .then(response => response.json())
-           .then(changeRoute("signin"))
+           .then(data => {
+             if(data.userId){
+               this.saveAuthTokenID(data.token);
+               fetch(`http://localhost:3000/profile/${data.userId}`, {
+                 method: 'get',
+                 headers: {
+                   'Content-Type': 'application/json',
+                   'Authorization': data.token
+                 }
+               })
+             }
+           })
+           .then(response => response.json())
+           .then(data => {
+             if(data){
+               changeRoute('placeholder')
+             }
+           })
            .catch(err => console.log(err))
      } else {
         setPassErr("Complete the form");
@@ -73,12 +94,6 @@ class Register extends React.Component {
             onChange={onSetPass2}
             onBlur={this.checkPassword}
           />
-          <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
-            <span className="fa fa-google"></span> Sign Up with Google
-          </div>
-          <div className="btn btn-block btn-social btn-facebook" style={{'color': '#fff'}}>
-            <span className="fa fa-facebook"></span> Sign Up with Facebook
-          </div>
       </div>
       <button
         onClick={this.onSubmitRegister}
