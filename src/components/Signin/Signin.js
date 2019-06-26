@@ -2,6 +2,10 @@ import React from 'react';
 import './sign-in.css';
 
 class Signin extends React.Component {
+  saveAuthTokenID = (token) => {
+    window.sessionStorage.setItem('token', token);
+  }
+
   onSignIn = () => {
     const { signInEmail, signInPassword, changeRoute } = this.props;
      fetch('http://localhost:3000/signin', {
@@ -10,14 +14,24 @@ class Signin extends React.Component {
              'Content-Type': 'application/json',
            },
            body: JSON.stringify({
-             username: signInEmail,
+             email: signInEmail,
              password: signInPassword
            })
          })
-      .then(response => response.json())
-      .then(changeRoute('placeholder'))
-      .catch(err => console.log(err))
-  }
+         .then(response => response.json())
+         .then(data => {
+           if (data.userId) {
+             this.saveAuthTokenID(data.token);
+             fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+               method: 'get',
+               headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': data.token
+               }
+             }).then(response => response.json())
+            .then(data =>{ if(data); changeRoute('placeholder')})
+          }}).catch(err => console.log(err))
+        }
 
   render(){
     const { onSignInEmailChange, onSignInPasswordChange } = this.props;
@@ -44,12 +58,6 @@ class Signin extends React.Component {
             required=""
             onChange={onSignInPasswordChange}
           />
-          <div className="btn btn-block btn-social btn-google" style={{'color': '#fff'}}>
-            <span className="fa fa-google"></span> Sign Up with Google
-          </div>
-          <div className="btn btn-block btn-social btn-facebook" style={{'color': '#fff'}}>
-            <span className="fa fa-facebook"></span> Sign Up with Facebook
-          </div>
       </div>
       <button
         onClick={this.onSignIn}

@@ -51,7 +51,7 @@ export const fillSigninForm = (state=initialSigninState, action={}) => {
 }
 
 const initialRouteState = {
-  route: 'register'
+  route: 'signin'
 }
 
 export const changeRoute = (state=initialRouteState, action={}) => {
