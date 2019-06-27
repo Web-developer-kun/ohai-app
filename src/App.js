@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
-import { setRegisterEmail, setPassField1, setPassField2, setPassErr, setPassword, setLoginEmail, setLoginPassword, changeRoute } from './actions';
+import { setRegisterEmail, setPassField1, setPassField2, setFormErrMsg, setPassword, setLoginEmail, setLoginPassword, changeRoute } from './actions';
 import './App.css';
 import './bootstrap-social.css';
 const Signin = React.lazy(() => import('./components/Signin/Signin'))
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     email: state.fillRegisterForm.email,
     setPass1: state.fillRegisterForm.setPass1,
     setPass2: state.fillRegisterForm.setPass2,
-    passErr: state.fillRegisterForm.passErr,
+    formErrMsg: state.fillRegisterForm.formErrMsg,
     password: state.fillRegisterForm.password,
     signInEmail: state.fillSigninForm.signInEmail,
     signInPassword: state.fillSigninForm.signInPassword,
@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
     onEmailChange: (event) => dispatch(setRegisterEmail(event.target.value)),
     onSetPass1: (event) => dispatch(setPassField1(event.target.value)),
     onSetPass2: (event) => dispatch(setPassField2(event.target.value)),
-    setPassErr: (text) => dispatch(setPassErr(text)),
+    setFormErrMsg: (text) => dispatch(setFormErrMsg(text)),
     setPassword: (text) => dispatch(setPassword(text)),
     onSignInEmailChange: (event) => dispatch(setLoginEmail(event.target.value)),
     onSignInPasswordChange: (event) => dispatch(setLoginPassword(event.target.value)),
