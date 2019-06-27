@@ -53,7 +53,7 @@ class Signin extends React.Component {
           })
           .then(response => response.json())
           .then(data => {
-            if(data === "Invalid User"){
+            if(data === "Invalid login credentials"){
               setPassErr("Invalid login credentials")
             }
             if (data.userId) {
