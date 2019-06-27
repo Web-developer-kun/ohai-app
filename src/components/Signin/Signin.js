@@ -11,7 +11,7 @@ class Signin extends React.Component {
   }
 
   componentDidMount(){
-    const { changeRoute, setPassErr } = this.props;
+    const { changeRoute, setFormErrMsg } = this.props;
     const token = this.getAuthToken();
     if(token){
       fetch('http://localhost:3000/signin', {
@@ -31,7 +31,7 @@ class Signin extends React.Component {
               'Authorization': data.token
             }
           }).then(response => response.json())
-          .then(() =>{ setPassErr(""); changeRoute('placeholder'); })
+          .then(() =>{ setFormErrMsg(""); changeRoute('placeholder'); })
           .catch(err => console.log(err))
         }
       })
@@ -39,7 +39,7 @@ class Signin extends React.Component {
   }
 
   onSignIn = () => {
-    const { signInEmail, signInPassword, changeRoute, setPassErr } = this.props;
+    const { signInEmail, signInPassword, changeRoute, setFormErrMsg } = this.props;
     if(signInEmail.length && signInPassword.length){
       fetch('http://localhost:3000/signin', {
             method: 'POST',
@@ -54,7 +54,7 @@ class Signin extends React.Component {
           .then(response => response.json())
           .then(data => {
             if(data === "Invalid login credentials"){
-              setPassErr("Invalid login credentials")
+              setFormErrMsg("Invalid login credentials")
             }
             if (data.userId) {
               this.saveAuthTokenID(data.token);
@@ -65,21 +65,21 @@ class Signin extends React.Component {
                   'Authorization': data.token
                 }
               }).then(response => response.json())
-             .then(() =>{ setPassErr(""); changeRoute('placeholder');})
+             .then(() =>{ setFormErrMsg(""); changeRoute('placeholder');})
            }}).catch(err => console.log(err))
     } else {
-      setPassErr("Complete the form");
+      setFormErrMsg("Complete the form");
     }
 
   }
 
   render(){
-    const { onSignInEmailChange, onSignInPasswordChange, passErr, changeRoute, setPassErr } = this.props;
+    const { onSignInEmailChange, onSignInPasswordChange, formErrMsg, changeRoute, setFormErrMsg } = this.props;
     return(
       <div>
       <div className="text-center">
           <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign In</h1>
-          <label className="form-err">{passErr.length ? passErr : ''}</label>
+          <label className="form-err">{formErrMsg.length ? formErrMsg : ''}</label>
           <label htmlFor="inputEmail">Email address</label>
             <input
               type="email"
@@ -90,7 +90,7 @@ class Signin extends React.Component {
               autoFocus=""
               onChange={onSignInEmailChange}
             />
-          <label htmlFor="inputPassword">{passErr.length? passErr : "Password"}</label>
+          <label htmlFor="inputPassword">{formErrMsg.length? formErrMsg : "Password"}</label>
           <input
             type="password"
             id="inputPassword"
@@ -105,7 +105,7 @@ class Signin extends React.Component {
         className="btn btn-lg btn-primary btn-block"
       >Sign In</button>
       <button
-        onClick={() =>{ setPassErr(""); changeRoute('register')}}
+        onClick={() =>{ setFormErrMsg(""); changeRoute('register')}}
         className="btn btn-lg btn-primary btn-block"
       >Register</button>
       </div>
