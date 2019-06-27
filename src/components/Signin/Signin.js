@@ -6,35 +6,72 @@ class Signin extends React.Component {
     window.sessionStorage.setItem('token', token);
   }
 
-  onSignIn = () => {
-    const { signInEmail, signInPassword, changeRoute } = this.props;
-     fetch('http://localhost:3000/signin', {
-           method: 'POST',
-           headers: {
-             'Content-Type': 'application/json',
-           },
-           body: JSON.stringify({
-             email: signInEmail,
-             password: signInPassword
-           })
-         })
-         .then(response => response.json())
-         .then(data => {
-           if (data.userId) {
-             this.saveAuthTokenID(data.token);
-             fetch(`http://localhost:3000/placeholder/${data.userId}`, {
-               method: 'get',
-               headers: {
-                 'Content-Type': 'application/json',
-                 'Authorization': data.token
-               }
-             }).then(response => response.json())
-            .then(data =>{ if(data); changeRoute('placeholder')})
-          }}).catch(err => console.log(err))
+  getAuthToken = () => {
+    return window.sessionStorage.getItem('token');
+  }
+
+  componentDidMount(){
+    const { changeRoute } = this.props;
+    const token = this.getAuthToken();
+    if(token){
+      fetch('http://localhost:3000/signin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': token
+            }
+          }
+        ).then(response => response.json())
+        .then((data) => {
+          if(data && data.id){
+          fetch(`http://localhost:3000/placeholder/${data.id}`, {
+            method: 'get',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': data.token
+            }
+          }).then(response => response.json())
+          .then(data =>{ if(data); changeRoute('placeholder')})
+          .catch(err => console.log(err))
         }
+      })
+    }
+  }
+
+  onSignIn = () => {
+    const { signInEmail, signInPassword, changeRoute, setPassErr } = this.props;
+    if(signInEmail.length && signInPassword.length){
+      fetch('http://localhost:3000/signin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: signInEmail,
+              password: signInPassword
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.userId) {
+              this.saveAuthTokenID(data.token);
+              fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+                method: 'get',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': data.token
+                }
+              }).then(response => response.json())
+             .then(data =>{ if(data); changeRoute('placeholder')})
+           }}).catch(err => console.log(err))
+    } else {
+      setPassErr("Complete the form");
+    }
+
+  }
 
   render(){
-    const { onSignInEmailChange, onSignInPasswordChange } = this.props;
+    const { onSignInEmailChange, onSignInPasswordChange, passErr } = this.props;
     return(
       <div>
       <div className="text-center">
@@ -49,7 +86,7 @@ class Signin extends React.Component {
               autoFocus=""
               onChange={onSignInEmailChange}
             />
-          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <label htmlFor="inputPassword" className="sr-only">{passErr.length? passErr : "Password"}</label>
           <input
             type="password"
             id="inputPassword"
