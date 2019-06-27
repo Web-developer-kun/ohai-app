@@ -11,7 +11,7 @@ class Signin extends React.Component {
   }
 
   componentDidMount(){
-    const { changeRoute } = this.props;
+    const { changeRoute, setPassErr } = this.props;
     const token = this.getAuthToken();
     if(token){
       fetch('http://localhost:3000/signin', {
@@ -31,7 +31,7 @@ class Signin extends React.Component {
               'Authorization': data.token
             }
           }).then(response => response.json())
-          .then(data =>{ if(data); changeRoute('placeholder')})
+          .then(() =>{ setPassErr(""); changeRoute('placeholder'); })
           .catch(err => console.log(err))
         }
       })
@@ -53,6 +53,9 @@ class Signin extends React.Component {
           })
           .then(response => response.json())
           .then(data => {
+            if(data === "Invalid User"){
+              setPassErr("Invalid login credentials")
+            }
             if (data.userId) {
               this.saveAuthTokenID(data.token);
               fetch(`http://localhost:3000/placeholder/${data.userId}`, {
@@ -62,7 +65,7 @@ class Signin extends React.Component {
                   'Authorization': data.token
                 }
               }).then(response => response.json())
-             .then(data =>{ if(data); changeRoute('placeholder')})
+             .then(() =>{ setPassErr(""); changeRoute('placeholder');})
            }}).catch(err => console.log(err))
     } else {
       setPassErr("Complete the form");
@@ -71,12 +74,13 @@ class Signin extends React.Component {
   }
 
   render(){
-    const { onSignInEmailChange, onSignInPasswordChange, passErr } = this.props;
+    const { onSignInEmailChange, onSignInPasswordChange, passErr, changeRoute, setPassErr } = this.props;
     return(
       <div>
       <div className="text-center">
           <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign In</h1>
-          <label htmlFor="inputEmail" className="sr-only">Email address</label>
+          <label className="form-err">{passErr.length ? passErr : ''}</label>
+          <label htmlFor="inputEmail">Email address</label>
             <input
               type="email"
               id="inputEmail"
@@ -86,7 +90,7 @@ class Signin extends React.Component {
               autoFocus=""
               onChange={onSignInEmailChange}
             />
-          <label htmlFor="inputPassword" className="sr-only">{passErr.length? passErr : "Password"}</label>
+          <label htmlFor="inputPassword">{passErr.length? passErr : "Password"}</label>
           <input
             type="password"
             id="inputPassword"
@@ -100,6 +104,10 @@ class Signin extends React.Component {
         onClick={this.onSignIn}
         className="btn btn-lg btn-primary btn-block"
       >Sign In</button>
+      <button
+        onClick={() =>{ setPassErr(""); changeRoute('register')}}
+        className="btn btn-lg btn-primary btn-block"
+      >Register</button>
       </div>
     )
   }

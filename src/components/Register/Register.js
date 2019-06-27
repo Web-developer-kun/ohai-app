@@ -4,13 +4,13 @@ import './register.css';
 class Register extends React.Component {
   checkPassword = () => {
     const { setPassErr, setPassword, setPass1, setPass2 } = this.props;
-    if(setPass1 === setPass2){
-      setPassErr("Passwords Match");
-      setPassword(setPass2);
-    } else if(setPass1 !== setPass2){
-      setPassErr("Passwords Don't  Match");
-      setPassword("");
-    }
+      if(setPass1 === setPass2){
+        setPassErr("");
+        setPassword(setPass2);
+      } else if(setPass1 !== setPass2){
+        setPassErr("Passwords Must Match");
+        setPassword("");
+      }
   }
 
   saveAuthTokenID = (token) => {
@@ -33,6 +33,9 @@ class Register extends React.Component {
            })
            .then(response => response.json())
            .then(data => {
+            if(data === "User already exists"){
+              setPassErr("User already exists");
+            }
              if(data.userId){
                this.saveAuthTokenID(data.token);
                fetch(`http://localhost:3000/placeholder/${data.userId}`, {
@@ -42,7 +45,7 @@ class Register extends React.Component {
                    'Authorization': data.token
                  }
                }).then(response => response.json())
-              .then(data => { console.log(data); changeRoute('placeholder')})
+              .then(() =>{ setPassErr(""); changeRoute('placeholder');})
              }
            })
            .catch(err => console.log(err))
@@ -52,12 +55,13 @@ class Register extends React.Component {
   }
 
   render(){
-    const { onEmailChange, onSetPass1, onSetPass2, passErr } = this.props;
+    const { onEmailChange, onSetPass1, onSetPass2, passErr, setPassErr, changeRoute } = this.props;
 
     return(
       <div>
       <div className="text-center">
           <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign Up</h1>
+          <label className="form-err">{passErr.length ? passErr : ''}</label>
           <label htmlFor="inputEmail">Email address</label>
             <input
               type="email"
@@ -78,8 +82,7 @@ class Register extends React.Component {
             onChange={onSetPass1}
             onBlur={this.checkPassword}
             />
-
-          <label htmlFor="inputPassword">{ passErr.length ? passErr : "Confirm Password" }</label>
+          <label htmlFor="inputPassword">{ "Confirm Password" }</label>
           <input
             type="password"
             id="confirmPassword"
@@ -94,6 +97,10 @@ class Register extends React.Component {
         onClick={this.onSubmitRegister}
         className="btn btn-lg btn-primary btn-block"
       >Register</button>
+      <button
+        onClick={() =>{ setPassErr(""); changeRoute('signin')}}
+        className="btn btn-lg btn-primary btn-block"
+      >Back to Sign In</button>
       </div>
     )
   }
