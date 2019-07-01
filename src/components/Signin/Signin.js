@@ -2,17 +2,9 @@ import React from 'react';
 import './sign-in.css';
 
 class Signin extends React.Component {
-  saveAuthTokenID = (token) => {
-    window.sessionStorage.setItem('token', token);
-  }
-
-  getAuthToken = () => {
-    return window.sessionStorage.getItem('token');
-  }
-
   componentDidMount(){
     const { changeRoute, setFormErrMsg } = this.props;
-    const token = this.getAuthToken();
+    const token = window.sessionStorage.getItem('token');
     if(token){
       fetch('http://localhost:3000/signin', {
             method: 'POST',
@@ -57,7 +49,7 @@ class Signin extends React.Component {
               setFormErrMsg("Invalid login credentials")
             }
             if (data.userId) {
-              this.saveAuthTokenID(data.token);
+              window.sessionStorage.setItem('token', data.token);
               fetch(`http://localhost:3000/placeholder/${data.userId}`, {
                 method: 'get',
                 headers: {
