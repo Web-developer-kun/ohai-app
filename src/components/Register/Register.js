@@ -54,8 +54,20 @@ class Register extends React.Component {
      }
   }
 
+  navigateToSignIn = () => {
+    const { onEmailChange, onSetPass1, onSetPass2, setFormErrMsg, setPassword, changeRoute } = this.props;
+    const empty = { target: { value: ''} };
+    onEmailChange(empty);
+    onSetPass1(empty);
+    onSetPass2(empty);
+    setPassword("");
+    setFormErrMsg("");
+    changeRoute("signin")
+  }
+
+
   render(){
-    const { onEmailChange, onSetPass1, onSetPass2, formErrMsg, setFormErrMsg, changeRoute } = this.props;
+    const { onEmailChange, onSetPass1, onSetPass2, formErrMsg } = this.props;
 
     return(
       <div>
@@ -98,7 +110,7 @@ class Register extends React.Component {
         className="btn btn-lg btn-primary btn-block"
       >Register</button>
       <button
-        onClick={() =>{ setFormErrMsg(""); changeRoute('signin')}}
+        onClick={() =>{ this.navigateToSignIn(); }}
         className="btn btn-lg btn-primary btn-block"
       >Back to Sign In</button>
       </div>
