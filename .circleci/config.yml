@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/10.16.0-jessie
+      - image: circleci/10.16.0-alpine
     steps:
       - checkout
       - run: echo "hello world"
