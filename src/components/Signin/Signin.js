@@ -2,17 +2,9 @@ import React from 'react';
 import './sign-in.css';
 
 class Signin extends React.Component {
-  saveAuthTokenID = (token) => {
-    window.sessionStorage.setItem('token', token);
-  }
-
-  getAuthToken = () => {
-    return window.sessionStorage.getItem('token');
-  }
-
   componentDidMount(){
     const { changeRoute, setFormErrMsg } = this.props;
-    const token = this.getAuthToken();
+    const token = window.sessionStorage.getItem('token');
     if(token){
       fetch('http://localhost:3000/signin', {
             method: 'POST',
@@ -57,7 +49,7 @@ class Signin extends React.Component {
               setFormErrMsg("Invalid login credentials")
             }
             if (data.userId) {
-              this.saveAuthTokenID(data.token);
+              window.sessionStorage.setItem('token', data.token);
               fetch(`http://localhost:3000/placeholder/${data.userId}`, {
                 method: 'get',
                 headers: {
@@ -73,8 +65,18 @@ class Signin extends React.Component {
 
   }
 
+  navigateToRegister = () => {
+    const { onSignInEmailChange, onSignInPasswordChange, setFormErrMsg, setPassword, changeRoute } = this.props;
+    const empty = { target: { value: ''} };
+    onSignInEmailChange(empty);
+    onSignInPasswordChange(empty);
+    setPassword("");
+    setFormErrMsg("");
+    changeRoute("register");
+  }
+
   render(){
-    const { onSignInEmailChange, onSignInPasswordChange, formErrMsg, changeRoute, setFormErrMsg } = this.props;
+    const { onSignInEmailChange, onSignInPasswordChange, formErrMsg } = this.props;
     return(
       <div>
       <div className="text-center">
@@ -105,7 +107,7 @@ class Signin extends React.Component {
         className="btn btn-lg btn-primary btn-block"
       >Sign In</button>
       <button
-        onClick={() =>{ setFormErrMsg(""); changeRoute('register')}}
+        onClick={() =>{ this.navigateToRegister() }}
         className="btn btn-lg btn-primary btn-block"
       >Register</button>
       </div>
