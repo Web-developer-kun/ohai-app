@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import {
   setRegisterEmail,
@@ -10,13 +10,8 @@ import {
   setLoginPassword,
   changeRoute
 } from "./actions";
-import "./App.css";
 import "./bootstrap-social.css";
-const Signin = React.lazy(() => import("./components/Signin/Signin"));
-const Register = React.lazy(() => import("./components/Register/Register"));
-const Placeholder = React.lazy(() =>
-  import("./components/Placeholder/Placeholder")
-);
+import Router from "./components/Router/Router";
 
 const mapStateToProps = state => {
   return {
@@ -47,32 +42,7 @@ const mapDispatchToProps = dispatch => {
 
 class App extends React.Component {
   render() {
-    const { route } = this.props;
-    if (route === "signin") {
-      return (
-        <div style={{ width: "100%", height: "100%" }}>
-          <Suspense fallback={<h1>Signin</h1>}>
-            <Signin {...this.props} />
-          </Suspense>
-        </div>
-      );
-    } else if (route === "register") {
-      return (
-        <div style={{ width: "100%", height: "100%" }}>
-          <Suspense fallback={<h1>Register</h1>}>
-            <Register {...this.props} />
-          </Suspense>
-        </div>
-      );
-    } else if (route === "placeholder") {
-      return (
-        <div style={{ width: "100%", height: "100%" }}>
-          <Suspense fallback={<h1>Register</h1>}>
-            <Placeholder {...this.props} />
-          </Suspense>
-        </div>
-      );
-    }
+    return <Router {...this.props} />;
   }
 }
 

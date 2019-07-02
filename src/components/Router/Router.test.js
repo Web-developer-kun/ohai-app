@@ -1,6 +1,6 @@
-import React from "react";
 import { shallow } from "enzyme";
-import Signin from "./Signin";
+import React from "react";
+import Router from "./Router";
 
 let wrapper;
 beforeEach(() => {
@@ -10,8 +10,8 @@ beforeEach(() => {
     setPass2: "",
     formErrMsg: "",
     password: "",
-    signInEmail: "chunkylover53@aol.com",
-    signInPassword: "123",
+    signInEmail: "",
+    signInPassword: "",
     route: "signin",
     onEmailChange: jest.fn(),
     onSetPass1: jest.fn(),
@@ -22,18 +22,8 @@ beforeEach(() => {
     onSignInPasswordChange: jest.fn(),
     changeRoute: jest.fn()
   };
-  wrapper = shallow(<Signin {...mockProps} />);
+  wrapper = shallow(<Router {...mockProps} />);
 });
-
-it("renders without crashing", () => {
+it("renders Router component", () => {
   expect(wrapper).toMatchSnapshot();
-});
-
-it("navigates to register", () => {
-  expect(wrapper.instance().navigateToRegister());
-});
-
-it("signs in a user", done => {
-  expect(wrapper.instance().onSignIn());
-  done();
 });
