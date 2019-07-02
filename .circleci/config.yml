@@ -7,12 +7,5 @@ jobs:
       - checkout
       - run: echo "npm installing"
       - run: npm install
-      - run: CI=true npm run build
-  test:
-    docker:
-      - image: circleci/node:10.16.0-jessie
-    steps:
-      - checkout
-      - run: echo "testing stuff"
-      - run: npm install
       - run: npm test
+      - run: CI=true npm run build
