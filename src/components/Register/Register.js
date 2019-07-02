@@ -37,8 +37,9 @@ class Register extends React.Component {
             setFormErrMsg("User already exists");
           }
           if (data.userId) {
+            console.log(data.email);
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",

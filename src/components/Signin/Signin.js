@@ -16,7 +16,7 @@ class Signin extends React.Component {
         .then(response => response.json())
         .then(data => {
           if (data && data.id) {
-            fetch(`http://localhost:3000/placeholder/${data.id}`, {
+            fetch(`http://localhost:3000/townsquare/${data.id}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
