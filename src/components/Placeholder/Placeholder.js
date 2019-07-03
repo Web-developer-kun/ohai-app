@@ -1,13 +1,29 @@
 import React from "react";
 import Message from "../Message/Message";
+import socketIOClient from "socket.io-client";
 
 class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
       msgBox: "",
-      messages: []
+      messages: [],
+      socket: socketIOClient("http://localhost:3000/")
     };
+  }
+
+  componentDidMount() {
+    this.state.socket.on("message-received", msg => {
+      const time = new Date().toLocaleTimeString();
+      const newChat = this.state.messages;
+      newChat.push({
+        user: msg.user,
+        message: msg.message,
+        time: time
+      });
+      this.setState({ messages: newChat });
+      this.setState({ msgBox: "" });
+    });
   }
 
   writeMessage = event => {
@@ -17,17 +33,14 @@ class Placeholder extends React.Component {
   postMessage = () => {
     const { session_creds } = this.props;
     const ms = new Date();
-    const dateString = ms.toLocaleDateString() + " " + ms.toLocaleTimeString();
+
     const { msgBox } = this.state;
-    const newChat = this.state.messages;
-    newChat.push({
+
+    this.state.socket.emit("post-message", {
       user: session_creds.email,
       message: msgBox,
-      time: dateString,
-      ms: ms
+      time: ms
     });
-    this.setState({ messages: newChat });
-    this.setState({ msgBox: "" });
   };
 
   signOut = () => {
