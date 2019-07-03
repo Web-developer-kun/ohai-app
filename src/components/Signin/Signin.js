@@ -3,7 +3,7 @@ import "./sign-in.css";
 
 class Signin extends React.Component {
   componentDidMount() {
-    const { changeRoute, setFormErrMsg } = this.props;
+    const { changeRoute, setFormErrMsg, setSessionCredentials } = this.props;
     const token = window.sessionStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/signin", {
@@ -24,7 +24,8 @@ class Signin extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
               })
@@ -39,7 +40,8 @@ class Signin extends React.Component {
       signInEmail,
       signInPassword,
       changeRoute,
-      setFormErrMsg
+      setFormErrMsg,
+      setSessionCredentials
     } = this.props;
     if (signInEmail.length && signInPassword.length) {
       fetch("http://localhost:3000/signin", {
@@ -67,7 +69,8 @@ class Signin extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
               });

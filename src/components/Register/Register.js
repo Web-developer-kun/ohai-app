@@ -19,7 +19,13 @@ class Register extends React.Component {
 
   onSubmitRegister = () => {
     this.checkPassword();
-    const { email, password, setFormErrMsg, changeRoute } = this.props;
+    const {
+      email,
+      password,
+      setFormErrMsg,
+      changeRoute,
+      setSessionCredentials
+    } = this.props;
     if (email.length && password.length) {
       fetch("http://localhost:3000/register", {
         method: "POST",
@@ -46,7 +52,8 @@ class Register extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
               });

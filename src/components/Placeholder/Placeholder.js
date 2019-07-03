@@ -30,7 +30,7 @@ class Placeholder extends React.Component {
   };
 
   signOut = () => {
-    const { changeRoute } = this.props;
+    const { changeRoute, setSessionCredentials } = this.props;
     fetch("http://localhost:3000/signout", {
       method: "POST",
       headers: {
@@ -41,6 +41,7 @@ class Placeholder extends React.Component {
       })
     })
       .then(response => response.json())
+      .then(setSessionCredentials({ email: "", id: "" }))
       .then(window.sessionStorage.removeItem("token"))
       .then(changeRoute("signin"));
   };
