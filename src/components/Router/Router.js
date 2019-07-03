@@ -23,7 +23,7 @@ class Router extends React.Component {
           </Suspense>
         </div>
       );
-    } else if (route === "placeholder") {
+    } else if (route === "townsquare") {
       return (
         <div style={{ width: "100%", height: "100%" }}>
           <Suspense fallback={<h1>Register</h1>}>

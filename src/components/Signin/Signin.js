@@ -26,7 +26,7 @@ class Signin extends React.Component {
               .then(response => response.json())
               .then(() => {
                 setFormErrMsg("");
-                changeRoute("placeholder");
+                changeRoute("townsquare");
               })
               .catch(err => console.log(err));
           }
@@ -59,7 +59,7 @@ class Signin extends React.Component {
           }
           if (data.userId) {
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -69,7 +69,7 @@ class Signin extends React.Component {
               .then(response => response.json())
               .then(() => {
                 setFormErrMsg("");
-                changeRoute("placeholder");
+                changeRoute("townsquare");
               });
           }
         })
