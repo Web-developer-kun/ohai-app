@@ -15,12 +15,13 @@ class Placeholder extends React.Component {
   };
 
   postMessage = () => {
+    const { session_creds } = this.props;
     const ms = new Date();
     const dateString = ms.toLocaleDateString() + " " + ms.toLocaleTimeString();
     const { msgBox } = this.state;
     const newChat = this.state.messages;
     newChat.push({
-      user: "User123",
+      user: session_creds.email,
       message: msgBox,
       time: dateString,
       ms: ms
