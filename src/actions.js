@@ -6,19 +6,38 @@ import {
   SET_PASSWORD,
   SET_LOGIN_EMAIL,
   SET_LOGIN_PASSWORD,
-  CHANGE_ROUTE
-} from './constants'
+  CHANGE_ROUTE,
+  SET_SESSION_CREDENTIALS
+} from "./constants";
 
 //Register Page
-export const setRegisterEmail = (text) => ({type: SET_REGISTER_EMAIL, payload: text})
-export const setPassField1 = (text) => ({type: CHANGE_PASS_FIELD_1, payload: text})
-export const setPassField2 = (text) => ({type: CHANGE_PASS_FIELD_2, payload: text})
-export const setFormErrMsg = (text) => ({type: SET_FORM_ERR, payload: text})
-export const setPassword = (text) => ({type: SET_PASSWORD, payload: text})
+export const setRegisterEmail = text => ({
+  type: SET_REGISTER_EMAIL,
+  payload: text
+});
+export const setPassField1 = text => ({
+  type: CHANGE_PASS_FIELD_1,
+  payload: text
+});
+export const setPassField2 = text => ({
+  type: CHANGE_PASS_FIELD_2,
+  payload: text
+});
+export const setFormErrMsg = text => ({ type: SET_FORM_ERR, payload: text });
+export const setPassword = text => ({ type: SET_PASSWORD, payload: text });
 
 //Signin Page
-export const setLoginEmail = (text) => ({type: SET_LOGIN_EMAIL, payload: text})
-export const setLoginPassword = (text) => ({type: SET_LOGIN_PASSWORD, payload: text})
+export const setLoginEmail = text => ({ type: SET_LOGIN_EMAIL, payload: text });
+export const setLoginPassword = text => ({
+  type: SET_LOGIN_PASSWORD,
+  payload: text
+});
 
 //Routes
-export const changeRoute = (text) => ({type: CHANGE_ROUTE, payload: text})
+export const changeRoute = text => ({ type: CHANGE_ROUTE, payload: text });
+
+//Session
+export const setSessionCredentials = obj => ({
+  type: SET_SESSION_CREDENTIALS,
+  payload: obj
+});

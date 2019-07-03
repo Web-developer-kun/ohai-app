@@ -3,7 +3,7 @@ import "./sign-in.css";
 
 class Signin extends React.Component {
   componentDidMount() {
-    const { changeRoute, setFormErrMsg } = this.props;
+    const { changeRoute, setFormErrMsg, setSessionCredentials } = this.props;
     const token = window.sessionStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/signin", {
@@ -16,7 +16,7 @@ class Signin extends React.Component {
         .then(response => response.json())
         .then(data => {
           if (data && data.id) {
-            fetch(`http://localhost:3000/placeholder/${data.id}`, {
+            fetch(`http://localhost:3000/townsquare/${data.id}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -24,9 +24,10 @@ class Signin extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
-                changeRoute("placeholder");
+                changeRoute("townsquare");
               })
               .catch(err => console.log(err));
           }
@@ -39,7 +40,8 @@ class Signin extends React.Component {
       signInEmail,
       signInPassword,
       changeRoute,
-      setFormErrMsg
+      setFormErrMsg,
+      setSessionCredentials
     } = this.props;
     if (signInEmail.length && signInPassword.length) {
       fetch("http://localhost:3000/signin", {
@@ -59,7 +61,7 @@ class Signin extends React.Component {
           }
           if (data.userId) {
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -67,9 +69,10 @@ class Signin extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
-                changeRoute("placeholder");
+                changeRoute("townsquare");
               });
           }
         })

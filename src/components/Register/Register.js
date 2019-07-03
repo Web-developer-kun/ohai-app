@@ -19,7 +19,13 @@ class Register extends React.Component {
 
   onSubmitRegister = () => {
     this.checkPassword();
-    const { email, password, setFormErrMsg, changeRoute } = this.props;
+    const {
+      email,
+      password,
+      setFormErrMsg,
+      changeRoute,
+      setSessionCredentials
+    } = this.props;
     if (email.length && password.length) {
       fetch("http://localhost:3000/register", {
         method: "POST",
@@ -38,7 +44,7 @@ class Register extends React.Component {
           }
           if (data.userId) {
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/placeholder/${data.userId}`, {
+            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
               method: "get",
               headers: {
                 "Content-Type": "application/json",
@@ -46,9 +52,10 @@ class Register extends React.Component {
               }
             })
               .then(response => response.json())
-              .then(() => {
+              .then(user => {
+                setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
-                changeRoute("placeholder");
+                changeRoute("townsquare");
               });
           }
         })
