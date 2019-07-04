@@ -88,7 +88,7 @@ class Placeholder extends React.Component {
           onChange={this.writeMessage}
           className="form-control message"
           onKeyPress={this.checkForEnterKey}
-          value={msgBox.length ? msgBox : ""}
+          value={msgBox && msgBox.length ? msgBox : ""}
         />
         <button
           className="btn btn-lg btn-primary btn-block"
