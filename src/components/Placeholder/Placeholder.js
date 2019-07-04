@@ -30,6 +30,10 @@ class Placeholder extends React.Component {
     this.setState({ msgBox: event.target.value });
   };
 
+  checkForEnterKey = event => {
+    if (event.key === "Enter") this.postMessage();
+  };
+
   postMessage = () => {
     const { session_creds } = this.props;
     const ms = new Date();
@@ -81,6 +85,7 @@ class Placeholder extends React.Component {
           type="text"
           onChange={this.writeMessage}
           className="form-control message"
+          onKeyPress={this.checkForEnterKey}
           value={msgBox.length ? msgBox : ""}
         />
         <button
