@@ -7,7 +7,8 @@ import {
   SET_LOGIN_EMAIL,
   SET_LOGIN_PASSWORD,
   CHANGE_ROUTE,
-  SET_SESSION_CREDENTIALS
+  SET_SESSION_CREDENTIALS,
+  SET_COMPOSE_INPUT
 } from "./constants";
 
 //Register Page
@@ -40,4 +41,11 @@ export const changeRoute = text => ({ type: CHANGE_ROUTE, payload: text });
 export const setSessionCredentials = obj => ({
   type: SET_SESSION_CREDENTIALS,
   payload: obj
+});
+
+//TSQ
+
+export const setComposeInput = text => ({
+  type: SET_COMPOSE_INPUT,
+  payload: text
 });

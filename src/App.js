@@ -9,7 +9,8 @@ import {
   setLoginEmail,
   setLoginPassword,
   changeRoute,
-  setSessionCredentials
+  setSessionCredentials,
+  setComposeInput
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -24,7 +25,8 @@ const mapStateToProps = state => {
     signInEmail: state.fillSigninForm.signInEmail,
     signInPassword: state.fillSigninForm.signInPassword,
     route: state.changeRoute.route,
-    session_creds: state.setLoggedInCreds.session_creds
+    session_creds: state.setLoggedInCreds.session_creds,
+    msgBox: state.setComposeInputField.msgBox
   };
 };
 
@@ -39,7 +41,8 @@ const mapDispatchToProps = dispatch => {
     onSignInPasswordChange: event =>
       dispatch(setLoginPassword(event.target.value)),
     changeRoute: text => dispatch(changeRoute(text)),
-    setSessionCredentials: obj => dispatch(setSessionCredentials(obj))
+    setSessionCredentials: obj => dispatch(setSessionCredentials(obj)),
+    onInputFieldChange: text => dispatch(setComposeInput(text))
   };
 };
 
