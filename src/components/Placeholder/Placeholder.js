@@ -6,13 +6,13 @@ class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
-      msgBox: "",
       messages: [],
       socket: socketIOClient("http://localhost:3000/")
     };
   }
 
   componentDidMount() {
+    const { onInputFieldChange } = this.props;
     this.state.socket.on("message-received", msg => {
       const time = new Date().toLocaleTimeString();
       const newChat = this.state.messages;
@@ -22,12 +22,13 @@ class Placeholder extends React.Component {
         time: time
       });
       this.setState({ messages: newChat });
-      this.setState({ msgBox: "" });
+      onInputFieldChange("");
     });
   }
 
   writeMessage = event => {
-    this.setState({ msgBox: event.target.value });
+    const { onInputFieldChange } = this.props;
+    onInputFieldChange(event.target.value);
   };
 
   checkForEnterKey = event => {
@@ -38,7 +39,7 @@ class Placeholder extends React.Component {
     const { session_creds } = this.props;
     const ms = new Date();
 
-    const { msgBox } = this.state;
+    const { msgBox } = this.props;
 
     this.state.socket.emit("post-message", {
       user: session_creds.email,
@@ -64,7 +65,8 @@ class Placeholder extends React.Component {
       .then(changeRoute("signin"));
   };
   render() {
-    const { messages, msgBox } = this.state;
+    const { messages } = this.state;
+    const { msgBox } = this.props;
     return (
       <div>
         <div style={{ height: "500px" }} className="form-control">

@@ -7,7 +7,8 @@ import {
   SET_LOGIN_EMAIL,
   SET_LOGIN_PASSWORD,
   CHANGE_ROUTE,
-  SET_SESSION_CREDENTIALS
+  SET_SESSION_CREDENTIALS,
+  SET_COMPOSE_INPUT
 } from "./constants";
 
 const initialRegisterState = {
@@ -75,6 +76,19 @@ export const setLoggedInCreds = (state = initialSessionState, action = {}) => {
   switch (action.type) {
     case SET_SESSION_CREDENTIALS:
       return Object.assign({}, state, { session_creds: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialTsqState = {
+  msgBox: ""
+};
+
+export const setComposeInputField = (state = initialTsqState, action = {}) => {
+  switch (action.type) {
+    case SET_COMPOSE_INPUT:
+      return Object.assign({}, state, { msgBox: action.payload });
     default:
       return state;
   }

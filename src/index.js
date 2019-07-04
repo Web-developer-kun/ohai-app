@@ -11,14 +11,16 @@ import {
   fillRegisterForm,
   fillSigninForm,
   changeRoute,
-  setLoggedInCreds
+  setLoggedInCreds,
+  setComposeInputField
 } from "./reducers";
 
 const rootReducer = combineReducers({
   fillRegisterForm,
   fillSigninForm,
   changeRoute,
-  setLoggedInCreds
+  setLoggedInCreds,
+  setComposeInputField
 });
 const store = createStore(
   rootReducer,
