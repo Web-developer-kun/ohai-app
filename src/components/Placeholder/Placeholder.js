@@ -71,6 +71,7 @@ class Placeholder extends React.Component {
       src: url,
       time: new Date()
     });
+    this.setState({ images: [] });
   };
 
   removeImage = id => {
