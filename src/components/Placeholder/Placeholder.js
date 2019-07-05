@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "../Message/Message";
+import Post from "../Post/Post";
 import Spinner from "../Spinner";
 import Images from "../Images";
 import Buttons from "../Buttons";
@@ -11,40 +11,38 @@ class Placeholder extends React.Component {
     this.state = {
       uploading: false,
       images: [],
-      messages: [],
+      posts: [],
       socket: socketIOClient("http://localhost:3000/")
     };
   }
 
   componentDidMount() {
     const { onInputFieldChange } = this.props;
+    const time = new Date().toLocaleTimeString();
+    const newChat = this.state.posts;
+
     this.state.socket.on("message-received", msg => {
-      const time = new Date().toLocaleTimeString();
-      const newChat = this.state.messages;
       newChat.push({
         user: msg.user,
         message: msg.message,
         time: time
       });
-      this.setState({ messages: newChat });
+      this.setState({ posts: newChat });
       onInputFieldChange("");
     });
+
     this.state.socket.on("image-received", imgpost => {
-      console.log(imgpost, "Image Post");
-      const time = new Date().toLocaleTimeString();
-      const newChat = this.state.messages;
       newChat.push({
         user: imgpost.user,
         src: imgpost.src,
         time: time
       });
-      this.setState({ messages: newChat });
-      onInputFieldChange("");
+      this.setState({ posts: newChat });
     });
   }
 
-  onImageChange = e => {
-    const files = Array.from(e.target.files);
+  onImageUpload = event => {
+    const files = Array.from(event.target.files);
     this.setState({ uploading: true });
 
     const formData = new FormData();
@@ -120,7 +118,7 @@ class Placeholder extends React.Component {
       .then(changeRoute("signin"));
   };
   render() {
-    const { messages, uploading, images } = this.state;
+    const { posts, uploading, images } = this.state;
     const { msgBox } = this.props;
 
     const imageUploader = () => {
@@ -136,21 +134,24 @@ class Placeholder extends React.Component {
             />
           );
         default:
-          return <Buttons onChange={this.onImageChange} />;
+          return <Buttons onImageUpload={this.onImageUpload} />;
       }
     };
     return (
       <div>
-        <div style={{ height: "500px" }} className="form-control">
-          {messages
-            ? messages.map((msg, i) => {
+        <div
+          style={{ height: "500px", overflow: "scroll" }}
+          className="form-control"
+        >
+          {posts
+            ? posts.map((pst, i) => {
                 return (
-                  <Message
+                  <Post
                     key={i}
-                    user={msg.user}
-                    message={msg.message}
-                    src={msg.src}
-                    time={msg.time}
+                    user={pst.user}
+                    message={pst.message}
+                    src={pst.src}
+                    time={pst.time}
                   />
                 );
               })

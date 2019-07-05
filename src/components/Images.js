@@ -14,7 +14,11 @@ const Images = ({ images, removeImage, postImage }) =>
       <div onClick={() => postImage(image.secure_url)} className="upload">
         <FontAwesomeIcon icon={faArrowCircleUp} size="2x" />
       </div>
-      <img src={image.secure_url} alt="" />
+      <img
+        style={{ "max-height": "250px", "max-width": "250px" }}
+        src={image.secure_url}
+        alt=""
+      />
     </div>
   ));
 
