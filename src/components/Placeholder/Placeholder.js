@@ -29,6 +29,18 @@ class Placeholder extends React.Component {
       this.setState({ messages: newChat });
       onInputFieldChange("");
     });
+    this.state.socket.on("image-received", imgpost => {
+      console.log(imgpost, "Image Post");
+      const time = new Date().toLocaleTimeString();
+      const newChat = this.state.messages;
+      newChat.push({
+        user: imgpost.user,
+        src: imgpost.src,
+        time: time
+      });
+      this.setState({ messages: newChat });
+      onInputFieldChange("");
+    });
   }
 
   onImageChange = e => {
@@ -52,6 +64,15 @@ class Placeholder extends React.Component {
           images
         });
       });
+  };
+
+  postImage = url => {
+    const { session_creds } = this.props;
+    this.state.socket.emit("post-image", {
+      user: session_creds.email,
+      src: url,
+      time: new Date()
+    });
   };
 
   removeImage = id => {
@@ -107,7 +128,13 @@ class Placeholder extends React.Component {
         case uploading:
           return <Spinner />;
         case images.length > 0:
-          return <Images images={images} removeImage={this.removeImage} />;
+          return (
+            <Images
+              images={images}
+              removeImage={this.removeImage}
+              postImage={this.postImage}
+            />
+          );
         default:
           return <Buttons onChange={this.onImageChange} />;
       }
@@ -122,6 +149,7 @@ class Placeholder extends React.Component {
                     key={i}
                     user={msg.user}
                     message={msg.message}
+                    src={msg.src}
                     time={msg.time}
                   />
                 );
