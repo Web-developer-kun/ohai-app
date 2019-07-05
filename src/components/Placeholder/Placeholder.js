@@ -31,8 +31,8 @@ class Placeholder extends React.Component {
     });
   }
 
-  onImagesChange = e => {
-    const files = Array.fromt(e.target.files);
+  onImageChange = e => {
+    const files = Array.from(e.target.files);
     this.setState({ uploading: true });
 
     const formData = new FormData();
@@ -109,7 +109,7 @@ class Placeholder extends React.Component {
         case images.length > 0:
           return <Images images={images} removeImage={this.removeImage} />;
         default:
-          return <Buttons onImageChange={this.onImageChange} />;
+          return <Buttons onChange={this.onImageChange} />;
       }
     };
     return (
