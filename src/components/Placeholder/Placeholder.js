@@ -162,7 +162,7 @@ class Placeholder extends React.Component {
       switch (true) {
         case uploading:
           return <Spinner />;
-        case images.length > 0:
+        case images !== undefined && images.length > 0:
           return (
             <Images
               images={images}
