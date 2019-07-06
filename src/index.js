@@ -13,7 +13,8 @@ import {
   changeRoute,
   setLoggedInCreds,
   setComposeInputField,
-  setSfwScoreResults
+  setSfwScoreResults,
+  uploadImagesToCloudinary
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   changeRoute,
   setLoggedInCreds,
   setComposeInputField,
-  setSfwScoreResults
+  setSfwScoreResults,
+  uploadImagesToCloudinary
 });
 const store = createStore(
   rootReducer,

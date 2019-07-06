@@ -9,8 +9,6 @@ class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
-      uploading: false,
-      images: [],
       posts: [],
       socket: socketIOClient("http://localhost:3000/")
     };
@@ -43,25 +41,12 @@ class Placeholder extends React.Component {
 
   onImageUpload = event => {
     const files = Array.from(event.target.files);
-    this.setState({ uploading: true });
-
+    const { onSelectImagesFromDisk } = this.props;
     const formData = new FormData();
-
     files.forEach((file, i) => {
       formData.append(i, file);
     });
-
-    fetch(`http://localhost:3000/image-upload`, {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(images => {
-        this.setState({
-          uploading: false,
-          images
-        });
-      });
+    onSelectImagesFromDisk(formData);
   };
 
   postImage = url => {
@@ -98,7 +83,7 @@ class Placeholder extends React.Component {
             src: url,
             time: new Date()
           });
-          this.setState({ images: [] });
+          this.removeImage();
         }
       });
   };
@@ -121,9 +106,8 @@ class Placeholder extends React.Component {
   };
 
   removeImage = id => {
-    this.setState({
-      images: this.state.images.filter(image => image.public_id !== id)
-    });
+    const { clearImageTray } = this.props;
+    clearImageTray([]);
   };
 
   writeMessage = event => {
@@ -165,7 +149,8 @@ class Placeholder extends React.Component {
       .then(changeRoute("signin"));
   };
   render() {
-    const { posts, uploading, images } = this.state;
+    const { uploading, images } = this.props;
+    const { posts } = this.state;
     const { msgBox, sfwScoreString, nsfwScoreString } = this.props;
 
     const imageUploader = () => {

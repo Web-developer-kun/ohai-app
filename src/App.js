@@ -12,7 +12,9 @@ import {
   setSessionCredentials,
   setComposeInput,
   setSfwScore,
-  setNsfwScore
+  setNsfwScore,
+  uploadImages,
+  clearImageTray
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -30,7 +32,9 @@ const mapStateToProps = state => {
     session_creds: state.setLoggedInCreds.session_creds,
     msgBox: state.setComposeInputField.msgBox,
     sfwScoreString: state.setSfwScoreResults.sfwScoreString,
-    nsfwScoreString: state.setSfwScoreResults.nsfwScoreString
+    nsfwScoreString: state.setSfwScoreResults.nsfwScoreString,
+    images: state.uploadImagesToCloudinary.images,
+    uploading: state.uploadImagesToCloudinary.uploading
   };
 };
 
@@ -48,7 +52,9 @@ const mapDispatchToProps = dispatch => {
     setSessionCredentials: obj => dispatch(setSessionCredentials(obj)),
     onInputFieldChange: text => dispatch(setComposeInput(text)),
     setSFWScore: text => dispatch(setSfwScore(text)),
-    setNSFWScore: text => dispatch(setNsfwScore(text))
+    setNSFWScore: text => dispatch(setNsfwScore(text)),
+    onSelectImagesFromDisk: formData => dispatch(uploadImages(formData)),
+    clearImageTray: array => dispatch(clearImageTray(array))
   };
 };
 

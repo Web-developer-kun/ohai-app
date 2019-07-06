@@ -10,7 +10,11 @@ import {
   SET_SESSION_CREDENTIALS,
   SET_COMPOSE_INPUT,
   SET_SFW_SCORE,
-  SET_NSFW_SCORE
+  SET_NSFW_SCORE,
+  UPLOADING_PENDING,
+  UPLOADING_SUCCESS,
+  UPLOADING_FAILED,
+  CLEAR_IMAGE_TRAY
 } from "./constants";
 
 const initialRegisterState = {
@@ -107,6 +111,35 @@ export const setSfwScoreResults = (state = initialSfwState, action = {}) => {
       return Object.assign({}, state, { sfwScoreString: action.payload });
     case SET_NSFW_SCORE:
       return Object.assign({}, state, { nsfwScoreString: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialUploadState = {
+  images: [],
+  uploading: false
+};
+
+export const uploadImagesToCloudinary = (
+  state = initialUploadState,
+  action = {}
+) => {
+  switch (action.type) {
+    case UPLOADING_PENDING:
+      return Object.assign({}, state, { uploading: true });
+    case UPLOADING_SUCCESS:
+      return Object.assign({}, state, {
+        images: action.payload,
+        uploading: false
+      });
+    case UPLOADING_FAILED:
+      return Object.assign({}, state, {
+        error: action.payload,
+        uploading: false
+      });
+    case CLEAR_IMAGE_TRAY:
+      return Object.assign({}, state, { images: action.payload });
     default:
       return state;
   }
