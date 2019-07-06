@@ -15,8 +15,8 @@ class Placeholder extends React.Component {
 
   componentDidMount() {
     const { onInputFieldChange } = this.props;
-    const time = new Date().toLocaleTimeString();
     const { pushPost } = this.props;
+    const time = new Date().toLocaleTimeString();
 
     this.state.socket.on("message-received", msg => {
       pushPost({
@@ -37,9 +37,10 @@ class Placeholder extends React.Component {
   }
 
   onImageUpload = event => {
-    const files = Array.from(event.target.files);
     const { onSelectImagesFromDisk } = this.props;
+    const files = Array.from(event.target.files);
     const formData = new FormData();
+
     files.forEach((file, i) => {
       formData.append(i, file);
     });
@@ -103,8 +104,10 @@ class Placeholder extends React.Component {
   };
 
   removeImage = id => {
-    const { clearImageTray } = this.props;
+    const { clearImageTray, setSFWScore, setNSFWScore } = this.props;
     clearImageTray([]);
+    setSFWScore("");
+    setNSFWScore("");
   };
 
   writeMessage = event => {
