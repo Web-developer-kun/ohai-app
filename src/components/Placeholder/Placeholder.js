@@ -79,17 +79,19 @@ class Placeholder extends React.Component {
       .then(response => response.json())
       .then(data => {
         const sfwScores = this.processClarifaiData(data);
-        console.log(sfwScores.nsfwString, sfwScores.sfwString, "Scores");
-
-        setSFWScore(sfwScores.sfwString);
-        setNSFWScore(sfwScores.nsfwString);
-
-        if (sfwScores.nsfwScore > 0.8) {
+        console.log(sfwScores, "hmm");
+        if (sfwScores.nsfw.score > 0.8) {
           setNSFWScore(
-            sfwScores.nsfwString +
-              " The API has decided this is NSFW. You may not upload."
+            sfwScores.nsfw.score * 100 +
+              " %  Warning: the bot moderator thinks this is NSFW"
           );
         } else {
+          setSFWScore(
+            sfwScores.sfw.score * 100 + " % chance this image is SFW"
+          );
+          setNSFWScore(
+            sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
+          );
           const { session_creds } = this.props;
           this.state.socket.emit("post-image", {
             user: session_creds.email,
@@ -102,14 +104,20 @@ class Placeholder extends React.Component {
   };
 
   processClarifaiData = data => {
-    const sfw = data.outputs[0].data.concepts[0];
-    const nsfw = data.outputs[0].data.concepts[1];
-    return {
-      nsfwString: nsfw.value * 100 + " % chance the uploaded image was NSFW",
-      sfwString: sfw.value * 100 + " % chance the uploaded image was SFW",
-      nsfwScore: nsfw.value,
-      sfwScore: sfw.value
+    const concepts = data.outputs[0].data.concepts;
+    const results = {
+      nsfw: {},
+      sfw: {}
     };
+
+    for (var i = 0; i < concepts.length; i++) {
+      if (concepts[i].name === "sfw") {
+        results.sfw.score = concepts[i].value;
+      } else if (concepts[i].name === "nsfw") {
+        results.nsfw.score = concepts[i].value;
+      }
+    }
+    return results;
   };
 
   removeImage = id => {
