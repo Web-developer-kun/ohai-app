@@ -8,7 +8,9 @@ import {
   SET_LOGIN_PASSWORD,
   CHANGE_ROUTE,
   SET_SESSION_CREDENTIALS,
-  SET_COMPOSE_INPUT
+  SET_COMPOSE_INPUT,
+  SET_SFW_SCORE,
+  SET_NSFW_SCORE
 } from "./constants";
 
 //Register Page
@@ -47,5 +49,17 @@ export const setSessionCredentials = obj => ({
 
 export const setComposeInput = text => ({
   type: SET_COMPOSE_INPUT,
+  payload: text
+});
+
+//IMG Upload
+
+export const setSfwScore = text => ({
+  type: SET_SFW_SCORE,
+  payload: text
+});
+
+export const setNsfwScore = text => ({
+  type: SET_NSFW_SCORE,
   payload: text
 });

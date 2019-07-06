@@ -12,7 +12,8 @@ import {
   fillSigninForm,
   changeRoute,
   setLoggedInCreds,
-  setComposeInputField
+  setComposeInputField,
+  setSfwScoreResults
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   fillSigninForm,
   changeRoute,
   setLoggedInCreds,
-  setComposeInputField
+  setComposeInputField,
+  setSfwScoreResults
 });
 const store = createStore(
   rootReducer,

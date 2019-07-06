@@ -10,7 +10,9 @@ import {
   setLoginPassword,
   changeRoute,
   setSessionCredentials,
-  setComposeInput
+  setComposeInput,
+  setSfwScore,
+  setNsfwScore
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -26,7 +28,9 @@ const mapStateToProps = state => {
     signInPassword: state.fillSigninForm.signInPassword,
     route: state.changeRoute.route,
     session_creds: state.setLoggedInCreds.session_creds,
-    msgBox: state.setComposeInputField.msgBox
+    msgBox: state.setComposeInputField.msgBox,
+    sfwScoreString: state.setSfwScoreResults.sfwScoreString,
+    nsfwScoreString: state.setSfwScoreResults.nsfwScoreString
   };
 };
 
@@ -42,7 +46,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(setLoginPassword(event.target.value)),
     changeRoute: text => dispatch(changeRoute(text)),
     setSessionCredentials: obj => dispatch(setSessionCredentials(obj)),
-    onInputFieldChange: text => dispatch(setComposeInput(text))
+    onInputFieldChange: text => dispatch(setComposeInput(text)),
+    setSFWScore: text => dispatch(setSfwScore(text)),
+    setNSFWScore: text => dispatch(setNsfwScore(text))
   };
 };
 

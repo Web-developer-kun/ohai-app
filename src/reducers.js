@@ -8,7 +8,9 @@ import {
   SET_LOGIN_PASSWORD,
   CHANGE_ROUTE,
   SET_SESSION_CREDENTIALS,
-  SET_COMPOSE_INPUT
+  SET_COMPOSE_INPUT,
+  SET_SFW_SCORE,
+  SET_NSFW_SCORE
 } from "./constants";
 
 const initialRegisterState = {
@@ -89,6 +91,22 @@ export const setComposeInputField = (state = initialTsqState, action = {}) => {
   switch (action.type) {
     case SET_COMPOSE_INPUT:
       return Object.assign({}, state, { msgBox: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialSfwState = {
+  sfwScoreString: "",
+  nsfwScoreString: ""
+};
+
+export const setSfwScoreResults = (state = initialSfwState, action = {}) => {
+  switch (action.type) {
+    case SET_SFW_SCORE:
+      return Object.assign({}, state, { sfwScoreString: action.payload });
+    case SET_NSFW_SCORE:
+      return Object.assign({}, state, { nsfwScoreString: action.payload });
     default:
       return state;
   }

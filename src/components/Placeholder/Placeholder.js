@@ -65,6 +65,7 @@ class Placeholder extends React.Component {
   };
 
   postImage = url => {
+    const { setSFWScore, setNSFWScore } = this.props;
     fetch("http://localhost:3000/image-scan", {
       method: "post",
       headers: {
@@ -78,14 +79,25 @@ class Placeholder extends React.Component {
       .then(response => response.json())
       .then(data => {
         const sfwScores = this.processClarifaiData(data);
-        console.log(sfwScores.nsfwString, sfwScores.sfwString, "SCORES");
-        const { session_creds } = this.props;
-        this.state.socket.emit("post-image", {
-          user: session_creds.email,
-          src: url,
-          time: new Date()
-        });
-        this.setState({ images: [] });
+        console.log(sfwScores.nsfwString, sfwScores.sfwString, "Scores");
+
+        setSFWScore(sfwScores.sfwString);
+        setNSFWScore(sfwScores.nsfwString);
+
+        if (sfwScores.nsfwScore > 0.8) {
+          setNSFWScore(
+            sfwScores.nsfwString +
+              " The API has decided this is NSFW. You may not upload."
+          );
+        } else {
+          const { session_creds } = this.props;
+          this.state.socket.emit("post-image", {
+            user: session_creds.email,
+            src: url,
+            time: new Date()
+          });
+          this.setState({ images: [] });
+        }
       });
   };
 
@@ -93,8 +105,8 @@ class Placeholder extends React.Component {
     const sfw = data.outputs[0].data.concepts[0];
     const nsfw = data.outputs[0].data.concepts[1];
     return {
-      nsfwString: nsfw.value * 100 + " % NSFW",
-      sfwString: sfw.value * 100 + " % SFW",
+      nsfwString: nsfw.value * 100 + " % chance the uploaded image was NSFW",
+      sfwString: sfw.value * 100 + " % chance the uploaded image was SFW",
       nsfwScore: nsfw.value,
       sfwScore: sfw.value
     };
@@ -146,7 +158,7 @@ class Placeholder extends React.Component {
   };
   render() {
     const { posts, uploading, images } = this.state;
-    const { msgBox } = this.props;
+    const { msgBox, sfwScoreString, nsfwScoreString } = this.props;
 
     const imageUploader = () => {
       switch (true) {
@@ -199,6 +211,12 @@ class Placeholder extends React.Component {
           Send
         </button>
         <div className="buttons">{imageUploader()}</div>
+        <span style={{ display: "block" }}>
+          {sfwScoreString ? sfwScoreString : ""}
+        </span>
+        <span style={{ display: "block" }}>
+          {nsfwScoreString ? nsfwScoreString : ""}
+        </span>
         <button
           onClick={this.signOut}
           className="btn btn-lg btn-primary btn-block"
