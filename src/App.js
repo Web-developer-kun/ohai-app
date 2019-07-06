@@ -10,7 +10,12 @@ import {
   setLoginPassword,
   changeRoute,
   setSessionCredentials,
-  setComposeInput
+  setComposeInput,
+  setSfwScore,
+  setNsfwScore,
+  uploadImages,
+  clearImageTray,
+  pushPost
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -26,7 +31,12 @@ const mapStateToProps = state => {
     signInPassword: state.fillSigninForm.signInPassword,
     route: state.changeRoute.route,
     session_creds: state.setLoggedInCreds.session_creds,
-    msgBox: state.setComposeInputField.msgBox
+    msgBox: state.setComposeInputField.msgBox,
+    sfwScoreString: state.setSfwScoreResults.sfwScoreString,
+    nsfwScoreString: state.setSfwScoreResults.nsfwScoreString,
+    images: state.uploadImagesToCloudinary.images,
+    uploading: state.uploadImagesToCloudinary.uploading,
+    posts: state.pushPostsToChatBox.posts
   };
 };
 
@@ -42,7 +52,12 @@ const mapDispatchToProps = dispatch => {
       dispatch(setLoginPassword(event.target.value)),
     changeRoute: text => dispatch(changeRoute(text)),
     setSessionCredentials: obj => dispatch(setSessionCredentials(obj)),
-    onInputFieldChange: text => dispatch(setComposeInput(text))
+    onInputFieldChange: text => dispatch(setComposeInput(text)),
+    setSFWScore: text => dispatch(setSfwScore(text)),
+    setNSFWScore: text => dispatch(setNsfwScore(text)),
+    onSelectImagesFromDisk: formData => dispatch(uploadImages(formData)),
+    clearImageTray: array => dispatch(clearImageTray(array)),
+    pushPost: obj => dispatch(pushPost(obj))
   };
 };
 

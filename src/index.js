@@ -12,7 +12,10 @@ import {
   fillSigninForm,
   changeRoute,
   setLoggedInCreds,
-  setComposeInputField
+  setComposeInputField,
+  setSfwScoreResults,
+  uploadImagesToCloudinary,
+  pushPostsToChatBox
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -20,7 +23,10 @@ const rootReducer = combineReducers({
   fillSigninForm,
   changeRoute,
   setLoggedInCreds,
-  setComposeInputField
+  setComposeInputField,
+  setSfwScoreResults,
+  uploadImagesToCloudinary,
+  pushPostsToChatBox
 });
 const store = createStore(
   rootReducer,

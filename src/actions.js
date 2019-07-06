@@ -8,7 +8,14 @@ import {
   SET_LOGIN_PASSWORD,
   CHANGE_ROUTE,
   SET_SESSION_CREDENTIALS,
-  SET_COMPOSE_INPUT
+  SET_COMPOSE_INPUT,
+  SET_SFW_SCORE,
+  SET_NSFW_SCORE,
+  UPLOADING_PENDING,
+  UPLOADING_SUCCESS,
+  UPLOADING_FAILED,
+  CLEAR_IMAGE_TRAY,
+  PUSH_POST
 } from "./constants";
 
 //Register Page
@@ -48,4 +55,37 @@ export const setSessionCredentials = obj => ({
 export const setComposeInput = text => ({
   type: SET_COMPOSE_INPUT,
   payload: text
+});
+
+//IMG Upload
+
+export const setSfwScore = text => ({
+  type: SET_SFW_SCORE,
+  payload: text
+});
+
+export const setNsfwScore = text => ({
+  type: SET_NSFW_SCORE,
+  payload: text
+});
+
+export const uploadImages = formData => dispatch => {
+  dispatch({ type: UPLOADING_PENDING });
+  fetch(`http://localhost:3000/image-upload`, {
+    method: "POST",
+    body: formData
+  })
+    .then(res => res.json())
+    .then(data => dispatch({ type: UPLOADING_SUCCESS, payload: data }))
+    .catch(error => dispatch({ type: UPLOADING_FAILED, payload: error }));
+};
+
+export const clearImageTray = array => ({
+  type: CLEAR_IMAGE_TRAY,
+  payload: array
+});
+
+export const pushPost = obj => ({
+  type: PUSH_POST,
+  payload: obj
 });

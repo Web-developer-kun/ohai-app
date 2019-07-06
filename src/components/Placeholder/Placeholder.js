@@ -9,75 +9,105 @@ class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
-      uploading: false,
-      images: [],
-      posts: [],
       socket: socketIOClient("http://localhost:3000/")
     };
   }
 
   componentDidMount() {
     const { onInputFieldChange } = this.props;
+    const { pushPost } = this.props;
     const time = new Date().toLocaleTimeString();
-    const newChat = this.state.posts;
 
     this.state.socket.on("message-received", msg => {
-      newChat.push({
+      pushPost({
         user: msg.user,
         message: msg.message,
         time: time
       });
-      this.setState({ posts: newChat });
       onInputFieldChange("");
     });
 
     this.state.socket.on("image-received", imgpost => {
-      newChat.push({
+      pushPost({
         user: imgpost.user,
         src: imgpost.src,
         time: time
       });
-      this.setState({ posts: newChat });
     });
   }
 
   onImageUpload = event => {
+    const { onSelectImagesFromDisk } = this.props;
     const files = Array.from(event.target.files);
-    this.setState({ uploading: true });
-
     const formData = new FormData();
 
     files.forEach((file, i) => {
       formData.append(i, file);
     });
-
-    fetch(`http://localhost:3000/image-upload`, {
-      method: "POST",
-      body: formData
-    })
-      .then(res => res.json())
-      .then(images => {
-        this.setState({
-          uploading: false,
-          images
-        });
-      });
+    onSelectImagesFromDisk(formData);
   };
 
   postImage = url => {
-    const { session_creds } = this.props;
-    this.state.socket.emit("post-image", {
-      user: session_creds.email,
-      src: url,
-      time: new Date()
-    });
-    this.setState({ images: [] });
+    const { setSFWScore, setNSFWScore } = this.props;
+    fetch("http://localhost:3000/image-scan", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: window.sessionStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        url: url
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const sfwScores = this.processClarifaiData(data);
+        if (sfwScores.nsfw.score > 0.8) {
+          setNSFWScore(
+            sfwScores.nsfw.score * 100 +
+              " %  Warning: the bot moderator thinks this is NSFW"
+          );
+          setSFWScore("");
+        } else {
+          setSFWScore(
+            sfwScores.sfw.score * 100 + " % chance this image is SFW"
+          );
+          setNSFWScore(
+            sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
+          );
+          const { session_creds } = this.props;
+          this.state.socket.emit("post-image", {
+            user: session_creds.email,
+            src: url,
+            time: new Date()
+          });
+          this.removeImage();
+        }
+      });
+  };
+
+  processClarifaiData = data => {
+    const concepts = data.outputs[0].data.concepts;
+    const results = {
+      nsfw: {},
+      sfw: {}
+    };
+
+    for (var i = 0; i < concepts.length; i++) {
+      if (concepts[i].name === "sfw") {
+        results.sfw.score = concepts[i].value;
+      } else if (concepts[i].name === "nsfw") {
+        results.nsfw.score = concepts[i].value;
+      }
+    }
+    return results;
   };
 
   removeImage = id => {
-    this.setState({
-      images: this.state.images.filter(image => image.public_id !== id)
-    });
+    const { clearImageTray, setSFWScore, setNSFWScore } = this.props;
+    clearImageTray([]);
+    setSFWScore("");
+    setNSFWScore("");
   };
 
   writeMessage = event => {
@@ -119,14 +149,20 @@ class Placeholder extends React.Component {
       .then(changeRoute("signin"));
   };
   render() {
-    const { posts, uploading, images } = this.state;
-    const { msgBox } = this.props;
+    const {
+      uploading,
+      images,
+      posts,
+      msgBox,
+      sfwScoreString,
+      nsfwScoreString
+    } = this.props;
 
     const imageUploader = () => {
       switch (true) {
         case uploading:
           return <Spinner />;
-        case images.length > 0:
+        case images !== undefined && images.length > 0:
           return (
             <Images
               images={images}
@@ -173,6 +209,12 @@ class Placeholder extends React.Component {
           Send
         </button>
         <div className="buttons">{imageUploader()}</div>
+        <span style={{ display: "block" }}>
+          {sfwScoreString ? sfwScoreString : ""}
+        </span>
+        <span style={{ display: "block" }}>
+          {nsfwScoreString ? nsfwScoreString : ""}
+        </span>
         <button
           onClick={this.signOut}
           className="btn btn-lg btn-primary btn-block"

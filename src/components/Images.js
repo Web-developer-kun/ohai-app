@@ -15,7 +15,7 @@ const Images = ({ images, removeImage, postImage }) =>
         <FontAwesomeIcon icon={faArrowCircleUp} size="2x" />
       </div>
       <img
-        style={{ "max-height": "250px", "max-width": "250px" }}
+        style={{ maxHeight: "250px", maxWidth: "250px" }}
         src={image.secure_url}
         alt=""
       />
