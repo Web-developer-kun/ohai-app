@@ -77,7 +77,8 @@ class Placeholder extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data, "Data");
+        const sfwScores = this.processClarifaiData(data);
+        console.log(sfwScores.nsfwString, sfwScores.sfwString, "SCORES");
         const { session_creds } = this.props;
         this.state.socket.emit("post-image", {
           user: session_creds.email,
@@ -86,6 +87,17 @@ class Placeholder extends React.Component {
         });
         this.setState({ images: [] });
       });
+  };
+
+  processClarifaiData = data => {
+    const sfw = data.outputs[0].data.concepts[0];
+    const nsfw = data.outputs[0].data.concepts[1];
+    return {
+      nsfwString: nsfw.value * 100 + " % NSFW",
+      sfwString: sfw.value * 100 + " % SFW",
+      nsfwScore: nsfw.value,
+      sfwScore: sfw.value
+    };
   };
 
   removeImage = id => {
