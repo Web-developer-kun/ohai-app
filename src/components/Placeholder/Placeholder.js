@@ -9,7 +9,6 @@ class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
-      posts: [],
       socket: socketIOClient("http://localhost:3000/")
     };
   }
@@ -17,25 +16,23 @@ class Placeholder extends React.Component {
   componentDidMount() {
     const { onInputFieldChange } = this.props;
     const time = new Date().toLocaleTimeString();
-    const newChat = this.state.posts;
+    const { pushPost } = this.props;
 
     this.state.socket.on("message-received", msg => {
-      newChat.push({
+      pushPost({
         user: msg.user,
         message: msg.message,
         time: time
       });
-      this.setState({ posts: newChat });
       onInputFieldChange("");
     });
 
     this.state.socket.on("image-received", imgpost => {
-      newChat.push({
+      pushPost({
         user: imgpost.user,
         src: imgpost.src,
         time: time
       });
-      this.setState({ posts: newChat });
     });
   }
 
@@ -64,12 +61,12 @@ class Placeholder extends React.Component {
       .then(response => response.json())
       .then(data => {
         const sfwScores = this.processClarifaiData(data);
-        console.log(sfwScores, "hmm");
         if (sfwScores.nsfw.score > 0.8) {
           setNSFWScore(
             sfwScores.nsfw.score * 100 +
               " %  Warning: the bot moderator thinks this is NSFW"
           );
+          setSFWScore("");
         } else {
           setSFWScore(
             sfwScores.sfw.score * 100 + " % chance this image is SFW"
@@ -149,9 +146,14 @@ class Placeholder extends React.Component {
       .then(changeRoute("signin"));
   };
   render() {
-    const { uploading, images } = this.props;
-    const { posts } = this.state;
-    const { msgBox, sfwScoreString, nsfwScoreString } = this.props;
+    const {
+      uploading,
+      images,
+      posts,
+      msgBox,
+      sfwScoreString,
+      nsfwScoreString
+    } = this.props;
 
     const imageUploader = () => {
       switch (true) {

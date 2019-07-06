@@ -14,7 +14,8 @@ import {
   UPLOADING_PENDING,
   UPLOADING_SUCCESS,
   UPLOADING_FAILED,
-  CLEAR_IMAGE_TRAY
+  CLEAR_IMAGE_TRAY,
+  PUSH_POST
 } from "./constants";
 
 //Register Page
@@ -82,4 +83,9 @@ export const uploadImages = formData => dispatch => {
 export const clearImageTray = array => ({
   type: CLEAR_IMAGE_TRAY,
   payload: array
+});
+
+export const pushPost = obj => ({
+  type: PUSH_POST,
+  payload: obj
 });

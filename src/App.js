@@ -14,7 +14,8 @@ import {
   setSfwScore,
   setNsfwScore,
   uploadImages,
-  clearImageTray
+  clearImageTray,
+  pushPost
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -34,7 +35,8 @@ const mapStateToProps = state => {
     sfwScoreString: state.setSfwScoreResults.sfwScoreString,
     nsfwScoreString: state.setSfwScoreResults.nsfwScoreString,
     images: state.uploadImagesToCloudinary.images,
-    uploading: state.uploadImagesToCloudinary.uploading
+    uploading: state.uploadImagesToCloudinary.uploading,
+    posts: state.pushPostsToChatBox.posts
   };
 };
 
@@ -54,7 +56,8 @@ const mapDispatchToProps = dispatch => {
     setSFWScore: text => dispatch(setSfwScore(text)),
     setNSFWScore: text => dispatch(setNsfwScore(text)),
     onSelectImagesFromDisk: formData => dispatch(uploadImages(formData)),
-    clearImageTray: array => dispatch(clearImageTray(array))
+    clearImageTray: array => dispatch(clearImageTray(array)),
+    pushPost: obj => dispatch(pushPost(obj))
   };
 };
 

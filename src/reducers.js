@@ -14,7 +14,8 @@ import {
   UPLOADING_PENDING,
   UPLOADING_SUCCESS,
   UPLOADING_FAILED,
-  CLEAR_IMAGE_TRAY
+  CLEAR_IMAGE_TRAY,
+  PUSH_POST
 } from "./constants";
 
 const initialRegisterState = {
@@ -140,6 +141,21 @@ export const uploadImagesToCloudinary = (
       });
     case CLEAR_IMAGE_TRAY:
       return Object.assign({}, state, { images: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialPostState = {
+  posts: []
+};
+
+export const pushPostsToChatBox = (state = initialPostState, action = {}) => {
+  switch (action.type) {
+    case PUSH_POST:
+      return Object.assign({}, state, {
+        posts: [...state.posts, action.payload]
+      });
     default:
       return state;
   }

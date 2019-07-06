@@ -14,7 +14,8 @@ import {
   setLoggedInCreds,
   setComposeInputField,
   setSfwScoreResults,
-  uploadImagesToCloudinary
+  uploadImagesToCloudinary,
+  pushPostsToChatBox
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   setLoggedInCreds,
   setComposeInputField,
   setSfwScoreResults,
-  uploadImagesToCloudinary
+  uploadImagesToCloudinary,
+  pushPostsToChatBox
 });
 const store = createStore(
   rootReducer,
