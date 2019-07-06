@@ -65,13 +65,27 @@ class Placeholder extends React.Component {
   };
 
   postImage = url => {
-    const { session_creds } = this.props;
-    this.state.socket.emit("post-image", {
-      user: session_creds.email,
-      src: url,
-      time: new Date()
-    });
-    this.setState({ images: [] });
+    fetch("http://localhost:3000/image-scan", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: window.sessionStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        url: url
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data, "Data");
+        const { session_creds } = this.props;
+        this.state.socket.emit("post-image", {
+          user: session_creds.email,
+          src: url,
+          time: new Date()
+        });
+        this.setState({ images: [] });
+      });
   };
 
   removeImage = id => {

@@ -7,8 +7,8 @@ const Post = ({ user, time, message, src }) => {
         <div> {user} posted: </div>
         <img
           style={{
-            "max-height": "512px",
-            "max-width": "512px",
+            maxHeight: "512px",
+            maxWidth: "512px",
             display: "block"
           }}
           src={src}
