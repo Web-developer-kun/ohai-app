@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
-import { logger } from "redux-logger";
+// import { logger } from "redux-logger";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -15,7 +15,9 @@ import {
   setComposeInputField,
   setSfwScoreResults,
   uploadImagesToCloudinary,
-  pushPostsToChatBox
+  pushPostsToChatBox,
+  setPmCreds,
+  setConnectedSockets
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -26,12 +28,11 @@ const rootReducer = combineReducers({
   setComposeInputField,
   setSfwScoreResults,
   uploadImagesToCloudinary,
-  pushPostsToChatBox
+  pushPostsToChatBox,
+  setPmCreds,
+  setConnectedSockets
 });
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddleware, logger)
-);
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
   <Provider store={store}>

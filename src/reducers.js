@@ -15,7 +15,10 @@ import {
   UPLOADING_SUCCESS,
   UPLOADING_FAILED,
   CLEAR_IMAGE_TRAY,
-  PUSH_POST
+  PUSH_POST,
+  SET_PM_SID,
+  SET_PM_USERNAME,
+  SET_CONNECTED_SOCKETS
 } from "./constants";
 
 const initialRegisterState = {
@@ -156,6 +159,38 @@ export const pushPostsToChatBox = (state = initialPostState, action = {}) => {
       return Object.assign({}, state, {
         posts: [...state.posts, action.payload]
       });
+    default:
+      return state;
+  }
+};
+
+const initialPmState = {
+  pmUserSid: "",
+  pmUserName: ""
+};
+
+export const setPmCreds = (state = initialPmState, action = {}) => {
+  switch (action.type) {
+    case SET_PM_SID:
+      return Object.assign({}, state, { pmUserSid: action.payload });
+    case SET_PM_USERNAME:
+      return Object.assign({}, state, { pmUserName: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialSocketsState = {
+  connectedSockets: []
+};
+
+export const setConnectedSockets = (
+  state = initialSocketsState,
+  action = {}
+) => {
+  switch (action.type) {
+    case SET_CONNECTED_SOCKETS:
+      return Object.assign({}, state, { connectedSockets: action.payload });
     default:
       return state;
   }

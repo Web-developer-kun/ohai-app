@@ -15,7 +15,10 @@ import {
   setNsfwScore,
   uploadImages,
   clearImageTray,
-  pushPost
+  pushPost,
+  setPmSid,
+  setPmUserName,
+  setConnectedSockets
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -36,7 +39,10 @@ const mapStateToProps = state => {
     nsfwScoreString: state.setSfwScoreResults.nsfwScoreString,
     images: state.uploadImagesToCloudinary.images,
     uploading: state.uploadImagesToCloudinary.uploading,
-    posts: state.pushPostsToChatBox.posts
+    posts: state.pushPostsToChatBox.posts,
+    pmUserSid: state.setPmCreds.pmUserSid,
+    pmUserName: state.setPmCreds.pmUserName,
+    connectedSockets: state.setConnectedSockets.connectedSockets
   };
 };
 
@@ -57,7 +63,10 @@ const mapDispatchToProps = dispatch => {
     setNSFWScore: text => dispatch(setNsfwScore(text)),
     onSelectImagesFromDisk: formData => dispatch(uploadImages(formData)),
     clearImageTray: array => dispatch(clearImageTray(array)),
-    pushPost: obj => dispatch(pushPost(obj))
+    pushPost: obj => dispatch(pushPost(obj)),
+    setPmSid: text => dispatch(setPmSid(text)),
+    setPmUserName: text => dispatch(setPmUserName(text)),
+    setConnectedSockets: array => dispatch(setConnectedSockets(array))
   };
 };
 
