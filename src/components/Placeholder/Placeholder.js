@@ -20,7 +20,10 @@ class Placeholder extends React.Component {
     const { socket } = this.state;
     const time = new Date().toLocaleTimeString();
 
-    socket.emit("add-user", session_creds.email);
+    if (session_creds.email) {
+      socket.emit("add-user", session_creds.email);
+    }
+
     socket.on("receive-connected-sockets", connectedSockets => {
       setConnectedSockets(connectedSockets);
     });
