@@ -3,22 +3,30 @@ import Post from "../Post/Post";
 import Spinner from "../Spinner";
 import Images from "../Images";
 import Buttons from "../Buttons";
+import OnlineUsers from "../OnlineUsers";
 import socketIOClient from "socket.io-client";
 
 class Placeholder extends React.Component {
   constructor() {
     super();
     this.state = {
-      socket: socketIOClient("http://localhost:3000/")
+      socket: socketIOClient(`http://localhost:3000`),
+      connectedSockets: []
     };
   }
 
   componentDidMount() {
     const { onInputFieldChange } = this.props;
-    const { pushPost } = this.props;
+    const { pushPost, session_creds } = this.props;
+    const { socket } = this.state;
     const time = new Date().toLocaleTimeString();
 
-    this.state.socket.on("message-received", msg => {
+    socket.emit("add-user", session_creds.email);
+    socket.on("receive-connected-sockets", connectedSockets => {
+      this.setState({ connectedSockets: connectedSockets });
+    });
+
+    socket.on("message-received", msg => {
       pushPost({
         user: msg.user,
         message: msg.message,
@@ -27,7 +35,7 @@ class Placeholder extends React.Component {
       onInputFieldChange("");
     });
 
-    this.state.socket.on("image-received", imgpost => {
+    socket.on("image-received", imgpost => {
       pushPost({
         user: imgpost.user,
         src: imgpost.src,
@@ -35,6 +43,10 @@ class Placeholder extends React.Component {
       });
     });
   }
+
+  pmUser = () => {
+    console.log("Test");
+  };
 
   onImageUpload = event => {
     const { onSelectImagesFromDisk } = this.props;
@@ -134,6 +146,7 @@ class Placeholder extends React.Component {
 
   signOut = () => {
     const { changeRoute, setSessionCredentials } = this.props;
+
     fetch("http://localhost:3000/signout", {
       method: "POST",
       headers: {
@@ -194,6 +207,10 @@ class Placeholder extends React.Component {
               })
             : ""}
         </div>
+        <OnlineUsers
+          connectedSockets={this.state.connectedSockets}
+          pmUser={this.pmUser}
+        />
         <input
           type="text"
           onChange={this.writeMessage}
