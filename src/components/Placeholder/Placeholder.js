@@ -16,23 +16,29 @@ class Placeholder extends React.Component {
   }
 
   componentDidMount() {
-    const { onInputFieldChange } = this.props;
-    const { pushPost, session_creds } = this.props;
+    const { pushPost, session_creds, setConnectedSockets } = this.props;
     const { socket } = this.state;
     const time = new Date().toLocaleTimeString();
 
     socket.emit("add-user", session_creds.email);
     socket.on("receive-connected-sockets", connectedSockets => {
-      this.setState({ connectedSockets: connectedSockets });
+      setConnectedSockets(connectedSockets);
     });
 
+    socket.on("receive-private-message", msg => {
+      pushPost({
+        user: msg.user,
+        message: msg.message,
+        whisper: true,
+        time: time
+      });
+    });
     socket.on("message-received", msg => {
       pushPost({
         user: msg.user,
         message: msg.message,
         time: time
       });
-      onInputFieldChange("");
     });
 
     socket.on("image-received", imgpost => {
@@ -132,16 +138,26 @@ class Placeholder extends React.Component {
   };
 
   postMessage = () => {
-    const { session_creds } = this.props;
+    const { session_creds, onInputFieldChange } = this.props;
     const ms = new Date();
 
-    const { msgBox } = this.props;
+    const { msgBox, pmUserSid } = this.props;
 
-    this.state.socket.emit("post-message", {
-      user: session_creds.email,
-      message: msgBox,
-      time: ms
-    });
+    if (pmUserSid) {
+      this.state.socket.emit("send-private-message", {
+        user: session_creds.email,
+        message: msgBox,
+        time: ms,
+        sid: pmUserSid
+      });
+    } else {
+      this.state.socket.emit("post-message", {
+        user: session_creds.email,
+        message: msgBox,
+        time: ms
+      });
+    }
+    onInputFieldChange("");
   };
 
   signOut = () => {
@@ -168,7 +184,12 @@ class Placeholder extends React.Component {
       posts,
       msgBox,
       sfwScoreString,
-      nsfwScoreString
+      nsfwScoreString,
+      connectedSockets,
+      setPmSid,
+      setPmUserName,
+      pmUserSid,
+      pmUserName
     } = this.props;
 
     const imageUploader = () => {
@@ -200,6 +221,7 @@ class Placeholder extends React.Component {
                     key={i}
                     user={pst.user}
                     message={pst.message}
+                    whisper={pst.whisper}
                     src={pst.src}
                     time={pst.time}
                   />
@@ -208,9 +230,25 @@ class Placeholder extends React.Component {
             : ""}
         </div>
         <OnlineUsers
-          connectedSockets={this.state.connectedSockets}
-          pmUser={this.pmUser}
+          connectedSockets={connectedSockets}
+          setPmSid={setPmSid}
+          setPmUserName={setPmUserName}
         />
+        <div>
+          {pmUserSid && pmUserName && pmUserSid.length && pmUserName.length ? (
+            <span
+              className="btn btn-lg btn-warning"
+              onClick={() => {
+                setPmUserName("");
+                setPmSid("");
+              }}
+            >
+              Private Message {pmUserName} X
+            </span>
+          ) : (
+            ""
+          )}
+        </div>
         <input
           type="text"
           onChange={this.writeMessage}

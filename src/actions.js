@@ -15,7 +15,10 @@ import {
   UPLOADING_SUCCESS,
   UPLOADING_FAILED,
   CLEAR_IMAGE_TRAY,
-  PUSH_POST
+  PUSH_POST,
+  SET_PM_SID,
+  SET_PM_USERNAME,
+  SET_CONNECTED_SOCKETS
 } from "./constants";
 
 //Register Page
@@ -88,4 +91,19 @@ export const clearImageTray = array => ({
 export const pushPost = obj => ({
   type: PUSH_POST,
   payload: obj
+});
+
+export const setPmSid = text => ({
+  type: SET_PM_SID,
+  payload: text
+});
+
+export const setPmUserName = text => ({
+  type: SET_PM_USERNAME,
+  payload: text
+});
+
+export const setConnectedSockets = array => ({
+  type: SET_CONNECTED_SOCKETS,
+  payload: array
 });

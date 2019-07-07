@@ -1,7 +1,7 @@
 import React from "react";
 
-const Post = ({ user, time, message, src }) => {
-  if (src)
+const Post = ({ user, time, message, whisper, src }) => {
+  if (src) {
     return (
       <div>
         <div> {user} posted: </div>
@@ -17,13 +17,21 @@ const Post = ({ user, time, message, src }) => {
         <span style={{ display: "block" }}>({time})</span>
       </div>
     );
-  else
+  } else if (whisper) {
+    return (
+      <div style={{ color: "tomato" }}>
+        {" "}
+        {user} whispers: {message} ({time}){" "}
+      </div>
+    );
+  } else {
     return (
       <div>
         {" "}
         {user} says: {message} ({time}){" "}
       </div>
     );
+  }
 };
 
 export default Post;

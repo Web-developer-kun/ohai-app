@@ -1,7 +1,7 @@
 import React from "react";
 import OnlineUser from "./OnlineUser";
 
-const OnlineUsers = ({ connectedSockets, pmUser }) => {
+const OnlineUsers = ({ connectedSockets, setPmSid, setPmUserName }) => {
   return (
     <div>
       {connectedSockets.map((cs, i) => {
@@ -10,7 +10,8 @@ const OnlineUsers = ({ connectedSockets, pmUser }) => {
             key={i}
             username={cs.username}
             sid={cs.sid}
-            pmUser={pmUser}
+            setPmUserName={setPmUserName}
+            setPmSid={setPmSid}
           />
         );
       })}

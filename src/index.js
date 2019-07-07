@@ -15,7 +15,9 @@ import {
   setComposeInputField,
   setSfwScoreResults,
   uploadImagesToCloudinary,
-  pushPostsToChatBox
+  pushPostsToChatBox,
+  setPmCreds,
+  setConnectedSockets
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -26,7 +28,9 @@ const rootReducer = combineReducers({
   setComposeInputField,
   setSfwScoreResults,
   uploadImagesToCloudinary,
-  pushPostsToChatBox
+  pushPostsToChatBox,
+  setPmCreds,
+  setConnectedSockets
 });
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
