@@ -4,6 +4,7 @@ import Spinner from "../Spinner";
 import Images from "../Images";
 import Buttons from "../Buttons";
 import OnlineUsers from "../OnlineUsers";
+import ChatBox from "../ChatBox/ChatBox";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
 
@@ -212,7 +213,6 @@ class Placeholder extends React.Component {
     const {
       uploading,
       images,
-      posts,
       msgBox,
       sfwScoreString,
       nsfwScoreString,
@@ -222,6 +222,8 @@ class Placeholder extends React.Component {
       pmUserSid,
       pmUserName
     } = this.props;
+
+    const { socket } = this.state;
 
     const imageUploader = () => {
       switch (true) {
@@ -244,45 +246,12 @@ class Placeholder extends React.Component {
     };
     return (
       <div>
-        <div
-          style={{ height: "500px", overflow: "scroll" }}
-          className="form-control"
-        >
-          {posts
-            ? posts.map((pst, i) => {
-                return (
-                  <Post
-                    key={i}
-                    user={pst.user}
-                    message={pst.message}
-                    whisper={pst.whisper}
-                    src={pst.src}
-                    time={pst.time}
-                  />
-                );
-              })
-            : ""}
-        </div>
+        <ChatBox {...this.props} />
         <OnlineUsers
           connectedSockets={connectedSockets}
           setPmSid={setPmSid}
           setPmUserName={setPmUserName}
         />
-        <div>
-          {pmUserSid && pmUserName && pmUserSid.length && pmUserName.length ? (
-            <span
-              className="btn btn-lg btn-warning"
-              onClick={() => {
-                setPmUserName("");
-                setPmSid("");
-              }}
-            >
-              Private Message {pmUserName} X
-            </span>
-          ) : (
-            ""
-          )}
-        </div>
         <input
           type="text"
           onChange={this.writeMessage}
@@ -291,7 +260,22 @@ class Placeholder extends React.Component {
           onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
           onKeyPress={this.checkForEnterKey}
           value={msgBox && msgBox.length ? msgBox : ""}
+          style={{ display: "inline-block", width: "70%" }}
         />
+        {pmUserSid.length && pmUserSid !== socket.id ? (
+          <span
+            className="btn btn-lg btn-warning"
+            onClick={() => {
+              setPmUserName("");
+              setPmSid("");
+            }}
+            style={{ display: "inline-block" }}
+          >
+            To: {pmUserName} X
+          </span>
+        ) : (
+          ""
+        )}
         <div style={{ height: "50px" }}>
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {
