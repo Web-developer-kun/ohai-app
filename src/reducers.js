@@ -9,6 +9,7 @@ import {
   CHANGE_ROUTE,
   SET_SESSION_CREDENTIALS,
   SET_COMPOSE_INPUT,
+  SET_IMAGE_URL,
   SET_SFW_SCORE,
   SET_NSFW_SCORE,
   UPLOADING_PENDING,
@@ -99,6 +100,8 @@ export const setComposeInputField = (state = initialTsqState, action = {}) => {
   switch (action.type) {
     case SET_COMPOSE_INPUT:
       return Object.assign({}, state, { msgBox: action.payload });
+    case SET_IMAGE_URL:
+      return Object.assign({}, state, { imgUrl: action.payload });
     default:
       return state;
   }

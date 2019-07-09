@@ -40,25 +40,21 @@ class MessageInput extends React.Component {
     });
 
     socket.on("receive-private-message", msg => {
+      console.log(msg);
       pushPost({
         user: msg.user,
         message: msg.message,
+        src: msg.src,
         whisper: true,
         time: time
       });
     });
     socket.on("message-received", msg => {
+      console.log(msg);
       pushPost({
         user: msg.user,
         message: msg.message,
-        time: time
-      });
-    });
-
-    socket.on("image-received", imgpost => {
-      pushPost({
-        user: imgpost.user,
-        src: imgpost.src,
+        src: msg.src,
         time: time
       });
     });
@@ -86,24 +82,34 @@ class MessageInput extends React.Component {
   };
 
   postMessage = () => {
-    const { session_creds, onInputFieldChange } = this.props;
+    const {
+      session_creds,
+      onInputFieldChange,
+      imgUrl,
+      msgBox,
+      pmUserSid,
+      setImageUrl
+    } = this.props;
+    if (!msgBox.length && !imgUrl.length) return;
     const ms = new Date();
-
-    const { msgBox, pmUserSid } = this.props;
 
     if (pmUserSid) {
       this.state.socket.emit("send-private-message", {
         user: session_creds.email,
         message: msgBox,
+        src: imgUrl,
         time: ms,
         sid: pmUserSid
       });
+      setImageUrl("");
     } else {
       this.state.socket.emit("post-message", {
         user: session_creds.email,
         message: msgBox,
+        src: imgUrl,
         time: ms
       });
+      setImageUrl("");
     }
     onInputFieldChange("");
   };

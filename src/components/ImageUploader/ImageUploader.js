@@ -17,7 +17,7 @@ class Placeholder extends React.Component {
   };
 
   scanImage = url => {
-    const { setSFWScore, setNSFWScore } = this.props;
+    const { setSFWScore, setNSFWScore, setImageUrl } = this.props;
     fetch("http://localhost:3000/image-scan", {
       method: "post",
       headers: {
@@ -44,6 +44,8 @@ class Placeholder extends React.Component {
           setNSFWScore(
             sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
           );
+          setImageUrl(url);
+          console.log(this.props.imgUrl);
         }
       });
   };

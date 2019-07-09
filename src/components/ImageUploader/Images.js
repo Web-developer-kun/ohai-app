@@ -2,8 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTimesCircle,
-  faArrowCircleUp,
-  faFileUpload
+  faArrowCircleUp
 } from "@fortawesome/free-solid-svg-icons";
 
 const Images = ({
@@ -22,13 +21,6 @@ const Images = ({
       <div onClick={() => scanImage(image.secure_url)} className="upload">
         <FontAwesomeIcon icon={faArrowCircleUp} size="2x" />
       </div>
-      {sfwScoreString.length && nsfwScoreString.length ? (
-        <div onClick={() => postImage(image.secure_url)} className="upload">
-          <FontAwesomeIcon icon={faFileUpload} size="2x" />
-        </div>
-      ) : (
-        ""
-      )}
       <img
         style={{ maxHeight: "250px", maxWidth: "250px" }}
         src={image.secure_url}
