@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import "../../bootstrap-social.css";
 const Signin = React.lazy(() => import("../Signin/Signin"));
 const Register = React.lazy(() => import("../Register/Register"));
-const Placeholder = React.lazy(() => import("../Placeholder/Placeholder"));
+const Placeholder = React.lazy(() => import("../TownSquare/TownSquare"));
 
 class Router extends React.Component {
   render() {

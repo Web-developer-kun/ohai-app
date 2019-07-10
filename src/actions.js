@@ -9,6 +9,7 @@ import {
   CHANGE_ROUTE,
   SET_SESSION_CREDENTIALS,
   SET_COMPOSE_INPUT,
+  SET_IMAGE_URL,
   SET_SFW_SCORE,
   SET_NSFW_SCORE,
   UPLOADING_PENDING,
@@ -57,6 +58,11 @@ export const setSessionCredentials = obj => ({
 
 export const setComposeInput = text => ({
   type: SET_COMPOSE_INPUT,
+  payload: text
+});
+
+export const setImageUrl = text => ({
+  type: SET_IMAGE_URL,
   payload: text
 });
 

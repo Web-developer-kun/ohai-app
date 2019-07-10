@@ -21,3 +21,5 @@ export const SET_PM_SID = "SET_PM_SID";
 export const SET_PM_USERNAME = "SET_PM_USERNAME";
 
 export const SET_CONNECTED_SOCKETS = "SET_CONNECTED_SOCKETS";
+
+export const SET_IMAGE_URL = "SET_IMAGE_URL";
