@@ -1,7 +1,6 @@
 import React from "react";
 
 const Post = ({ user, time, message, whisper, src }) => {
-  console.log(src);
   return (
     <div>
       <div>

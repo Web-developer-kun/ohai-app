@@ -40,7 +40,6 @@ class MessageInput extends React.Component {
     });
 
     socket.on("receive-private-message", msg => {
-      console.log(msg);
       pushPost({
         user: msg.user,
         message: msg.message,
@@ -49,8 +48,8 @@ class MessageInput extends React.Component {
         time: time
       });
     });
+
     socket.on("message-received", msg => {
-      console.log(msg);
       pushPost({
         user: msg.user,
         message: msg.message,
