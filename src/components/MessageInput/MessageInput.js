@@ -127,6 +127,25 @@ class MessageInput extends React.Component {
 
     return (
       <div>
+        {pmUserSid.length && pmUserSid !== socket.id ? (
+          <div
+            className="btn btn-lg btn-warning"
+            onClick={() => {
+              setPmUserName("");
+              setPmSid("");
+            }}
+            style={{ display: "inline-block", width: "15%" }}
+          >
+            To: {pmUserName} X
+          </div>
+        ) : (
+          <div
+            className="btn btn-lg btn-warning"
+            style={{ display: "inline-block", width: "15%" }}
+          >
+            To: All
+          </div>
+        )}
         <input
           type="text"
           onChange={this.writeMessage}
@@ -137,20 +156,7 @@ class MessageInput extends React.Component {
           value={msgBox && msgBox.length ? msgBox : ""}
           style={{ display: "inline-block", width: "70%" }}
         />
-        {pmUserSid.length && pmUserSid !== socket.id ? (
-          <span
-            className="btn btn-lg btn-warning"
-            onClick={() => {
-              setPmUserName("");
-              setPmSid("");
-            }}
-            style={{ display: "inline-block" }}
-          >
-            To: {pmUserName} X
-          </span>
-        ) : (
-          ""
-        )}
+
         <div style={{ height: "50px" }}>
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {

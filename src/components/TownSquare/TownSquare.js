@@ -5,7 +5,7 @@ import MessageInput from "../MessageInput/MessageInput";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import SignOut from "../SignOut/SignOut";
 
-class Placeholder extends React.Component {
+class TownSquare extends React.Component {
   render() {
     return (
       <div>
@@ -19,4 +19,4 @@ class Placeholder extends React.Component {
   }
 }
 
-export default Placeholder;
+export default TownSquare;

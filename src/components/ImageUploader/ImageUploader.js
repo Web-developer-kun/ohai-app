@@ -1,8 +1,8 @@
-import React from "react";
-import Spinner from "./Spinner";
-import Images from "./Images";
-import Buttons from "./Buttons";
+import React, { Suspense } from "react";
 import SfwResults from "./SfwResults";
+const Spinner = React.lazy(() => import("./Spinner"));
+const Images = React.lazy(() => import("./Images"));
+const Buttons = React.lazy(() => import("./Buttons"));
 
 class Placeholder extends React.Component {
   onImageUpload = event => {
@@ -45,7 +45,6 @@ class Placeholder extends React.Component {
             sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
           );
           setImageUrl(url);
-          console.log(this.props.imgUrl);
         }
       });
   };
@@ -79,18 +78,30 @@ class Placeholder extends React.Component {
     return (
       <div>
         {uploading ? (
-          <Spinner />
+          <div style={{ width: "100%", height: "100%" }}>
+            <Suspense fallback={<p>Spinner</p>}>
+              <Spinner />
+            </Suspense>
+          </div>
         ) : images !== undefined && images.length > 0 ? (
-          <Images
-            images={images}
-            removeImage={this.removeImage}
-            scanImage={this.scanImage}
-            postImage={this.postImage}
-            sfwScoreString={sfwScoreString}
-            nsfwScoreString={nsfwScoreString}
-          />
+          <div style={{ width: "100%", height: "100%" }}>
+            <Suspense fallback={<p>Images</p>}>
+              <Images
+                images={images}
+                removeImage={this.removeImage}
+                scanImage={this.scanImage}
+                postImage={this.postImage}
+                sfwScoreString={sfwScoreString}
+                nsfwScoreString={nsfwScoreString}
+              />
+            </Suspense>
+          </div>
         ) : (
-          <Buttons onImageUpload={this.onImageUpload} />
+          <div style={{ width: "100%", height: "100%" }}>
+            <Suspense fallback={<p>Buttons</p>}>
+              <Buttons onImageUpload={this.onImageUpload} />
+            </Suspense>
+          </div>
         )}
         <SfwResults {...this.props} />
       </div>

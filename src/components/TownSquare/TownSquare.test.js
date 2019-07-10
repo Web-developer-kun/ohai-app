@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Placeholder from "./Placeholder";
+import TownSquare from "./TownSquare";
 
 it("renders without crashing", () => {
-  expect(shallow(<Placeholder />)).toMatchSnapshot();
+  expect(shallow(<TownSquare />)).toMatchSnapshot();
 });
