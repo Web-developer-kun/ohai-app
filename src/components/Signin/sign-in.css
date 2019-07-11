@@ -1,8 +1,66 @@
-input, button, a, p {
-    margin: 10px 0;
+@font-face {
+  font-family: "evolve";
+  src: url("../../fonts/made_evolve_sans_bold_evo-webfont.woff") format("woff"),
+    url("../../fonts/made_evolve_sans_bold_evo-webfont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #2a2a2e;
+}
+
+h1.header-logo {
+  font-family: "evolve";
+  color: #f0f0f0;
+  font-size: 72px;
+}
+
+input#inputEmail,
+input#inputPassword {
+  border-radius: 0;
+  background-color: #56565c;
+  color: #f0f0f0;
+  border: none;
+  font-size: 16px;
+}
+
+button.signin,
+button.register {
+  background-color: #46464a;
+  border: none;
+  border-radius: 0;
+}
+
+button.signin {
+  color: #69e2f5;
+}
+
+button.register {
+  color: #ea7600;
+}
+
+button.signin:hover {
+  background-color: #69e2f5;
+  color: #f0f0f0;
+}
+
+button.register:hover {
+  background-color: #ea7600;
+  color: #f0f0f0;
+}
+
+input,
+button,
+a,
+p {
+  margin: 10px 0;
 }
 
 .form-err {
   display: block;
-  color: tomato;
+  color: #f0f0f0;
 }

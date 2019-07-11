@@ -105,13 +105,12 @@ class Signin extends React.Component {
       formErrMsg
     } = this.props;
     return (
-      <div>
+      <div className="container">
         <div className="text-center">
-          <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign In</h1>
+          <h1 className="h3 mb-3 font-weight-normal header-logo">PingIM</h1>
           <label className="form-err">
             {formErrMsg.length ? formErrMsg : ""}
           </label>
-          <label htmlFor="inputEmail">Email address</label>
           <input
             type="email"
             id="inputEmail"
@@ -121,9 +120,6 @@ class Signin extends React.Component {
             autoFocus=""
             onChange={onSignInEmailChange}
           />
-          <label htmlFor="inputPassword">
-            {formErrMsg.length ? formErrMsg : "Password"}
-          </label>
           <input
             type="password"
             id="inputPassword"
@@ -133,21 +129,27 @@ class Signin extends React.Component {
             onChange={onSignInPasswordChange}
           />
         </div>
-        <button
-          onClick={this.onSignIn}
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Sign In
-        </button>
-        <button
-          onClick={() => {
-            this.navigateToRegister();
-          }}
-          id="to-register"
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Register
-        </button>
+        <div className="row">
+          <div className="col-sm"></div>
+          <div className="col-sm">
+            <button
+              onClick={this.onSignIn}
+              className="btn btn-lg btn-primary btn-block signin"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => {
+                this.navigateToRegister();
+              }}
+              id="to-register"
+              className="btn btn-lg btn-primary btn-block register"
+            >
+              Register
+            </button>
+          </div>
+          <div className="col-sm"></div>
+        </div>
       </div>
     );
   }
