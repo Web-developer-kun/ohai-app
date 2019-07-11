@@ -11,14 +11,16 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
   width: 100%;
-  background-color: #2a2a2e;
+  background-color: #56565c;
 }
 
 .container {
   height: 100%;
+  background-color: #2a2a2e;
 }
 
 .header-logo {
