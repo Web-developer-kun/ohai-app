@@ -130,27 +130,21 @@ class Signin extends React.Component {
               onChange={onSignInPasswordChange}
             />
           </div>
-          <div className="row">
-            <div className="col-sm"></div>
-            <div className="col-sm">
-              <button
-                onClick={this.onSignIn}
-                className="btn btn-lg btn-primary btn-block signin"
-              >
-                Sign In
-              </button>
-              <button
-                onClick={() => {
-                  this.navigateToRegister();
-                }}
-                id="to-register"
-                className="btn btn-lg btn-primary btn-block register"
-              >
-                Register
-              </button>
-            </div>
-            <div className="col-sm"></div>
-          </div>
+          <button
+            onClick={this.onSignIn}
+            className="btn btn-lg btn-outline-warning btn-block signin"
+          >
+            Sign In
+          </button>
+          <button
+            onClick={() => {
+              this.navigateToRegister();
+            }}
+            id="to-register"
+            className="btn btn-lg btn-link register"
+          >
+            Need to register?
+          </button>
         </div>
       </div>
     );

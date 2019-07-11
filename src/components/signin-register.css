@@ -40,17 +40,31 @@ body,
 #inputEmail,
 #inputPassword,
 #confirmPassword {
-  border-radius: 0;
-  background-color: #56565c;
+  background-color: rgba(0, 0, 0, 0.1);
   color: #f0f0f0;
-  border: none;
+  border-radius: 3px;
   font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-button.signin,
+button.signin {
+  font-family: "evolve-light";
+}
 button.register {
-  background-color: #46464a;
-  color: #43b581;
+  padding: 0;
+  margin: 0;
+  font-family: "evolve-light";
+  color: #ffc107;
+}
+
+.register:hover {
+  color: #000;
+}
+
+/* button.signin,
+button.register {
+  background-color: rgba(234, 118, 0, 0.);
+  color: #f0f0f0;
   border: none;
   border-radius: 0;
   font-family: "evolve-light";
@@ -58,9 +72,9 @@ button.register {
 
 button.signin:hover,
 button.register:hover {
-  background-color: #56565c;
+  background-color: rgba(234, 118, 0, .8);
   color: #f0f0f0;
-}
+} */
 
 input,
 button,
@@ -72,5 +86,4 @@ p {
 .form-err {
   display: block;
   color: #ea7600;
-  font-family: "evolve-light";
 }
