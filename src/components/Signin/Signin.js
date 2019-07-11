@@ -112,39 +112,41 @@ class Signin extends React.Component {
             <label className="form-err">
               {formErrMsg.length ? formErrMsg : ""}
             </label>
-            <input
-              type="email"
-              id="inputEmail"
-              className="form-control"
-              placeholder="Email address"
-              required=""
-              autoFocus=""
-              onChange={onSignInEmailChange}
-            />
-            <input
-              type="password"
-              id="inputPassword"
-              className="form-control"
-              placeholder="Password"
-              required=""
-              onChange={onSignInPasswordChange}
-            />
+            <div className="form-body">
+              <input
+                type="email"
+                id="inputEmail"
+                className="form-control"
+                placeholder="Email address"
+                required=""
+                autoFocus=""
+                onChange={onSignInEmailChange}
+              />
+              <input
+                type="password"
+                id="inputPassword"
+                className="form-control"
+                placeholder="Password"
+                required=""
+                onChange={onSignInPasswordChange}
+              />
+              <button
+                onClick={this.onSignIn}
+                className="btn btn-lg btn-outline-warning btn-block signin"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => {
+                  this.navigateToRegister();
+                }}
+                id="to-register"
+                className="btn btn-lg btn-link register"
+              >
+                Need to register?
+              </button>
+            </div>
           </div>
-          <button
-            onClick={this.onSignIn}
-            className="btn btn-lg btn-outline-warning btn-block signin"
-          >
-            Sign In
-          </button>
-          <button
-            onClick={() => {
-              this.navigateToRegister();
-            }}
-            id="to-register"
-            className="btn btn-lg btn-link register"
-          >
-            Need to register?
-          </button>
         </div>
       </div>
     );

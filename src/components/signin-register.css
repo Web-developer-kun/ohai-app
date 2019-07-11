@@ -15,21 +15,52 @@ body,
 #root {
   height: 100%;
   width: 100%;
-  background-color: #56565c;
+  background: url("./pingim-signup-bg.jpg") no-repeat;
+  background-size: cover;
 }
 
 .container {
   height: 100%;
+  width: 100%;
 }
 
 .login-form {
-  margin-top: 3%;
-  height: 350px;
-  width: 500px;
+  margin: 0 auto;
   background-color: #36393f;
   padding: 40px;
   border-radius: 5px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+
+  width: 500px;
+  height: 420px;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@media (max-width: 576px) {
+  .login-form {
+    top: 0px;
+    border-radius: 0;
+    height: 100%;
+    width: inherit;
+  }
+
+  .form-body {
+    position: relative;
+    top: 120px;
+  }
+
+  .container {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
 
 .header-logo {
@@ -50,31 +81,16 @@ body,
 button.signin {
   font-family: "evolve-light";
 }
-button.register {
-  padding: 0;
-  margin: 0;
+button.register,
+.btn-link.signin {
   font-family: "evolve-light";
   color: #ffc107;
 }
 
-.register:hover {
+.register:hover,
+.btn-link.signin:hover {
   color: #000;
 }
-
-/* button.signin,
-button.register {
-  background-color: rgba(234, 118, 0, 0.);
-  color: #f0f0f0;
-  border: none;
-  border-radius: 0;
-  font-family: "evolve-light";
-}
-
-button.signin:hover,
-button.register:hover {
-  background-color: rgba(234, 118, 0, .8);
-  color: #f0f0f0;
-} */
 
 input,
 button,
@@ -85,5 +101,5 @@ p {
 
 .form-err {
   display: block;
-  color: #ea7600;
+  color: #ffc107;
 }

@@ -88,58 +88,55 @@ class Register extends React.Component {
 
     return (
       <div className="container">
-        <div className="text-center">
-          <h1 className="h3 mb-3 font-weight-normal header-logo">PingIM</h1>
-          <label className="form-err">
-            {formErrMsg.length ? formErrMsg : ""}
-          </label>
-          <input
-            type="email"
-            id="inputEmail"
-            className="form-control"
-            placeholder="Email address"
-            required=""
-            autoFocus=""
-            onChange={onEmailChange}
-          />
-          <input
-            type="password"
-            id="inputPassword"
-            className="form-control"
-            placeholder="Password"
-            required=""
-            onChange={onSetPass1}
-            onBlur={this.checkPassword}
-          />
-          <input
-            type="password"
-            id="confirmPassword"
-            className="form-control"
-            placeholder="Confirm Password"
-            required=""
-            onChange={onSetPass2}
-            onBlur={this.checkPassword}
-          />
-        </div>
-        <div className="row">
-          <div className="col-sm"></div>
-          <div className="col-sm">
-            <button
-              onClick={this.onSubmitRegister}
-              className="btn btn-lg btn-primary btn-block register"
-            >
-              Register
-            </button>
-            <button
-              onClick={() => {
-                this.navigateToSignIn();
-              }}
-              className="btn btn-lg btn-primary btn-block signin"
-            >
-              Sign In
-            </button>
+        <div className="login-form">
+          <div className="text-center">
+            <h1 className="h1 mb-3 font-weight-normal header-logo">PingIM</h1>
+            <label className="form-err">
+              {formErrMsg.length ? formErrMsg : ""}
+            </label>
+            <input
+              type="email"
+              id="inputEmail"
+              className="form-control"
+              placeholder="Email address"
+              required=""
+              autoFocus=""
+              onChange={onEmailChange}
+            />
+            <input
+              type="password"
+              id="inputPassword"
+              className="form-control"
+              placeholder="Password"
+              required=""
+              onChange={onSetPass1}
+              onBlur={this.checkPassword}
+            />
+            <input
+              type="password"
+              id="confirmPassword"
+              className="form-control"
+              placeholder="Confirm Password"
+              required=""
+              onChange={onSetPass2}
+              onBlur={this.checkPassword}
+            />
           </div>
-          <div className="col-sm"></div>
+
+          <button
+            onClick={this.onSubmitRegister}
+            className="btn btn-lg btn-outline-warning btn-block register"
+          >
+            Register
+          </button>
+          <button
+            onClick={() => {
+              this.navigateToSignIn();
+            }}
+            className="btn btn-lg btn-link signin btn-block"
+          >
+            Have an account?
+          </button>
         </div>
       </div>
     );
