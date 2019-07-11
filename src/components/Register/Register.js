@@ -1,5 +1,5 @@
 import React from "react";
-import "./register.css";
+import "../signin-register.css";
 
 class Register extends React.Component {
   checkPassword = () => {
@@ -87,13 +87,12 @@ class Register extends React.Component {
     const { onEmailChange, onSetPass1, onSetPass2, formErrMsg } = this.props;
 
     return (
-      <div>
+      <div className="container">
         <div className="text-center">
-          <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign Up</h1>
+          <h1 className="h3 mb-3 font-weight-normal header-logo">PingIM</h1>
           <label className="form-err">
             {formErrMsg.length ? formErrMsg : ""}
           </label>
-          <label htmlFor="inputEmail">Email address</label>
           <input
             type="email"
             id="inputEmail"
@@ -103,7 +102,6 @@ class Register extends React.Component {
             autoFocus=""
             onChange={onEmailChange}
           />
-          <label htmlFor="inputPassword">Password</label>
           <input
             type="password"
             id="inputPassword"
@@ -113,7 +111,6 @@ class Register extends React.Component {
             onChange={onSetPass1}
             onBlur={this.checkPassword}
           />
-          <label htmlFor="inputPassword">{"Confirm Password"}</label>
           <input
             type="password"
             id="confirmPassword"
@@ -124,20 +121,26 @@ class Register extends React.Component {
             onBlur={this.checkPassword}
           />
         </div>
-        <button
-          onClick={this.onSubmitRegister}
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Register
-        </button>
-        <button
-          onClick={() => {
-            this.navigateToSignIn();
-          }}
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Back to Sign In
-        </button>
+        <div className="row">
+          <div className="col-sm"></div>
+          <div className="col-sm">
+            <button
+              onClick={this.onSubmitRegister}
+              className="btn btn-lg btn-primary btn-block register"
+            >
+              Register
+            </button>
+            <button
+              onClick={() => {
+                this.navigateToSignIn();
+              }}
+              className="btn btn-lg btn-primary btn-block signin"
+            >
+              Sign In
+            </button>
+          </div>
+          <div className="col-sm"></div>
+        </div>
       </div>
     );
   }

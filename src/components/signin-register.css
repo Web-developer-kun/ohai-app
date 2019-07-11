@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "evolve";
+  src: url("../fonts/made_evolve_sans_bold_evo-webfont.woff") format("woff"),
+    url("../fonts/made_evolve_sans_bold_evo-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "evolve-light";
+  src: url("../fonts/made_evolve_sans_light_evo-webfont.woff") format("woff"),
+    url("../fonts/made_evolve_sans_light_evo-webfont.woff2") format("woff2");
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #2a2a2e;
+}
+
+.container {
+  height: 100%;
+}
+
+.header-logo {
+  font-family: "evolve";
+  color: #f0f0f0;
+  font-size: 72px;
+}
+
+#inputEmail,
+#inputPassword,
+#confirmPassword {
+  border-radius: 0;
+  background-color: #56565c;
+  color: #f0f0f0;
+  border: none;
+  font-size: 16px;
+  font-family: "evolve-light";
+}
+
+button.signin,
+button.register {
+  background-color: #46464a;
+  color: #43b581;
+  border: none;
+  border-radius: 0;
+  font-family: "evolve-light";
+}
+
+button.signin:hover,
+button.register:hover {
+  background-color: #56565c;
+  color: #f0f0f0;
+}
+
+input,
+button,
+a,
+p {
+  margin: 10px 0;
+}
+
+.form-err {
+  display: block;
+  color: #43b581;
+  font-family: "evolve-light";
+}
