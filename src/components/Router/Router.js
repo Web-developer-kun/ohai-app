@@ -8,7 +8,10 @@ class Router extends React.Component {
     const { route } = this.props;
     if (route === "signin") {
       return (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div
+          className="signin-container"
+          style={{ width: "100%", height: "100%" }}
+        >
           <Suspense fallback={<h1>Signin</h1>}>
             <Signin {...this.props} />
           </Suspense>
@@ -16,7 +19,10 @@ class Router extends React.Component {
       );
     } else if (route === "register") {
       return (
-        <div style={{ width: "100%", height: "100%" }}>
+        <div
+          className="register-container"
+          style={{ width: "100%", height: "100%" }}
+        >
           <Suspense fallback={<h1>Register</h1>}>
             <Register {...this.props} />
           </Suspense>

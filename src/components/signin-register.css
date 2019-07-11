@@ -15,6 +15,10 @@ body,
 #root {
   height: 100%;
   width: 100%;
+}
+
+.signin-container,
+.register-container {
   background: url("./pingim-signup-bg.jpg") no-repeat;
   background-size: cover;
 }
