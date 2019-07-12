@@ -6,15 +6,9 @@ const Buttons = ({ onImageUpload }) => (
   <div className="buttons fadein">
     <div className="button">
       <label htmlFor="single">
-        <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="2x" />
+        <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="3x" />
       </label>
-      <div className="post-images">Post Images to Chat</div>
-      <input
-        type="file"
-        id="single"
-        style={{ display: "none" }}
-        onChange={onImageUpload}
-      />
+      <input type="file" id="single" onChange={onImageUpload} />
     </div>
   </div>
 );

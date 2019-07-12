@@ -117,3 +117,7 @@ body,
   color: #f0f0f0;
   font-family: "evolve-medium";
 }
+
+.buttons input[type="file"] {
+  display: none;
+}
