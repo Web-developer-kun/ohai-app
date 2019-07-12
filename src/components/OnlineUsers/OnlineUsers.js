@@ -4,7 +4,7 @@ import OnlineUser from "./OnlineUser";
 const OnlineUsers = ({ connectedSockets, setPmSid, setPmUserName }) => {
   return (
     <div id="active-users" className="col-2">
-      <h4 id="online-users-header">ONLINE:</h4>
+      <h4 id="online-users-header">Online:</h4>
       {connectedSockets.map((cs, i) => {
         return (
           <OnlineUser

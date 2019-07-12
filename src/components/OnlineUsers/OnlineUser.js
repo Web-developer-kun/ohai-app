@@ -10,7 +10,7 @@ class OnlineUser extends React.Component {
   render() {
     const { username, sid } = this.props;
     return (
-      <div>
+      <div className="online-user">
         <div className="prof-picture" style={{ display: "inline-block" }}>
           {username.charAt(0).toUpperCase()}
         </div>

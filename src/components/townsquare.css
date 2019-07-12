@@ -55,6 +55,14 @@
   color: #f0f0f0;
 }
 
+.online-user {
+  padding: 5px;
+}
+.online-user:hover {
+  background-color: #36393f;
+  cursor: pointer;
+}
+
 .post .user {
   font-family: "evolve-medium";
   color: #ffc107;
