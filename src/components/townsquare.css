@@ -6,14 +6,26 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "evolve";
+  src: url("../fonts/made_evolve_sans_bold_evo-webfont.woff") format("woff"),
+    url("../fonts/made_evolve_sans_bold_evo-webfont.woff2") format("woff2");
+}
+
 body,
 .container-fluid {
   height: 100%;
   background-color: #36393f;
 }
 
+#townSquareHeader {
+  font-family: "evolve";
+  color: #f0f0f0;
+  background-color: #2f3136;
+}
+
 #chat-box {
-  height: 500px;
+  height: 700px;
   background-color: #36393f;
   overflow: auto;
   scrollbar-color: #202225 #2f3136;
@@ -118,6 +130,19 @@ body,
   font-family: "evolve-medium";
 }
 
+#signOut {
+  font-family: "evolve";
+}
 .buttons input[type="file"] {
   display: none;
+}
+
+.spinner span {
+  font-family: "evolve";
+  color: #f0f0f0;
+}
+
+.results {
+  font-family: "evolve";
+  color: #f0f0f0;
 }

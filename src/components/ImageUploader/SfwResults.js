@@ -3,13 +3,18 @@ import React from "react";
 const SfwResults = ({ nsfwScoreString, sfwScoreString }) => {
   return (
     <div>
-      <span style={{ display: "block" }}>
+      <span className="results" style={{ display: "block" }}>
         {" "}
-        {sfwScoreString ? sfwScoreString : ""}{" "}
+        {sfwScoreString ? sfwScoreString + ". Hit enter to send." : ""}{" "}
       </span>
-      <span style={{ display: "block" }}>
+      <span className="results" style={{ display: "block" }}>
         {" "}
         {nsfwScoreString ? nsfwScoreString : ""}{" "}
+      </span>
+      <span className="results">
+        {!nsfwScoreString.length && !sfwScoreString.length
+          ? "Click the mod bot icon to scan this image"
+          : ""}
       </span>
     </div>
   );

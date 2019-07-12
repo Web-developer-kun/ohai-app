@@ -4,7 +4,7 @@ const Spinner = React.lazy(() => import("./Spinner"));
 const Images = React.lazy(() => import("./Images"));
 const Buttons = React.lazy(() => import("./Buttons"));
 
-class Placeholder extends React.Component {
+class ImageUploader extends React.Component {
   onImageUpload = event => {
     const { onSelectImagesFromDisk } = this.props;
     const files = Array.from(event.target.files);
@@ -33,17 +33,16 @@ class Placeholder extends React.Component {
         const sfwScores = this.processClarifaiData(data);
         if (sfwScores.nsfw.score > 0.8) {
           setNSFWScore(
-            sfwScores.nsfw.score * 100 +
+            (sfwScores.nsfw.score * 100).toFixed(2) +
               " %  Warning: the bot moderator thinks this is NSFW"
           );
           setSFWScore("");
         } else {
           setSFWScore(
-            sfwScores.sfw.score * 100 + " % chance this image is SFW"
+            (sfwScores.sfw.score * 100).toFixed(2) +
+              " % chance this image is SFW"
           );
-          setNSFWScore(
-            sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
-          );
+          setNSFWScore("");
           setImageUrl(url);
         }
       });
@@ -76,37 +75,43 @@ class Placeholder extends React.Component {
   render() {
     const { uploading, images, sfwScoreString, nsfwScoreString } = this.props;
     return (
-      <div>
-        {uploading ? (
-          <div style={{ width: "100%", height: "100%" }}>
-            <Suspense fallback={<p>Spinner</p>}>
-              <Spinner />
-            </Suspense>
+      <div id="imageUploader">
+        <div class="row">
+          <div class="col" />
+          <div class="col-md-auto">
+            {uploading ? (
+              <div style={{ width: "100%", height: "100%" }}>
+                <Suspense fallback={<p>Spinner</p>}>
+                  <Spinner />
+                </Suspense>
+              </div>
+            ) : images !== undefined && images.length > 0 ? (
+              <div style={{ width: "100%", height: "100%" }}>
+                <Suspense fallback={<p>Images</p>}>
+                  <Images
+                    images={images}
+                    removeImage={this.removeImage}
+                    scanImage={this.scanImage}
+                    postImage={this.postImage}
+                    sfwScoreString={sfwScoreString}
+                    nsfwScoreString={nsfwScoreString}
+                  />
+                  <SfwResults {...this.props} />
+                </Suspense>
+              </div>
+            ) : (
+              <div style={{ width: "100%", height: "100%" }}>
+                <Suspense fallback={<p>Buttons</p>}>
+                  <Buttons onImageUpload={this.onImageUpload} />
+                </Suspense>
+              </div>
+            )}
           </div>
-        ) : images !== undefined && images.length > 0 ? (
-          <div style={{ width: "100%", height: "100%" }}>
-            <Suspense fallback={<p>Images</p>}>
-              <Images
-                images={images}
-                removeImage={this.removeImage}
-                scanImage={this.scanImage}
-                postImage={this.postImage}
-                sfwScoreString={sfwScoreString}
-                nsfwScoreString={nsfwScoreString}
-              />
-            </Suspense>
-          </div>
-        ) : (
-          <div style={{ width: "100%", height: "100%" }}>
-            <Suspense fallback={<p>Buttons</p>}>
-              <Buttons onImageUpload={this.onImageUpload} />
-            </Suspense>
-          </div>
-        )}
-        <SfwResults {...this.props} />
+          <div className="col" />
+        </div>
       </div>
     );
   }
 }
 
-export default Placeholder;
+export default ImageUploader;

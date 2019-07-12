@@ -5,7 +5,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 const Buttons = ({ onImageUpload }) => (
   <div className="buttons fadein">
     <div className="button">
-      <label htmlFor="single">
+      <label htmlFor="single" style={{ cursor: "pointer" }}>
         <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="3x" />
       </label>
       <input type="file" id="single" onChange={onImageUpload} />

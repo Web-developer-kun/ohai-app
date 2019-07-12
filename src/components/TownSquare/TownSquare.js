@@ -10,6 +10,10 @@ class TownSquare extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+        <div id="townSquareHeader" className="row">
+          <h3 className="col-3">PingIM</h3>
+          <p className="col-sm-auto">(＾Ｕ＾)ノ~ＹＯ</p>
+        </div>
         <div className="row">
           <ChatBox {...this.props} />
           <OnlineUsers {...this.props} />

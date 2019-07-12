@@ -23,7 +23,8 @@ class SignOut extends React.Component {
     return (
       <button
         onClick={this.signOut}
-        className="btn btn-lg btn-primary btn-block"
+        className="btn btn-lg btn-outline-warning btn-block"
+        id="signOut"
       >
         Sign Out
       </button>
