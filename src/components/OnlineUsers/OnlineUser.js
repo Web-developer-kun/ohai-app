@@ -2,9 +2,11 @@ import React from "react";
 
 class OnlineUser extends React.Component {
   setPropsForPm = () => {
-    const { setPmUserName, setPmSid, username, sid } = this.props;
-    setPmUserName(username);
-    setPmSid(sid);
+    const { setPmUserName, setPmSid, username, sid, currentUser } = this.props;
+    if (username !== currentUser) {
+      setPmUserName(username);
+      setPmSid(sid);
+    }
   };
 
   render() {

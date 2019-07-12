@@ -114,37 +114,10 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const {
-      msgBox,
-      setPmSid,
-      setPmUserName,
-      pmUserSid,
-      pmUserName
-    } = this.props;
-
-    const { socket } = this.state;
+    const { msgBox } = this.props;
 
     return (
-      <div>
-        {pmUserSid.length && pmUserSid !== socket.id ? (
-          <div
-            className="btn btn-lg btn-warning"
-            onClick={() => {
-              setPmUserName("");
-              setPmSid("");
-            }}
-            style={{ display: "inline-block", width: "15%" }}
-          >
-            To: {pmUserName} X
-          </div>
-        ) : (
-          <div
-            className="btn btn-lg btn-warning"
-            style={{ display: "inline-block", width: "15%" }}
-          >
-            To: All
-          </div>
-        )}
+      <div id="messageInput">
         <input
           type="text"
           onChange={this.writeMessage}
@@ -153,23 +126,14 @@ class MessageInput extends React.Component {
           onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
           onKeyPress={this.checkForEnterKey}
           value={msgBox && msgBox.length ? msgBox : ""}
-          style={{ display: "inline-block", width: "70%" }}
         />
-
-        <div style={{ height: "50px" }}>
+        <div className="is-typing" style={{ height: "30px" }}>
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {
                 return <span key={i}>{user} is typing</span>;
               })
             : ""}
         </div>
-        <button
-          className="btn btn-lg btn-primary btn-block"
-          onClick={this.postMessage}
-        >
-          {" "}
-          Send
-        </button>
       </div>
     );
   }
