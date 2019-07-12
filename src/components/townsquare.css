@@ -132,6 +132,12 @@ body,
 
 #signOut {
   font-family: "evolve";
+  color: tomato;
+}
+
+#signOut:hover {
+  color: #000;
+  text-decoration: none;
 }
 .buttons input[type="file"] {
   display: none;

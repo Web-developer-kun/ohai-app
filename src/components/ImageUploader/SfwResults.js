@@ -5,7 +5,7 @@ const SfwResults = ({ nsfwScoreString, sfwScoreString }) => {
     <div>
       <span className="results" style={{ display: "block" }}>
         {" "}
-        {sfwScoreString ? sfwScoreString + ". Hit enter to send." : ""}{" "}
+        {sfwScoreString ? sfwScoreString + ": hit enter to send!" : ""}{" "}
       </span>
       <span className="results" style={{ display: "block" }}>
         {" "}
