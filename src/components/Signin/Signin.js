@@ -109,6 +109,9 @@ class Signin extends React.Component {
         <div className="login-form">
           <div className="text-center">
             <h1 className="h1 mb-3 font-weight-normal header-logo">PingIM</h1>
+            <h3 className="h6  mb-3 font-weight-normal tag-line">
+              The next big thing in instant messaging
+            </h3>
             <label className="form-err">
               {formErrMsg.length ? formErrMsg : ""}
             </label>
@@ -132,7 +135,7 @@ class Signin extends React.Component {
               />
               <button
                 onClick={this.onSignIn}
-                className="btn btn-lg btn-outline-warning btn-block signin"
+                className="btn btn-lg btn-warning btn-block signin"
               >
                 Sign In
               </button>
@@ -141,9 +144,9 @@ class Signin extends React.Component {
                   this.navigateToRegister();
                 }}
                 id="to-register"
-                className="btn btn-lg btn-link register"
+                className="btn btn-lg btn-outline-warning btn-block register"
               >
-                Need to register?
+                Don't have an account? Sign up!
               </button>
             </div>
           </div>

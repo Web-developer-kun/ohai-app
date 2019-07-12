@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "evolve-medium";
+  src: url("../fonts/made_evolve_sans_medium_evo-webfont.woff2") format("woff2"),
+    url("../fonts/made_evolve_sans_medium_evo-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#chat-box {
+  height: 500px;
+  background-color: #36393f;
+  overflow: auto;
+  scrollbar-color: #202225 #2f3136;
+}
+
+#chat-box::-webkit-scrollbar-track {
+  background-color: #2f3136;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+  height: 30px;
+  background-color: #202225;
+}
+
+#active-users {
+  background-color: #2f3136;
+  font-family: "evolve-medium";
+  color: #43b581;
+}
+
+.active-chat-user {
+  padding: 10px;
+}
+
+.prof-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #36393f;
+  display: inline-block;
+  position: relative;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 2px;
+}
+
+#online-users-header {
+  font-famiy: "evolve-medium";
+  color: #43b581;
+}
+
+.post {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.post .user {
+  font-family: "evolve-medium";
+  color: #ffc107;
+}
+
+.post-content {
+  display: block;
+  height: auto;
+  width: auto;
+}
+
+.post-content .time {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-left: 0.3rem;
+  color: #485763;
+}

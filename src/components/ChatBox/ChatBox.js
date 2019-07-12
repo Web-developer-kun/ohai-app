@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import Post from "../Post/Post";
+import "../townsquare.css";
 
 const ChatBox = ({ posts }) => {
   const messagesEndRef = useRef(null);
@@ -11,7 +12,7 @@ const ChatBox = ({ posts }) => {
   useEffect(scrollToBottom, [posts]);
 
   return (
-    <div style={{ height: "500px", overflow: "auto" }} className="form-control">
+    <div id="chat-box" className="col-10">
       {posts
         ? posts.map((pst, i) => {
             return (

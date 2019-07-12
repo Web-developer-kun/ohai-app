@@ -10,12 +10,18 @@ class OnlineUser extends React.Component {
   render() {
     const { username, sid } = this.props;
     return (
-      <div
-        className="btn btn-lg btn-primary"
-        sid={sid}
-        onClick={this.setPropsForPm}
-      >
-        {username}
+      <div>
+        <div className="prof-picture" style={{ display: "inline-block" }}>
+          {username.charAt(0).toUpperCase()}
+        </div>
+        <div
+          className="active-chat-user"
+          sid={sid}
+          onClick={this.setPropsForPm}
+          style={{ display: "inline-block" }}
+        >
+          {username}
+        </div>
       </div>
     );
   }

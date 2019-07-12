@@ -91,6 +91,9 @@ class Register extends React.Component {
         <div className="login-form">
           <div className="text-center">
             <h1 className="h1 mb-3 font-weight-normal header-logo">PingIM</h1>
+            <h3 className="h6  mb-3 font-weight-normal tag-line">
+              Join us: all the cool kids are doing it
+            </h3>
             <label className="form-err">
               {formErrMsg.length ? formErrMsg : ""}
             </label>
@@ -125,7 +128,7 @@ class Register extends React.Component {
 
           <button
             onClick={this.onSubmitRegister}
-            className="btn btn-lg btn-outline-warning btn-block register"
+            className="btn btn-lg btn-warning btn-block register"
           >
             Register
           </button>
@@ -133,7 +136,7 @@ class Register extends React.Component {
             onClick={() => {
               this.navigateToSignIn();
             }}
-            className="btn btn-lg btn-link signin btn-block"
+            className="btn btn-lg btn-outline-warning signin btn-block"
           >
             Have an account?
           </button>
