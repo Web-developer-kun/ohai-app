@@ -19,7 +19,8 @@ import {
   PUSH_POST,
   SET_PM_SID,
   SET_PM_USERNAME,
-  SET_CONNECTED_SOCKETS
+  SET_CONNECTED_SOCKETS,
+  TOGGLE_MODAL
 } from "./constants";
 
 const initialRegisterState = {
@@ -194,6 +195,19 @@ export const setConnectedSockets = (
   switch (action.type) {
     case SET_CONNECTED_SOCKETS:
       return Object.assign({}, state, { connectedSockets: action.payload });
+    default:
+      return state;
+  }
+};
+
+const initialModalState = {
+  isModalOpen: false
+};
+
+export const toggleModal = (state = initialModalState, action = {}) => {
+  switch (action.type) {
+    case TOGGLE_MODAL:
+      return Object.assign({}, state, { isModalOpen: action.payload });
     default:
       return state;
   }

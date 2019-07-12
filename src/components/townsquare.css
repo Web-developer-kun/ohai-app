@@ -81,6 +81,7 @@ body,
   background-color: #484b52;
   color: #f0f0f0;
   border-color: #484b52;
+  margin-left: 5px;
 }
 
 .post {
@@ -151,4 +152,20 @@ body,
 .results {
   font-family: "evolve";
   color: #f0f0f0;
+}
+
+#openImageUploadModal {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #484b52;
+  position: relative;
+  top: 12px;
+  left: 5px;
+}
+
+#openImageUploadModal svg {
+  position: relative;
+  right: 7px;
+  top: 2px;
 }

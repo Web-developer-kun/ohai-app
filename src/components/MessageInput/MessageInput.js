@@ -1,6 +1,8 @@
 import React from "react";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 
 class MessageInput extends React.Component {
   constructor() {
@@ -114,25 +116,34 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const { msgBox } = this.props;
+    const { msgBox, toggleModal } = this.props;
 
     return (
       <div id="messageInput">
-        <input
-          type="text"
-          onChange={this.writeMessage}
-          className="form-control message"
-          onKeyDown={this.emitTypingStatus}
-          onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
-          onKeyPress={this.checkForEnterKey}
-          value={msgBox && msgBox.length ? msgBox : ""}
-        />
         <div className="is-typing" style={{ height: "30px" }}>
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {
                 return <span key={i}>{user} is typing</span>;
               })
             : ""}
+        </div>
+        <div className="row">
+          <input
+            type="text"
+            onChange={this.writeMessage}
+            className="form-control message col-9"
+            onKeyDown={this.emitTypingStatus}
+            onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
+            onKeyPress={this.checkForEnterKey}
+            value={msgBox && msgBox.length ? msgBox : ""}
+          />
+          <div
+            id="openImageUploadModal"
+            className="col-sm-auto"
+            onClick={() => toggleModal(true)}
+          >
+            <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="1x" />
+          </div>
         </div>
       </div>
     );

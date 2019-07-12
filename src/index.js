@@ -17,7 +17,8 @@ import {
   uploadImagesToCloudinary,
   pushPostsToChatBox,
   setPmCreds,
-  setConnectedSockets
+  setConnectedSockets,
+  toggleModal
 } from "./reducers";
 
 const rootReducer = combineReducers({
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   uploadImagesToCloudinary,
   pushPostsToChatBox,
   setPmCreds,
-  setConnectedSockets
+  setConnectedSockets,
+  toggleModal
 });
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
