@@ -20,6 +20,7 @@ import {
   setPmSid,
   setPmUserName,
   setConnectedSockets,
+  setSocketForSignOut,
   toggleModal
 } from "./actions";
 import "./bootstrap-social.css";
@@ -46,6 +47,7 @@ const mapStateToProps = state => {
     pmUserSid: state.setPmCreds.pmUserSid,
     pmUserName: state.setPmCreds.pmUserName,
     connectedSockets: state.setConnectedSockets.connectedSockets,
+    socket: state.setConnectedSockets.socket,
     isModalOpen: state.toggleModal.isModalOpen
   };
 };
@@ -72,6 +74,7 @@ const mapDispatchToProps = dispatch => {
     setPmSid: text => dispatch(setPmSid(text)),
     setPmUserName: text => dispatch(setPmUserName(text)),
     setConnectedSockets: array => dispatch(setConnectedSockets(array)),
+    setSocketForSignOut: obj => dispatch(setSocketForSignOut(obj)),
     toggleModal: boolean => dispatch(toggleModal(boolean))
   };
 };
