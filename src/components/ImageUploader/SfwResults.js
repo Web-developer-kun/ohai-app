@@ -5,7 +5,7 @@ class SfwResults extends React.Component {
     const { sfwScoreString, nsfwScoreString, toggleModal } = this.props;
     return (
       <div>
-        <div className="results" style={{ display: "block" }}>
+        <div className="results">
           {" "}
           {sfwScoreString ? (
             <div>
@@ -22,7 +22,7 @@ class SfwResults extends React.Component {
           ) : (
             ""
           )}{" "}
-          <div className="results" style={{ display: "block" }}>
+          <div className="results">
             {" "}
             {nsfwScoreString ? nsfwScoreString : ""}{" "}
           </div>
