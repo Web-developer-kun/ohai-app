@@ -5,6 +5,11 @@ body,
   width: 100%;
 }
 
+.container {
+  height: 100%;
+  width: 100%;
+}
+
 @font-face {
   font-family: "evolve";
   src: url("../fonts/made_evolve_sans_bold_evo-webfont.woff") format("woff"),
@@ -21,11 +26,6 @@ body,
 .register-container {
   background: url("./pingim-signup-bg.jpg") no-repeat;
   background-size: cover;
-}
-
-.container {
-  height: 100%;
-  width: 100%;
 }
 
 .login-form {

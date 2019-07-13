@@ -31,10 +31,11 @@ class ImageUploader extends React.Component {
       .then(response => response.json())
       .then(data => {
         const sfwScores = this.processClarifaiData(data);
-        if (sfwScores.nsfw.score > 0.8) {
+        if (sfwScores.nsfw.score > 0.6) {
           setNSFWScore(
-            (sfwScores.nsfw.score * 100).toFixed(2) +
-              " %  Warning: the bot moderator thinks this is NSFW"
+            `Bot mod thinks this has a ${(sfwScores.nsfw.score * 100).toFixed(
+              2
+            )} % chance of being NSFW. Beep boop, blocking this from posting.`
           );
           setSFWScore("");
         } else {
