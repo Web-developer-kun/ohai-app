@@ -14,9 +14,16 @@ class MessageInput extends React.Component {
   }
 
   componentDidMount() {
-    const { pushPost, session_creds, setConnectedSockets } = this.props;
+    const {
+      pushPost,
+      session_creds,
+      setConnectedSockets,
+      setSocketForSignOut
+    } = this.props;
     const { socket } = this.state;
     const time = new Date().toLocaleTimeString();
+
+    setSocketForSignOut(socket);
 
     if (session_creds && session_creds.email) {
       socket.emit("add-user", session_creds.email);
@@ -116,29 +123,52 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const { msgBox, toggleModal, imgUrl } = this.props;
-
+    const {
+      msgBox,
+      toggleModal,
+      imgUrl,
+      pmUserName,
+      setPmSid,
+      setPmUserName
+    } = this.props;
     return (
       <div id="messageInput" className="col">
         <div className="row">
-          <div className="is-typing">
+          <div class="w-100"></div>
+          <div className="is-typing col">
             {this.state.typingUsers.length
               ? this.state.typingUsers.map((user, i) => {
                   return (
-                    <span key={i}>
+                    <div className="col-sm-auto" key={i}>
                       {i > 0 ? "; " : ""}
                       {user} is typing{" "}
-                    </span>
+                    </div>
                   );
                 })
               : ""}
           </div>
         </div>
         <div className="row">
+          {pmUserName && pmUserName.length ? (
+            <div
+              className="pm-notification-bar btn btn-lg btn-outline-warning btn-block"
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                setPmSid("");
+                setPmUserName("");
+              }}
+            >
+              Messaging {pmUserName}. (Click here to cancel):
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="row">
           <input
             type="text"
             onChange={this.writeMessage}
-            className="form-control message col-10"
+            className="form-control message col-8"
             onKeyDown={this.emitTypingStatus}
             onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
             onKeyPress={this.checkForEnterKey}

@@ -2,7 +2,7 @@ import React from "react";
 
 class SignOut extends React.Component {
   signOut = () => {
-    const { changeRoute, setSessionCredentials } = this.props;
+    const { changeRoute, setSessionCredentials, socket } = this.props;
 
     fetch("http://localhost:3000/signout", {
       method: "POST",
@@ -14,7 +14,10 @@ class SignOut extends React.Component {
       })
     })
       .then(response => response.json())
-      .then(setSessionCredentials({ email: "", id: "" }))
+      .then(() => {
+        setSessionCredentials({ email: "", id: "" });
+        socket.emit("sign-out");
+      })
       .then(window.sessionStorage.removeItem("token"))
       .then(changeRoute("signin"));
   };
@@ -23,7 +26,7 @@ class SignOut extends React.Component {
     return (
       <button
         onClick={this.signOut}
-        className="btn btn-lg btn-link col"
+        className="btn btn-lg btn-link"
         id="signOut"
       >
         Sign Out

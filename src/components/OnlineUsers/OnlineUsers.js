@@ -1,12 +1,16 @@
 import React from "react";
 import OnlineUser from "./OnlineUser";
+import SignOut from "../SignOut/SignOut";
 
 const OnlineUsers = ({
   connectedSockets,
   setPmSid,
   setPmUserName,
   pmUserName,
-  session_creds
+  session_creds,
+  changeRoute,
+  setSessionCredentials,
+  socket
 }) => {
   return (
     <div id="activeUsers" className="col-md-auto">
@@ -23,6 +27,11 @@ const OnlineUsers = ({
           />
         );
       })}
+      <SignOut
+        changeRoute={changeRoute}
+        setSessionCredentials={setSessionCredentials}
+        socket={socket}
+      />
     </div>
   );
 };

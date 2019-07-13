@@ -20,7 +20,8 @@ import {
   SET_PM_SID,
   SET_PM_USERNAME,
   SET_CONNECTED_SOCKETS,
-  TOGGLE_MODAL
+  TOGGLE_MODAL,
+  SET_SOCKET_FOR_SIGNOUT
 } from "./constants";
 
 const initialRegisterState = {
@@ -185,7 +186,8 @@ export const setPmCreds = (state = initialPmState, action = {}) => {
 };
 
 const initialSocketsState = {
-  connectedSockets: []
+  connectedSockets: [],
+  socket: ""
 };
 
 export const setConnectedSockets = (
@@ -195,6 +197,8 @@ export const setConnectedSockets = (
   switch (action.type) {
     case SET_CONNECTED_SOCKETS:
       return Object.assign({}, state, { connectedSockets: action.payload });
+    case SET_SOCKET_FOR_SIGNOUT:
+      return Object.assign({}, state, { socket: action.payload });
     default:
       return state;
   }

@@ -20,7 +20,8 @@ import {
   SET_PM_SID,
   SET_PM_USERNAME,
   SET_CONNECTED_SOCKETS,
-  TOGGLE_MODAL
+  TOGGLE_MODAL,
+  SET_SOCKET_FOR_SIGNOUT
 } from "./constants";
 
 //Register Page
@@ -118,4 +119,9 @@ export const setConnectedSockets = array => ({
 export const toggleModal = boolean => ({
   type: TOGGLE_MODAL,
   payload: boolean
+});
+
+export const setSocketForSignOut = obj => ({
+  type: SET_SOCKET_FOR_SIGNOUT,
+  payload: obj
 });

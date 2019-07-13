@@ -5,7 +5,6 @@ import MessageInput from "../MessageInput/MessageInput";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import Modal from "../Modal/Modal";
 import Header from "../Header/Header";
-import SignOut from "../SignOut/SignOut";
 import "../townsquare.css";
 
 class TownSquare extends React.Component {
@@ -24,8 +23,6 @@ class TownSquare extends React.Component {
           <OnlineUsers {...this.props} />
           <div class="w-100"></div>
           <MessageInput {...this.props} />
-          <div class="w-100"></div>
-          <SignOut {...this.props} />
         </div>
       </div>
     );
