@@ -19,7 +19,8 @@ import {
   PUSH_POST,
   SET_PM_SID,
   SET_PM_USERNAME,
-  SET_CONNECTED_SOCKETS
+  SET_CONNECTED_SOCKETS,
+  TOGGLE_MODAL
 } from "./constants";
 
 //Register Page
@@ -112,4 +113,9 @@ export const setPmUserName = text => ({
 export const setConnectedSockets = array => ({
   type: SET_CONNECTED_SOCKETS,
   payload: array
+});
+
+export const toggleModal = boolean => ({
+  type: TOGGLE_MODAL,
+  payload: boolean
 });

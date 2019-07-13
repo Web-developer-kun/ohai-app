@@ -1,0 +1,250 @@
+@font-face {
+  font-family: "evolve";
+  src: url("../fonts/made_evolve_sans_bold_evo-webfont.woff") format("woff"),
+    url("../fonts/made_evolve_sans_bold_evo-webfont.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "evolve-light";
+  src: url("../fonts/made_evolve_sans_light_evo-webfont.woff") format("woff"),
+    url("../fonts/made_evolve_sans_light_evo-webfont.woff2") format("woff2");
+}
+
+body,
+.container-fluid {
+  height: 100%;
+  background-color: #36393f;
+}
+
+#townSquareHeader {
+  font-family: "evolve";
+  color: #f0f0f0;
+  background-color: #2f3136;
+}
+
+#chat-box {
+  height: 700px;
+  background-color: #36393f;
+  overflow: auto;
+  scrollbar-color: #202225 #2f3136;
+  border-bottom: 1px solid #484b52;
+}
+
+#chat-box::-webkit-scrollbar-track,
+#active-users::-webkit-scrollbar-track {
+  background-color: #2f3136;
+}
+
+#chat-box::-webkit-scrollbar-thumb,
+#active-users::-webkit-scrollbar-thumb {
+  height: 30px;
+  background-color: #202225;
+}
+
+#active-users {
+  background-color: #2f3136;
+  font-family: "evolve-light";
+  color: #43b581;
+  scrollbar-color: #202225 #2f3136;
+  border-bottom: 1px solid #484b52;
+}
+
+.active-chat-user {
+  padding: 10px;
+}
+
+.pm-alert,
+.pm-stop {
+  position: relative;
+  top: 5px;
+  color: #f0f0f0;
+}
+
+.pm-notification-bar {
+  font-family: "evolve-light";
+  display: block;
+  padding: 5px;
+}
+
+.prof-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #36393f;
+  display: inline-block;
+  position: relative;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 2px;
+}
+
+#online-users-header {
+  font-famiy: "evolve-light";
+  color: #f0f0f0;
+}
+
+#messageInput input {
+  background-color: #484b52;
+  color: #f0f0f0;
+  border-color: #484b52;
+  margin-left: 5px;
+}
+
+.post {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.online-user {
+  padding: 5px;
+}
+.online-user:hover {
+  background-color: #36393f;
+  cursor: pointer;
+}
+
+.post .user {
+  font-family: "evolve-light";
+  color: #ffc107;
+}
+
+.post-content {
+  display: block;
+  height: auto;
+  width: auto;
+}
+
+.post-content .time {
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-left: 0.3rem;
+  color: #485763;
+}
+
+.post-images {
+  font-family: "evolve-light";
+  color: #f0f0f0;
+  display: inline-block;
+  margin-left: 5px;
+  position: relative;
+  bottom: 5px;
+}
+
+.is-typing {
+  color: #f0f0f0;
+  font-family: "evolve-light";
+}
+
+#signOut {
+  font-family: "evolve";
+  color: tomato;
+}
+
+#signOut:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.spinner span {
+  font-family: "evolve";
+  color: #f0f0f0;
+  height: 100%;
+  width: 100%;
+}
+
+.results {
+  font-family: "evolve-light";
+  color: #f0f0f0;
+}
+
+#openImageUploadModal {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #484b52;
+  position: relative;
+  top: 12px;
+  left: 5px;
+}
+
+#openImageUploadModal svg {
+  position: relative;
+  right: 7px;
+  top: 2px;
+}
+
+#imageUploader {
+  background-color: rgba(114, 137, 218, 0.3);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-images-to-chat {
+  display: block;
+  color: #f0f0f0;
+  font-family: "evolve-light";
+}
+
+.button label svg {
+  position: relative;
+  left: 40px;
+}
+
+.close-button-row {
+  display: block;
+}
+
+.results {
+  text-align: center;
+}
+
+.img-attached {
+  margin-left: 10px;
+  font-family: "evolve-light";
+  color: #f0f0f0;
+}
+
+.spinner-container,
+.images-in-tray-container {
+  width: 450px;
+  height: auto;
+  padding: 35px;
+}
+
+.upload-button-view-container {
+  height: auto;
+  width: 450px;
+  padding: 35px;
+}
+
+.image-in-tray img {
+  margin: 0 auto;
+}
+
+.spinner-container .btn,
+.images-in-tray-container .btn {
+  margin: 5px 0;
+  font-family: "evolve-light";
+}
+
+#imageUploader .btn-link {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+#imageUploader .btn-link:hover {
+  color: #ffc107;
+  cursor: pointer;
+}

@@ -4,7 +4,7 @@ const Spinner = React.lazy(() => import("./Spinner"));
 const Images = React.lazy(() => import("./Images"));
 const Buttons = React.lazy(() => import("./Buttons"));
 
-class Placeholder extends React.Component {
+class ImageUploader extends React.Component {
   onImageUpload = event => {
     const { onSelectImagesFromDisk } = this.props;
     const files = Array.from(event.target.files);
@@ -31,19 +31,19 @@ class Placeholder extends React.Component {
       .then(response => response.json())
       .then(data => {
         const sfwScores = this.processClarifaiData(data);
-        if (sfwScores.nsfw.score > 0.8) {
+        if (sfwScores.nsfw.score > 0.6) {
           setNSFWScore(
-            sfwScores.nsfw.score * 100 +
-              " %  Warning: the bot moderator thinks this is NSFW"
+            `Bot mod thinks this has a ${(sfwScores.nsfw.score * 100).toFixed(
+              2
+            )} % chance of being NSFW. Beep boop, blocking this from posting.`
           );
           setSFWScore("");
         } else {
           setSFWScore(
-            sfwScores.sfw.score * 100 + " % chance this image is SFW"
+            (sfwScores.sfw.score * 100).toFixed(2) +
+              " % chance this image is SFW"
           );
-          setNSFWScore(
-            sfwScores.nsfw.score * 100 + " %  chance this image is NSFW"
-          );
+          setNSFWScore("");
           setImageUrl(url);
         }
       });
@@ -74,17 +74,23 @@ class Placeholder extends React.Component {
   };
 
   render() {
-    const { uploading, images, sfwScoreString, nsfwScoreString } = this.props;
+    const {
+      uploading,
+      images,
+      sfwScoreString,
+      nsfwScoreString,
+      toggleModal
+    } = this.props;
     return (
-      <div>
+      <div id="imageUploader">
         {uploading ? (
-          <div style={{ width: "100%", height: "100%" }}>
+          <div className="spinner-container">
             <Suspense fallback={<p>Spinner</p>}>
               <Spinner />
             </Suspense>
           </div>
         ) : images !== undefined && images.length > 0 ? (
-          <div style={{ width: "100%", height: "100%" }}>
+          <div className="images-in-tray-container">
             <Suspense fallback={<p>Images</p>}>
               <Images
                 images={images}
@@ -94,19 +100,22 @@ class Placeholder extends React.Component {
                 sfwScoreString={sfwScoreString}
                 nsfwScoreString={nsfwScoreString}
               />
+              <SfwResults {...this.props} />
             </Suspense>
           </div>
         ) : (
-          <div style={{ width: "100%", height: "100%" }}>
+          <div className="upload-button-view-container">
             <Suspense fallback={<p>Buttons</p>}>
-              <Buttons onImageUpload={this.onImageUpload} />
+              <Buttons
+                onImageUpload={this.onImageUpload}
+                toggleModal={toggleModal}
+              />
             </Suspense>
           </div>
         )}
-        <SfwResults {...this.props} />
       </div>
     );
   }
 }
 
-export default Placeholder;
+export default ImageUploader;

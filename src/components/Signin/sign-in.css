@@ -1,8 +1,0 @@
-input, button, a, p {
-    margin: 10px 0;
-}
-
-.form-err {
-  display: block;
-  color: tomato;
-}

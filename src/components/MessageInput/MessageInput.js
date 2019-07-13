@@ -1,6 +1,8 @@
 import React from "react";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faImage, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 
 class MessageInput extends React.Component {
   constructor() {
@@ -114,62 +116,45 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const {
-      msgBox,
-      setPmSid,
-      setPmUserName,
-      pmUserSid,
-      pmUserName
-    } = this.props;
-
-    const { socket } = this.state;
+    const { msgBox, toggleModal, imgUrl } = this.props;
 
     return (
-      <div>
-        {pmUserSid.length && pmUserSid !== socket.id ? (
-          <div
-            className="btn btn-lg btn-warning"
-            onClick={() => {
-              setPmUserName("");
-              setPmSid("");
-            }}
-            style={{ display: "inline-block", width: "15%" }}
-          >
-            To: {pmUserName} X
-          </div>
-        ) : (
-          <div
-            className="btn btn-lg btn-warning"
-            style={{ display: "inline-block", width: "15%" }}
-          >
-            To: All
-          </div>
-        )}
-        <input
-          type="text"
-          onChange={this.writeMessage}
-          className="form-control message"
-          onKeyDown={this.emitTypingStatus}
-          onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
-          onKeyPress={this.checkForEnterKey}
-          value={msgBox && msgBox.length ? msgBox : ""}
-          style={{ display: "inline-block", width: "70%" }}
-        />
-
-        <div style={{ height: "50px" }}>
+      <div id="messageInput">
+        <div className="is-typing" style={{ height: "30px" }}>
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {
                 return <span key={i}>{user} is typing</span>;
               })
             : ""}
         </div>
-        <button
-          className="btn btn-lg btn-primary btn-block"
-          onClick={this.postMessage}
-        >
-          {" "}
-          Send
-        </button>
+        <div className="row">
+          <input
+            type="text"
+            onChange={this.writeMessage}
+            className="form-control message col-9"
+            onKeyDown={this.emitTypingStatus}
+            onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
+            onKeyPress={this.checkForEnterKey}
+            value={msgBox && msgBox.length ? msgBox : ""}
+          />
+          <div
+            id="openImageUploadModal"
+            className="col-sm-auto"
+            onClick={() => toggleModal(true)}
+          >
+            <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="1x" />
+          </div>
+        </div>
+        <div className="attachments" style={{ height: "20px" }}>
+          {imgUrl && imgUrl.length ? (
+            <div>
+              <FontAwesomeIcon icon={faPaperclip} color="#f0f0f0" size="1x" />
+              <span className="img-attached">Image Attached</span>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     );
   }

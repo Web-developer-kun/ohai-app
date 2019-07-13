@@ -1,5 +1,5 @@
 import React from "react";
-import "./sign-in.css";
+import "../signin-register.css";
 
 class Signin extends React.Component {
   componentDidMount() {
@@ -105,49 +105,52 @@ class Signin extends React.Component {
       formErrMsg
     } = this.props;
     return (
-      <div>
-        <div className="text-center">
-          <h1 className="h3 mb-3 font-weight-normal">Ohaii Sign In</h1>
-          <label className="form-err">
-            {formErrMsg.length ? formErrMsg : ""}
-          </label>
-          <label htmlFor="inputEmail">Email address</label>
-          <input
-            type="email"
-            id="inputEmail"
-            className="form-control"
-            placeholder="Email address"
-            required=""
-            autoFocus=""
-            onChange={onSignInEmailChange}
-          />
-          <label htmlFor="inputPassword">
-            {formErrMsg.length ? formErrMsg : "Password"}
-          </label>
-          <input
-            type="password"
-            id="inputPassword"
-            className="form-control"
-            placeholder="Password"
-            required=""
-            onChange={onSignInPasswordChange}
-          />
+      <div className="container">
+        <div className="login-form">
+          <div className="text-center">
+            <h1 className="h1 mb-3 font-weight-normal header-logo">PingIM</h1>
+            <h3 className="h6  mb-3 font-weight-normal tag-line">
+              The next big thing in instant messaging
+            </h3>
+            <label className="form-err">
+              {formErrMsg.length ? formErrMsg : ""}
+            </label>
+            <div className="form-body">
+              <input
+                type="email"
+                id="inputEmail"
+                className="form-control"
+                placeholder="Email address"
+                required=""
+                autoFocus=""
+                onChange={onSignInEmailChange}
+              />
+              <input
+                type="password"
+                id="inputPassword"
+                className="form-control"
+                placeholder="Password"
+                required=""
+                onChange={onSignInPasswordChange}
+              />
+              <button
+                onClick={this.onSignIn}
+                className="btn btn-lg btn-warning btn-block signin"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => {
+                  this.navigateToRegister();
+                }}
+                id="to-register"
+                className="btn btn-lg btn-outline-warning btn-block register"
+              >
+                Don't have an account? Sign up!
+              </button>
+            </div>
+          </div>
         </div>
-        <button
-          onClick={this.onSignIn}
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Sign In
-        </button>
-        <button
-          onClick={() => {
-            this.navigateToRegister();
-          }}
-          id="to-register"
-          className="btn btn-lg btn-primary btn-block"
-        >
-          Register
-        </button>
       </div>
     );
   }

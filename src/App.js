@@ -19,7 +19,8 @@ import {
   pushPost,
   setPmSid,
   setPmUserName,
-  setConnectedSockets
+  setConnectedSockets,
+  toggleModal
 } from "./actions";
 import "./bootstrap-social.css";
 import Router from "./components/Router/Router";
@@ -44,7 +45,8 @@ const mapStateToProps = state => {
     posts: state.pushPostsToChatBox.posts,
     pmUserSid: state.setPmCreds.pmUserSid,
     pmUserName: state.setPmCreds.pmUserName,
-    connectedSockets: state.setConnectedSockets.connectedSockets
+    connectedSockets: state.setConnectedSockets.connectedSockets,
+    isModalOpen: state.toggleModal.isModalOpen
   };
 };
 
@@ -69,7 +71,8 @@ const mapDispatchToProps = dispatch => {
     pushPost: obj => dispatch(pushPost(obj)),
     setPmSid: text => dispatch(setPmSid(text)),
     setPmUserName: text => dispatch(setPmUserName(text)),
-    setConnectedSockets: array => dispatch(setConnectedSockets(array))
+    setConnectedSockets: array => dispatch(setConnectedSockets(array)),
+    toggleModal: boolean => dispatch(toggleModal(boolean))
   };
 };
 
