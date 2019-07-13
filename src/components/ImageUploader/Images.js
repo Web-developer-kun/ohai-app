@@ -9,17 +9,8 @@ const Images = ({
   nsfwScoreString
 }) =>
   images.map((image, i) => (
-    <div key={i} className="image-in-tray">
-      <img
-        style={{
-          maxHeight: "250px",
-          maxWidth: "250px",
-          display: "block",
-          "border-radius": "5px"
-        }}
-        src={image.secure_url}
-        alt=""
-      />
+    <div key={i}>
+      <img style={{}} src={image.secure_url} className="image-in-tray" alt="" />
       <div
         onClick={() => removeImage(image.public_id)}
         className="btn btn-sm btn-link btn-block"

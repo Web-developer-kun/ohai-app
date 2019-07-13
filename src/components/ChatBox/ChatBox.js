@@ -12,7 +12,7 @@ const ChatBox = ({ posts }) => {
   useEffect(scrollToBottom, [posts]);
 
   return (
-    <div id="chat-box" className="col">
+    <div id="chatBox" className="col">
       {posts
         ? posts.map((pst, i) => {
             return (

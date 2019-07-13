@@ -1,7 +1,5 @@
 import React from "react";
 import OnlineUser from "./OnlineUser";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const OnlineUsers = ({
   connectedSockets,
@@ -11,7 +9,7 @@ const OnlineUsers = ({
   session_creds
 }) => {
   return (
-    <div id="active-users" className="col-md-auto">
+    <div id="activeUsers" className="col-md-auto">
       <h6 id="online-users-header">Online:</h6>
       {connectedSockets.map((cs, i) => {
         return (

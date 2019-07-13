@@ -4,14 +4,13 @@ import ChatBox from "../ChatBox/ChatBox";
 import MessageInput from "../MessageInput/MessageInput";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import Modal from "../Modal/Modal";
+import Header from "../Header/Header";
 import SignOut from "../SignOut/SignOut";
 import "../townsquare.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 class TownSquare extends React.Component {
   render() {
-    const { isModalOpen, setPmSid, setPmUserName, pmUserName } = this.props;
+    const { isModalOpen } = this.props;
     return (
       <div className="container-fluid">
         {isModalOpen ? (
@@ -19,29 +18,7 @@ class TownSquare extends React.Component {
             <ImageUploader {...this.props} />
           </Modal>
         ) : null}
-        <div id="townSquareHeader" className="row">
-          <h3 className="col-4">PingIM</h3>
-          {pmUserName && pmUserName.length ? (
-            <div
-              className="pm-notification-bar"
-              style={{ cursor: "pointer" }}
-              onClick={() => {
-                setPmSid("");
-                setPmUserName("");
-              }}
-            >
-              <div className="pm-alert" style={{ display: "inline-block" }}>
-                Messaging {pmUserName}. (Click here to cancel):
-              </div>
-              <div style={{ "margin-left": "10px", display: "inline-block" }}>
-                <FontAwesomeIcon className="pm-stop" icon={faTimes} size="1x" />
-              </div>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-
+        <Header {...this.props} />
         <div className="row">
           <ChatBox {...this.props} />
           <OnlineUsers {...this.props} />
