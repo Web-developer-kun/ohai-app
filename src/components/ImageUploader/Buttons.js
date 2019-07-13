@@ -10,7 +10,7 @@ const Buttons = ({ onImageUpload, toggleModal }) => (
     <span className="post-images-to-chat">Post Images to Chat</span>
     <input type="file" id="single" onChange={onImageUpload} />
     <div
-      className="btn btn-sm btn-link btn-block"
+      className="btn btn-sm btn-outline-light btn-block"
       onClick={() => {
         toggleModal(false);
       }}

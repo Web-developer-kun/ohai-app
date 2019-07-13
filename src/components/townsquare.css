@@ -108,7 +108,7 @@ body,
   cursor: pointer;
 }
 
-.post .user {
+.user {
   font-family: "evolve-light";
   color: #ffc107;
   display: block;
@@ -165,13 +165,6 @@ body,
 
 input[type="file"] {
   display: none;
-}
-
-.spinner span {
-  font-family: "evolve";
-  color: #f0f0f0;
-  height: 100%;
-  width: 100%;
 }
 
 .results {
@@ -246,7 +239,11 @@ input[type="file"] {
   padding: 35px;
 }
 
-.image-in-tray img {
+.image-in-tray {
+  max-height: 250px;
+  max-width: 250px;
+  display: block;
+  border-radius: 5px;
   margin: 0 auto;
 }
 
