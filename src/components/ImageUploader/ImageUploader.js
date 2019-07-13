@@ -82,47 +82,36 @@ class ImageUploader extends React.Component {
     } = this.props;
     return (
       <div id="imageUploader">
-        <div class="row">
-          <div class="col" />
-          <div class="col-md-auto">
-            {uploading ? (
-              <div style={{ width: "100%", height: "100%" }}>
-                <Suspense fallback={<p>Spinner</p>}>
-                  <Spinner />
-                </Suspense>
-              </div>
-            ) : images !== undefined && images.length > 0 ? (
-              <div style={{ width: "100%", height: "100%" }}>
-                <Suspense fallback={<p>Images</p>}>
-                  <Images
-                    images={images}
-                    removeImage={this.removeImage}
-                    scanImage={this.scanImage}
-                    postImage={this.postImage}
-                    sfwScoreString={sfwScoreString}
-                    nsfwScoreString={nsfwScoreString}
-                  />
-                  <SfwResults {...this.props} />
-                </Suspense>
-              </div>
-            ) : (
-              <div style={{ width: "100%", height: "100%" }}>
-                <Suspense fallback={<p>Buttons</p>}>
-                  <Buttons onImageUpload={this.onImageUpload} />
-                </Suspense>
-              </div>
-            )}
-            <div
-              className="btn btn-sm btn-outline-light btn-block"
-              onClick={() => {
-                toggleModal(false);
-              }}
-            >
-              Cancel
-            </div>
+        {uploading ? (
+          <div className="spinner-container">
+            <Suspense fallback={<p>Spinner</p>}>
+              <Spinner />
+            </Suspense>
           </div>
-          <div className="col" />
-        </div>
+        ) : images !== undefined && images.length > 0 ? (
+          <div className="images-in-tray-container">
+            <Suspense fallback={<p>Images</p>}>
+              <Images
+                images={images}
+                removeImage={this.removeImage}
+                scanImage={this.scanImage}
+                postImage={this.postImage}
+                sfwScoreString={sfwScoreString}
+                nsfwScoreString={nsfwScoreString}
+              />
+              <SfwResults {...this.props} />
+            </Suspense>
+          </div>
+        ) : (
+          <div className="upload-button-view-container">
+            <Suspense fallback={<p>Buttons</p>}>
+              <Buttons
+                onImageUpload={this.onImageUpload}
+                toggleModal={toggleModal}
+              />
+            </Suspense>
+          </div>
+        )}
       </div>
     );
   }

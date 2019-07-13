@@ -1,18 +1,8 @@
 import React from "react";
 
 class SfwResults extends React.Component {
-  writeMessage = event => {
-    const { onInputFieldChange } = this.props;
-    onInputFieldChange(event.target.value);
-  };
-
   render() {
-    const {
-      sfwScoreString,
-      nsfwScoreString,
-      toggleModal,
-      setImageUrl
-    } = this.props;
+    const { sfwScoreString, nsfwScoreString, toggleModal } = this.props;
     return (
       <div>
         <div className="results" style={{ display: "block" }}>
@@ -26,7 +16,7 @@ class SfwResults extends React.Component {
                 }}
                 className="btn btn-sm btn-outline-light btn-block"
               >
-                Attach to Next Post
+                Get back to chat
               </div>
             </div>
           ) : (

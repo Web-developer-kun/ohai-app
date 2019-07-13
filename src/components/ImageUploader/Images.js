@@ -1,6 +1,4 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimesCircle, faRobot } from "@fortawesome/free-solid-svg-icons";
 
 const Images = ({
   images,
@@ -11,7 +9,7 @@ const Images = ({
   nsfwScoreString
 }) =>
   images.map((image, i) => (
-    <div key={i} className="fadein">
+    <div key={i} className="image-in-tray">
       <img
         style={{
           maxHeight: "250px",
@@ -24,15 +22,15 @@ const Images = ({
       />
       <div
         onClick={() => removeImage(image.public_id)}
-        className="btn btn-sm btn-outline-light btn-block"
+        className="btn btn-sm btn-link btn-block"
       >
-        Nah this meme sucks. I'll post something else.
+        Delet Dis (╯‵□′)╯︵┻━┻
       </div>
       <div
         onClick={() => scanImage(image.secure_url)}
-        className="btn btn-sm btn-outline-light btn-block"
+        className="btn btn-sm btn-link btn-block"
       >
-        Ready to test if this is SFW?
+        Deploy the Memes (⌐■_■)
       </div>
     </div>
   ));
