@@ -182,7 +182,7 @@ input[type="file"] {
   border-radius: 50%;
   background-color: #484b52;
   position: relative;
-  top: 12px;
+  top: 5px;
   left: 5px;
 }
 
@@ -190,6 +190,11 @@ input[type="file"] {
   position: relative;
   right: 7px;
   top: 2px;
+}
+
+#openImageUploadModal {
+  position: relative;
+  bottom: 5px;
 }
 
 #imageUploader {
@@ -275,13 +280,19 @@ input[type="file"] {
 }
 
 .chat-box-container {
-  height: 70%;
+  height: 75%;
 }
 
-#dummyContainer {
-  height: 100%;
-  width: 100%;
-  background-color: goldenrod;
+#messageInput .message {
+  margin: 0 0 0 5px;
+}
+
+.is-typing {
+  margin-left: 10px;
+}
+
+#messageInput {
+  height: 10%;
 }
 
 .msg-box-container {
