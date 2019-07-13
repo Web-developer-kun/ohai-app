@@ -253,6 +253,14 @@ input[type="file"] {
   font-family: "evolve-light";
 }
 
+.spinner-icon-container {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
 #imageUploader .btn-link {
   color: #f0f0f0;
   text-decoration: none;
