@@ -73,7 +73,13 @@ class ImageUploader extends React.Component {
   };
 
   render() {
-    const { uploading, images, sfwScoreString, nsfwScoreString } = this.props;
+    const {
+      uploading,
+      images,
+      sfwScoreString,
+      nsfwScoreString,
+      toggleModal
+    } = this.props;
     return (
       <div id="imageUploader">
         <div class="row">
@@ -106,6 +112,14 @@ class ImageUploader extends React.Component {
                 </Suspense>
               </div>
             )}
+            <div
+              className="btn btn-sm btn-outline-light btn-block"
+              onClick={() => {
+                toggleModal(false);
+              }}
+            >
+              Cancel
+            </div>
           </div>
           <div className="col" />
         </div>

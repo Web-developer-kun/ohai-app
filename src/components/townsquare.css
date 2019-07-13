@@ -169,3 +169,40 @@ body,
   right: 7px;
   top: 2px;
 }
+
+#imageUploader {
+  background-color: rgba(114, 137, 218, 0.3);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-images-to-chat {
+  display: block;
+  color: #f0f0f0;
+  font-family: "evolve";
+}
+
+.button label svg {
+  position: relative;
+  left: 40px;
+}
+
+.close-button-row {
+  display: block;
+}
+
+.results {
+  text-align: center;
+}
+
+.img-attached {
+  margin-left: 10px;
+  font-family: "evolve-medium";
+  color: #f0f0f0;
+}

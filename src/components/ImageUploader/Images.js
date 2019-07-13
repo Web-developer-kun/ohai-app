@@ -12,20 +12,6 @@ const Images = ({
 }) =>
   images.map((image, i) => (
     <div key={i} className="fadein">
-      <div
-        onClick={() => removeImage(image.public_id)}
-        style={{ display: "inline-block", "margin-right": "5px" }}
-        className="delete"
-      >
-        <FontAwesomeIcon icon={faTimesCircle} size="2x" color="#f0f0f0" />
-      </div>
-      <div
-        onClick={() => scanImage(image.secure_url)}
-        style={{ display: "inline-block", "margin-left": "5px" }}
-        className="upload"
-      >
-        <FontAwesomeIcon icon={faRobot} size="2x" color="#f0f0f0" />
-      </div>
       <img
         style={{
           maxHeight: "250px",
@@ -36,6 +22,18 @@ const Images = ({
         src={image.secure_url}
         alt=""
       />
+      <div
+        onClick={() => removeImage(image.public_id)}
+        className="btn btn-sm btn-outline-light btn-block"
+      >
+        Nah this meme sucks. I'll post something else.
+      </div>
+      <div
+        onClick={() => scanImage(image.secure_url)}
+        className="btn btn-sm btn-outline-light btn-block"
+      >
+        Ready to test if this is SFW?
+      </div>
     </div>
   ));
 

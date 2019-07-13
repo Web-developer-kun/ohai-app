@@ -2,7 +2,7 @@ import React from "react";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { faImage, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 
 class MessageInput extends React.Component {
   constructor() {
@@ -116,7 +116,7 @@ class MessageInput extends React.Component {
   };
 
   render() {
-    const { msgBox, toggleModal } = this.props;
+    const { msgBox, toggleModal, imgUrl } = this.props;
 
     return (
       <div id="messageInput">
@@ -144,6 +144,16 @@ class MessageInput extends React.Component {
           >
             <FontAwesomeIcon icon={faImage} color="#f0f0f0" size="1x" />
           </div>
+        </div>
+        <div className="attachments" style={{ height: "20px" }}>
+          {imgUrl && imgUrl.length ? (
+            <div>
+              <FontAwesomeIcon icon={faPaperclip} color="#f0f0f0" size="1x" />
+              <span className="img-attached">Image Attached</span>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );
