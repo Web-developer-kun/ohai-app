@@ -131,7 +131,7 @@ class MessageInput extends React.Component {
           <input
             type="text"
             onChange={this.writeMessage}
-            className="form-control message col-9"
+            className="form-control message col-10"
             onKeyDown={this.emitTypingStatus}
             onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
             onKeyPress={this.checkForEnterKey}
