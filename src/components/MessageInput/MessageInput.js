@@ -123,7 +123,12 @@ class MessageInput extends React.Component {
         <div className="is-typing">
           {this.state.typingUsers.length
             ? this.state.typingUsers.map((user, i) => {
-                return <span key={i}>{user} is typing</span>;
+                return (
+                  <span key={i}>
+                    {i > 0 ? "; " : ""}
+                    {user} is typing{" "}
+                  </span>
+                );
               })
             : ""}
         </div>
