@@ -21,7 +21,7 @@ class TownSquare extends React.Component {
         ) : null}
         <div id="townSquareHeader" className="row">
           <h3 className="col-4">PingIM</h3>
-          {pmUserName.length ? (
+          {pmUserName && pmUserName.length ? (
             <div
               className="pm-notification-bar"
               style={{ cursor: "pointer" }}
