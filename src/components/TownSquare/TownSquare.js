@@ -19,12 +19,14 @@ class TownSquare extends React.Component {
           </Modal>
         ) : null}
         <Header {...this.props} />
-        <div className="row">
+        <div className="row chat-box-container">
           <ChatBox {...this.props} />
           <OnlineUsers {...this.props} />
+          <div class="w-100"></div>
+          <MessageInput {...this.props} />
+          <div class="w-100"></div>
+          <SignOut {...this.props} />
         </div>
-        <MessageInput {...this.props} />
-        <SignOut {...this.props} />
       </div>
     );
   }

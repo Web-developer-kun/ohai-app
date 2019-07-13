@@ -119,18 +119,20 @@ class MessageInput extends React.Component {
     const { msgBox, toggleModal, imgUrl } = this.props;
 
     return (
-      <div id="messageInput">
-        <div className="is-typing">
-          {this.state.typingUsers.length
-            ? this.state.typingUsers.map((user, i) => {
-                return (
-                  <span key={i}>
-                    {i > 0 ? "; " : ""}
-                    {user} is typing{" "}
-                  </span>
-                );
-              })
-            : ""}
+      <div id="messageInput" className="col">
+        <div className="row">
+          <div className="is-typing">
+            {this.state.typingUsers.length
+              ? this.state.typingUsers.map((user, i) => {
+                  return (
+                    <span key={i}>
+                      {i > 0 ? "; " : ""}
+                      {user} is typing{" "}
+                    </span>
+                  );
+                })
+              : ""}
+          </div>
         </div>
         <div className="row">
           <input
