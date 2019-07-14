@@ -41,72 +41,10 @@ body,
   background-color: #202225;
 }
 
-#activeUsers {
-  background-color: #2f3136;
-  font-family: "evolve-light";
-  color: #43b581;
-  scrollbar-color: #202225 #2f3136;
-  border-bottom: 1px solid #484b52;
-}
-
-.upload-images-button-icon {
-  cursor: "pointer";
-}
-
-.active-chat-user {
-  padding: 10px;
-}
-
-.pm-alert,
-.pm-stop {
-  position: relative;
-  top: 5px;
-  color: #f0f0f0;
-}
-
-.pm-notification-bar {
-  font-family: "evolve-light";
-  display: block;
-  padding: 5px;
-}
-
-.prof-picture {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #36393f;
-  display: inline-block;
-  position: relative;
-  color: #f0f0f0;
-  text-align: center;
-  padding: 2px;
-}
-
-#online-users-header {
-  font-famiy: "evolve-light";
-  color: #f0f0f0;
-}
-
-#messageInput {
-}
-#messageInput input {
-  background-color: #484b52;
-  color: #f0f0f0;
-  border-color: #484b52;
-}
-
 .post {
   padding-top: 10px;
   padding-bottom: 10px;
   color: #f0f0f0;
-}
-
-.online-user {
-  padding: 5px;
-}
-.online-user:hover {
-  background-color: #36393f;
-  cursor: pointer;
 }
 
 .user {
@@ -144,16 +82,37 @@ body,
   bottom: 5px;
 }
 
-.is-typing {
-  color: #f0f0f0;
+#activeUsers {
+  background-color: #2f3136;
   font-family: "evolve-light";
-  height: 30px;
-  display: block;
-  width: 100%;
+  color: #43b581;
+  scrollbar-color: #202225 #2f3136;
+  border-bottom: 1px solid #484b52;
 }
 
-.attachments {
-  height: 20px;
+.online-user {
+  padding: 5px;
+}
+.online-user:hover {
+  background-color: #36393f;
+  cursor: pointer;
+}
+
+#online-users-header {
+  font-famiy: "evolve-light";
+  color: #f0f0f0;
+}
+
+.prof-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #36393f;
+  display: inline-block;
+  position: relative;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 2px;
 }
 
 #signOut {
@@ -166,14 +125,37 @@ body,
   text-decoration: none;
 }
 
-input[type="file"] {
-  display: none;
+.message-input {
+  margin: 0 0 0 5px;
+  background-color: #484b52;
+  color: #f0f0f0;
+  border-color: #484b52;
 }
 
-.results {
-  font-family: "evolve-light";
+.is-typing {
   color: #f0f0f0;
+  font-family: "evolve-light";
+  height: 30px;
   display: block;
+  width: 100%;
+}
+
+.attachments {
+  height: 20px;
+}
+
+.pm-notification-bar {
+  font-family: "evolve-light";
+  display: block;
+  padding: 5px;
+}
+
+.active-chat-user {
+  padding: 10px;
+}
+
+.upload-images-button-icon {
+  cursor: "pointer";
 }
 
 #openImageUploadModal {
@@ -207,6 +189,26 @@ input[type="file"] {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#imageUploader .btn-link {
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+#imageUploader .btn-link:hover {
+  color: #ffc107;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.results {
+  font-family: "evolve-light";
+  color: #f0f0f0;
+  display: block;
 }
 
 .post-images-to-chat {
@@ -269,22 +271,8 @@ input[type="file"] {
   margin: 0 auto;
 }
 
-#imageUploader .btn-link {
-  color: #f0f0f0;
-  text-decoration: none;
-}
-
-#imageUploader .btn-link:hover {
-  color: #ffc107;
-  cursor: pointer;
-}
-
 .chat-box-container {
   height: 75%;
-}
-
-#messageInput .message {
-  margin: 0 0 0 5px;
 }
 
 .is-typing {
