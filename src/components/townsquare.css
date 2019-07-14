@@ -132,6 +132,11 @@ body,
   border-color: #484b52;
 }
 
+.message-input:focus {
+  background-color: #484b52;
+  color: #f0f0f0;
+}
+
 .is-typing {
   color: #f0f0f0;
   font-family: "evolve-light";
