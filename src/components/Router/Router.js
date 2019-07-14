@@ -12,7 +12,9 @@ class Router extends React.Component {
           className="signin-container"
           style={{ width: "100%", height: "100%" }}
         >
-          <Suspense fallback={<h1>Signin</h1>}>
+          <Suspense
+            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+          >
             <Signin {...this.props} />
           </Suspense>
         </div>
@@ -23,7 +25,9 @@ class Router extends React.Component {
           className="register-container"
           style={{ width: "100%", height: "100%" }}
         >
-          <Suspense fallback={<h1>Register</h1>}>
+          <Suspense
+            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+          >
             <Register {...this.props} />
           </Suspense>
         </div>
@@ -31,7 +35,9 @@ class Router extends React.Component {
     } else if (route === "townsquare") {
       return (
         <div style={{ width: "100%", height: "100%" }}>
-          <Suspense fallback={<h1>Register</h1>}>
+          <Suspense
+            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+          >
             <Placeholder {...this.props} />
           </Suspense>
         </div>
