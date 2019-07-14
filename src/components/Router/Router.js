@@ -13,7 +13,7 @@ class Router extends React.Component {
           style={{ width: "100%", height: "100%" }}
         >
           <Suspense
-            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+            fallback={<div style={{ backgroundColor: "#36393f" }}></div>}
           >
             <Signin {...this.props} />
           </Suspense>
@@ -26,7 +26,7 @@ class Router extends React.Component {
           style={{ width: "100%", height: "100%" }}
         >
           <Suspense
-            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+            fallback={<div style={{ backgroundColor: "#36393f" }}></div>}
           >
             <Register {...this.props} />
           </Suspense>
@@ -36,7 +36,7 @@ class Router extends React.Component {
       return (
         <div style={{ width: "100%", height: "100%" }}>
           <Suspense
-            fallback={<div style={{ "background-color": "#36393f" }}></div>}
+            fallback={<div style={{ backgroundColor: "#36393f" }}></div>}
           >
             <Placeholder {...this.props} />
           </Suspense>
