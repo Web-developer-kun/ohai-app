@@ -18,6 +18,8 @@ class MessageInput extends React.Component {
       pushPost,
       session_creds,
       setConnectedSockets,
+      setSessionCredentials,
+      changeRoute,
       setSocketForSignOut
     } = this.props;
     const { socket } = this.state;
@@ -28,6 +30,25 @@ class MessageInput extends React.Component {
     if (session_creds && session_creds.email) {
       socket.emit("add-user", session_creds.email);
     }
+
+    socket.on("duplicate-login", () => {
+      fetch("http://localhost:3000/signout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          token: window.sessionStorage.getItem("token")
+        })
+      })
+        .then(response => response.json())
+        .then(() => {
+          setSessionCredentials({ email: "", id: "" });
+          socket.emit("sign-out");
+        })
+        .then(window.sessionStorage.removeItem("token"))
+        .then(changeRoute("signin"));
+    });
 
     socket.on("receive-connected-sockets", connectedSockets => {
       setConnectedSockets(connectedSockets);
@@ -134,12 +155,11 @@ class MessageInput extends React.Component {
     return (
       <div id="messageInput" className="col">
         <div className="row">
-          <div class="w-100"></div>
           <div className="is-typing col">
             {this.state.typingUsers.length
               ? this.state.typingUsers.map((user, i) => {
                   return (
-                    <div className="col-sm-auto" key={i}>
+                    <div className="typing-user" key={i}>
                       {i > 0 ? "; " : ""}
                       {user} is typing{" "}
                     </div>

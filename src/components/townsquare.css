@@ -289,8 +289,13 @@ input[type="file"] {
 
 .is-typing {
   margin-left: 10px;
+  min-height: 50px;
+  height: auto;
 }
 
+.typing-user {
+  display: inline-block;
+}
 #messageInput {
   height: 10%;
 }
