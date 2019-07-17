@@ -25,6 +25,9 @@ const ChatBox = ({ posts }) => {
                 whisper={pst.whisper}
                 src={pst.src}
                 time={pst.time}
+                rgb={pst.rgb}
+                from={pst.from}
+                to={pst.to}
               />
             );
           })
