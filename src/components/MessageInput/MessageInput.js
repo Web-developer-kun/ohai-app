@@ -4,12 +4,18 @@ import _ from "underscore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage, faPaperclip } from "@fortawesome/free-solid-svg-icons";
 
+const rgb = [];
+for (var i = 0; i < 3; i++) {
+  rgb.push(Math.floor(Math.random() * 255));
+}
+
 class MessageInput extends React.Component {
   constructor() {
     super();
     this.state = {
       socket: socketIOClient(`http://localhost:3000`),
-      typingUsers: []
+      typingUsers: [],
+      rgb: `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
     };
   }
 
@@ -71,7 +77,8 @@ class MessageInput extends React.Component {
 
     socket.on("receive-private-message", msg => {
       pushPost({
-        user: msg.user,
+        from: msg.from,
+        to: msg.to,
         message: msg.message,
         src: msg.src,
         whisper: true,
@@ -84,7 +91,8 @@ class MessageInput extends React.Component {
         user: msg.user,
         message: msg.message,
         src: msg.src,
-        time: time
+        time: time,
+        rgb: msg.rgb
       });
     });
   }
@@ -117,6 +125,7 @@ class MessageInput extends React.Component {
       imgUrl,
       msgBox,
       pmUserSid,
+      pmUserName,
       setImageUrl
     } = this.props;
     if (!msgBox.length && !imgUrl.length) return;
@@ -124,7 +133,8 @@ class MessageInput extends React.Component {
 
     if (pmUserSid) {
       this.state.socket.emit("send-private-message", {
-        user: session_creds.email,
+        from: session_creds.email,
+        to: pmUserName,
         message: msgBox,
         src: imgUrl,
         time: ms,
@@ -136,7 +146,8 @@ class MessageInput extends React.Component {
         user: session_creds.email,
         message: msgBox,
         src: imgUrl,
-        time: ms
+        time: ms,
+        rgb: this.state.rgb
       });
       setImageUrl("");
     }
