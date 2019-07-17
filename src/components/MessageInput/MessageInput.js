@@ -76,7 +76,6 @@ class MessageInput extends React.Component {
     });
 
     socket.on("receive-private-message", msg => {
-      console.log(msg.from, msg.to, "In socket receive");
       pushPost({
         from: msg.from,
         to: msg.to,
@@ -143,7 +142,6 @@ class MessageInput extends React.Component {
       });
       setImageUrl("");
     } else {
-      console.log(this.state.rgb, "RGB");
       this.state.socket.emit("post-message", {
         user: session_creds.email,
         message: msgBox,

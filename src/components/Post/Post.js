@@ -1,7 +1,6 @@
 import React from "react";
 
 const Post = ({ user, time, message, whisper, src, rgb, from, to }) => {
-  console.log(from, to);
   if (!whisper) {
     return (
       <div className="post">
