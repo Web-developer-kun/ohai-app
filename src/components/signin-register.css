@@ -48,8 +48,8 @@ body,
   .login-form {
     top: 0;
     border-radius: 0;
-    height: 100%;
-    width: inherit;
+    height: inherit;
+    width: 100%;
   }
 }
 
