@@ -16,16 +16,20 @@ const OnlineUsers = ({
     <div id="activeUsers" className="col-md-auto">
       <h6 id="online-users-header">Online:</h6>
       {connectedSockets.map((cs, i) => {
-        return (
-          <OnlineUser
-            key={i}
-            username={cs.username}
-            sid={cs.sid}
-            setPmUserName={setPmUserName}
-            setPmSid={setPmSid}
-            currentUser={session_creds.email}
-          />
-        );
+        if (cs.username && cs.sid) {
+          return (
+            <OnlineUser
+              key={i}
+              username={cs.username}
+              sid={cs.sid}
+              setPmUserName={setPmUserName}
+              setPmSid={setPmSid}
+              currentUser={session_creds.email}
+            />
+          );
+        } else {
+          return "";
+        }
       })}
       <SignOut
         changeRoute={changeRoute}
