@@ -82,7 +82,7 @@ export const setNsfwScore = text => ({
 
 export const uploadImages = formData => dispatch => {
   dispatch({ type: UPLOADING_PENDING });
-  fetch(`http://localhost:3000/image-upload`, {
+  fetch(`https://pingim-backend.herokuapp.com/image-upload`, {
     method: "POST",
     body: formData
   })

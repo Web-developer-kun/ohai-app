@@ -6,7 +6,7 @@ class Signin extends React.Component {
     const { changeRoute, setFormErrMsg, setSessionCredentials } = this.props;
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/signin", {
+      fetch("https://pingim-backend.herokuapp.com/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -16,13 +16,16 @@ class Signin extends React.Component {
         .then(response => response.json())
         .then(data => {
           if (data && data.id) {
-            fetch(`http://localhost:3000/townsquare/${data.id}`, {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: token
+            fetch(
+              `https://pingim-backend.herokuapp.com/townsquare/${data.id}`,
+              {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: token
+                }
               }
-            })
+            )
               .then(response => response.json())
               .then(user => {
                 setSessionCredentials({ email: user.email, id: user._id });
@@ -44,7 +47,7 @@ class Signin extends React.Component {
       setSessionCredentials
     } = this.props;
     if (signInEmail.length && signInPassword.length) {
-      fetch("http://localhost:3000/signin", {
+      fetch("https://pingim-backend.herokuapp.com/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -61,13 +64,16 @@ class Signin extends React.Component {
           }
           if (data.userId) {
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: data.token
+            fetch(
+              `https://pingim-backend.herokuapp.com/townsquare/${data.userId}`,
+              {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: data.token
+                }
               }
-            })
+            )
               .then(response => response.json())
               .then(user => {
                 setSessionCredentials({ email: user.email, id: user._id });

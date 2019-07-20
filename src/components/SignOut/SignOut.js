@@ -4,7 +4,7 @@ class SignOut extends React.Component {
   signOut = () => {
     const { changeRoute, setSessionCredentials, socket } = this.props;
 
-    fetch("http://localhost:3000/signout", {
+    fetch("https://pingim-backend.herokuapp.com/signout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
