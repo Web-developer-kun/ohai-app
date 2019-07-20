@@ -27,7 +27,7 @@ class Register extends React.Component {
       setSessionCredentials
     } = this.props;
     if (email.length && password.length) {
-      fetch("http://localhost:3000/register", {
+      fetch("https://pingim-backend.herokuapp.com/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -44,13 +44,16 @@ class Register extends React.Component {
           }
           if (data.userId) {
             window.sessionStorage.setItem("token", data.token);
-            fetch(`http://localhost:3000/townsquare/${data.userId}`, {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: data.token
+            fetch(
+              `https://pingim-backend.herokuapp.com/townsquare/${data.userId}`,
+              {
+                method: "get",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: data.token
+                }
               }
-            })
+            )
               .then(response => response.json())
               .then(user => {
                 setSessionCredentials({ email: user.email, id: user._id });

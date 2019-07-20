@@ -13,7 +13,7 @@ class MessageInput extends React.Component {
   constructor() {
     super();
     this.state = {
-      socket: socketIOClient(`http://localhost:3000`),
+      socket: socketIOClient(`https://pingim-backend.herokuapp.com/`),
       typingUsers: [],
       rgb: `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
     };
@@ -38,7 +38,7 @@ class MessageInput extends React.Component {
     }
 
     socket.on("duplicate-login", () => {
-      fetch("http://localhost:3000/signout", {
+      fetch("https://pingim-backend.herokuapp.com/signout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

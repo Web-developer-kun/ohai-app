@@ -18,7 +18,7 @@ class ImageUploader extends React.Component {
 
   scanImage = url => {
     const { setSFWScore, setNSFWScore, setImageUrl } = this.props;
-    fetch("http://localhost:3000/image-scan", {
+    fetch("https://pingim-backend.herokuapp.com/image-scan", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
