@@ -2,7 +2,12 @@ import React from "react";
 
 class SignOut extends React.Component {
   signOut = () => {
-    const { changeRoute, setSessionCredentials, socket } = this.props;
+    const {
+      changeRoute,
+      setSessionCredentials,
+      socket,
+      setImageUrl
+    } = this.props;
 
     fetch("https://pingim-backend.herokuapp.com/signout", {
       method: "POST",
@@ -15,6 +20,7 @@ class SignOut extends React.Component {
     })
       .then(response => response.json())
       .then(() => {
+        setImageUrl("");
         setSessionCredentials({ email: "", id: "" });
         socket.emit("sign-out");
       })
