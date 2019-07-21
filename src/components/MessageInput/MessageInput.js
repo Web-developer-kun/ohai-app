@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, KeyboardAvoidingView } from "react-native-web";
+import { TextInput, KeyboardAvoidingView } from "react-native";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
