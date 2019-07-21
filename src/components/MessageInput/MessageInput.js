@@ -1,4 +1,5 @@
 import React from "react";
+import { TextInput, KeyboardAvoidingView } from "react-native";
 import socketIOClient from "socket.io-client";
 import _ from "underscore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -196,15 +197,25 @@ class MessageInput extends React.Component {
           )}
         </div>
         <div className="row">
-          <input
-            type="text"
-            onChange={this.writeMessage}
-            className="form-control message-input col-8"
-            onKeyDown={this.emitTypingStatus}
-            onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
-            onKeyPress={this.checkForEnterKey}
-            value={msgBox && msgBox.length ? msgBox : ""}
-          />
+          <KeyboardAvoidingView
+            style={{
+              backgroundColor: "#4c69a5",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+            behavior="padding"
+          >
+            <TextInput
+              type="text"
+              onChange={this.writeMessage}
+              className="form-control message-input col-8"
+              onKeyDown={this.emitTypingStatus}
+              onKeyUp={_.debounce(this.emitStoppedTyping, 5000)}
+              onKeyPress={this.checkForEnterKey}
+              value={msgBox && msgBox.length ? msgBox : ""}
+            />
+          </KeyboardAvoidingView>
           <div
             id="openImageUploadModal"
             className="col-sm-auto"
