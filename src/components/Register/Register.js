@@ -1,7 +1,14 @@
 import React from "react";
+import LoginSpinner from "../LoginSpinner.js";
 import "../signin-register.css";
 
 class Register extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      pendingRegister: false
+    };
+  }
   checkPassword = () => {
     const { setFormErrMsg, setPassword, setPass1, setPass2 } = this.props;
     if (setPass1 === setPass2) {
@@ -27,6 +34,7 @@ class Register extends React.Component {
       setSessionCredentials
     } = this.props;
     if (email.length && password.length) {
+      this.setState({ pendingRegister: true });
       fetch("https://pingim-backend.herokuapp.com/register", {
         method: "POST",
         headers: {
@@ -56,13 +64,17 @@ class Register extends React.Component {
             )
               .then(response => response.json())
               .then(user => {
+                this.setState({ pendingRegister: false });
                 setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
               });
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          this.setState({ pendingSignIn: false });
+        });
     } else {
       setFormErrMsg("Complete the form");
     }
@@ -88,6 +100,7 @@ class Register extends React.Component {
 
   render() {
     const { onEmailChange, onSetPass1, onSetPass2, formErrMsg } = this.props;
+    const { pendingRegister } = this.state;
 
     return (
       <div className="container">
@@ -143,6 +156,7 @@ class Register extends React.Component {
           >
             Have an account?
           </button>
+          {pendingRegister === true ? <LoginSpinner /> : ""}
         </div>
       </div>
     );
