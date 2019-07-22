@@ -104,3 +104,22 @@ p {
   display: block;
   color: #ffc107;
 }
+
+.spinner-container {
+  width: 450px;
+  height: auto;
+  padding: 35px;
+}
+
+.spinner-container .btn {
+  margin: 5px 0;
+  font-family: "evolve-light";
+}
+
+.spinner-icon-container {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}

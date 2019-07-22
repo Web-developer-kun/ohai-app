@@ -1,11 +1,19 @@
 import React from "react";
+import LoginSpinner from "../LoginSpinner.js";
 import "../signin-register.css";
 
 class Signin extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      pendingSignIn: false
+    };
+  }
   componentDidMount() {
     const { changeRoute, setFormErrMsg, setSessionCredentials } = this.props;
     const token = window.sessionStorage.getItem("token");
     if (token) {
+      this.setState({ pendingSignIn: true });
       fetch("https://pingim-backend.herokuapp.com/signin", {
         method: "POST",
         headers: {
@@ -28,6 +36,7 @@ class Signin extends React.Component {
             )
               .then(response => response.json())
               .then(user => {
+                this.setState({ pendingSignIn: false });
                 setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
@@ -47,6 +56,7 @@ class Signin extends React.Component {
       setSessionCredentials
     } = this.props;
     if (signInEmail.length && signInPassword.length) {
+      this.setState({ pendingSignIn: true });
       fetch("https://pingim-backend.herokuapp.com/signin", {
         method: "POST",
         headers: {
@@ -76,13 +86,17 @@ class Signin extends React.Component {
             )
               .then(response => response.json())
               .then(user => {
+                this.setState({ pendingSignIn: false });
                 setSessionCredentials({ email: user.email, id: user._id });
                 setFormErrMsg("");
                 changeRoute("townsquare");
               });
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          this.setState({ pendingSignIn: false });
+        });
     } else {
       setFormErrMsg("Complete the form");
     }
@@ -110,6 +124,7 @@ class Signin extends React.Component {
       onSignInPasswordChange,
       formErrMsg
     } = this.props;
+    const { pendingSignIn } = this.state;
     return (
       <div className="container">
         <div className="login-form">
@@ -154,6 +169,7 @@ class Signin extends React.Component {
               >
                 Don't have an account? Sign up!
               </button>
+              {pendingSignIn === true ? <LoginSpinner /> : ""}
             </div>
           </div>
         </div>
