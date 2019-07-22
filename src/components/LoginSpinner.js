@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
 
 const LoginSpinner = () => {
   return (
@@ -8,12 +8,11 @@ const LoginSpinner = () => {
       <div className="spinner-icon-container">
         <FontAwesomeIcon
           className="spinner-icon fa-spin"
-          icon={faSpinner}
+          icon={faCog}
           style={{ margin: "0 auto" }}
-          size="5x"
-          color="#f0f0f0"
+          size="3x"
+          color="#ffc107"
         />
-        <span className="sign-in-message">Installing Your Friends</span>
       </div>
     </div>
   );

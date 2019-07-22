@@ -10,7 +10,8 @@ const OnlineUsers = ({
   session_creds,
   changeRoute,
   setSessionCredentials,
-  socket
+  socket,
+  setImageUrl
 }) => {
   return (
     <div id="activeUsers" className="col-md-auto">
@@ -35,6 +36,7 @@ const OnlineUsers = ({
         changeRoute={changeRoute}
         setSessionCredentials={setSessionCredentials}
         socket={socket}
+        setImageUrl={setImageUrl}
       />
     </div>
   );

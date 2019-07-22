@@ -123,3 +123,8 @@ p {
   display: block;
   margin: 0 auto;
 }
+
+.sign-in-message {
+  font-family: "evolve-light";
+  color: #f0f0f0;
+}
